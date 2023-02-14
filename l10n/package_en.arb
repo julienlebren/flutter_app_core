@@ -1,0 +1,251 @@
+{
+  "daysAgo": "{days} days ago",
+  "@daysAgo" : {
+    "placeholders": {
+      "days": { 
+        "type": "String"
+        }
+    }
+  },
+  "yesterday": "yesterday",
+  "oneHourAgo": "1 hour ago",
+  "hoursAgo": "{hours} hours ago",
+  "@hoursAgo" : {
+    "placeholders": {
+      "hours": { 
+        "type": "String"
+        }
+    }
+  },
+  "minutesAgo": "{minutes} minutes ago",
+  "oneMinuteAgo": "1 minute ago",
+  "@minutesAgo" : {
+    "placeholders": {
+      "minutes": { 
+        "type": "String"
+        }
+    }
+  },
+  "justNow": "Just now",
+
+  "annualCaption": "Annual subscription",
+  "annualPrice": "{price}/year",
+  "@annualPrice" : {
+      "placeholders": {
+      "price": { 
+          "type": "String"
+      }
+    }
+  },
+  "annualDiscount": "i.e. {discount}% off",
+  "@annualDiscount" : {
+      "placeholders": {
+      "discount": { 
+          "type": "String"
+      }
+    }
+  },
+  "closeAlertTitle": "A purchase is currently in progress, are you sure you want to leave now?",
+  "closeAlertCloseButton": "Yes, leave this view",
+  "closeAlertCancelButton": "No, wait for the end of the purchase",
+  "cupertinoDisclaimer": "Payment will be charged to iTunes Account and subscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period. Account will be charged for renewal within 24-hours prior to the end of the current period. Manage auto-renewal by going to the user's Account Settings.",
+  "errorTitle": "Oops! Something went wrong...",
+  "monthlyCaption": "Monthly subscription",
+  "monthlyPrice": "{price}/month",
+  "@monthlyPrice" : {
+      "placeholders": {
+      "price": { 
+          "type": "String"
+      }
+    }
+  },
+  "priceNotLoaded": "Unable to contact Store at the moment.",
+  "privacyPolicyButton": "Privacy policy",
+  "purchaseInProgress": "Purchase in progress, please wait...",
+  "restoreButton": "Restore purchases",
+  "retryButton": "Retry",
+  "termsButton": "Terms of Use",
+  "sixMonthCaption": "6 months subscription",
+  "sixMonthPrice": "{price}/6 months",
+  "@sixMonthPrice" : {
+      "placeholders": {
+      "price": { 
+          "type": "String"
+      }
+    }
+  },
+  "threeMonthCaption": "3 months subscription",
+  "threeMonthPrice": "{price}/3 months",
+  "@threeMonthPrice" : {
+      "placeholders": {
+      "price": { 
+          "type": "String"
+      }
+    }
+  },
+  "twoMonthCaption": "2 months subscription",
+  "twoMonthPrice": "{price}/2 months",
+  "@twoMonthPrice" : {
+      "placeholders": {
+      "price": { 
+          "type": "String"
+      }
+    }
+  },
+  "weeklyCaption": "Weekly subscription",
+  "weeklyPrice": "{price}/week",
+  "@weeklyPrice" : {
+      "placeholders": {
+      "price": { 
+          "type": "String"
+      }
+    }
+  },
+  "noSubscriptionToRestore": "There is no active subscription to restore.",
+
+  "dark": "Dark",
+  "light": "Light",
+  "system": "System",
+  "errorDescription": "We are unable to handle your request at the moment.",
+  "networkErrorTitle": "You are currently not connected to the internet",
+  "networkErrorCaption": "The app requires an internet connection to work, please check your connection settings",
+  "networkErrorWaiting": "Waiting for connection...",
+
+  "continueButton": "Continue",
+  "countriesTitle": "Country / Region",
+  "emailResetTitle": "Forgot your password",
+  "emailResetSubtitle": "Enter your email and we'll send you a link to reset your password.",
+  "emailResetSubmitButton": "Reset your password",
+  "emailResetSuccessTitle": "Please check your email",
+  "emailResetSuccessDescription": "We just sent a link at {email} to reset your password.",
+  "@emailResetSuccessDescription" : {
+    "placeholders": {
+      "email": { 
+        "type": "String"
+        }
+    }
+  },
+  "passwordRequirements": "The password must meet the following conditions:",
+  "passwordRequirementMinLength": "Aleast 6 characters",
+  "passwordRequirementUppercase": "At least one capital letter",
+  "passwordRequirementLowercase": "At least a lowercase",
+  "passwordRequirementDigits": "At least one number",
+  "passwordRequirementSpecialChars": "At least one special character",
+  "passwordRequirementMatch": "Passwords match",
+  "settingsAccountTitle": "Account",
+  "settingsCreateAccountButton": "Create an account",
+  "settingsCreateAccountWith": "Create an account with {supplier}",
+  "@settingsCreateAccountWith" : {
+    "placeholders": {
+      "supplier": { 
+        "type": "String"
+        }
+    }
+  },
+  "settingsNoAccount": "You are currently not logged in, your settings and other data are not saved and may be lost. Tap here to create an account.",
+  "settingsDeleteTitle": "Delete account",
+  "settingsDeleteCaption": "Your account information, profile, and all data stored in the app will be deleted.",
+  "settingsDeleteButton": "Delete account",
+  "settingsDeleteAlertTitle": "Are you sure you want to continue ? This action is irreversible.",
+  "settingsEmailSectionTitle": "Login information",
+  "settingsEmailLabel": "Email address",
+  "settingsEmailTitle": "Email address",
+  "settingsEmailPlaceholder": "New email address",
+  "settingsPasswordTitle": "Password",
+  "settingsPasswordLabel": "Password",
+  "settingsPasswordPlaceholder": "New password",
+  "settingsPasswordConfirmationPlaceholder": "Confirm password",
+  "settingsPasswordEdit": "Change",
+  "settingsPasswordUndefinedCaption": "You haven't set a password yet, so you won't be able to log in to your account using your email address and password. Only login with third-party account will work.",
+  "settingsThirdPartySectionTitle": "Login with a third-party account",
+  "settingsThirdPartyConnected": "Connected",
+  "settingsThirdPartyNotConnected": "Not connected",
+  "settingsThirdPartyCaption": "You can combine several connection methods to secure access to your account.",
+  "settingsLogoutButton": "Logout",
+  "settingsLogoutConfirmation": "Are you sure you want to logout?",
+  "settingsUndefined": "Not set",
+  "signInAnonymously": "Continue without registration",
+  "signInWith": "Continue with {supplier}",
+  "@signInWith" : {
+    "placeholders": {
+      "supplier": { 
+        "type": "String"
+        }
+    }
+  },
+  "signInWithEmail": "e-mail",
+  "signInWithEmailLink": "e-mail",
+  "signInWithEmailLinkTitle": "Sign in with e-mail",
+  "signInWithEmailLinkSubtitle": "No password required, we just send you an email with a link to log in to the app.",
+  "signInWithEmailLinkSuccess": "Check your email, we have sent a sign-in link.",
+  "signInWithEmailLinkRetry": "You did not receive it? Try again or try another identification method.",
+  "signInWithEmailCreateAccount": "Not yet registered? Create an account here.",
+  "signInWithEmailForgotPassword": "Forgot your password?",
+  "signInWithEmailPlaceholder": "Email address",
+  "signInWithEmailPasswordPlaceholder": "Password",
+  "signInWithEmailAlreadyAccount": "Already have an account? Sign in here.",
+  "signInWithEmailRegisterButton": "Register",
+  "signInWithEmailRegisterTitle": "Sign up with e-mail",
+  "signInWithEmailTitle": "Sign in with e-mail",
+  "signInWithEmailSubtitle": "No password required, we just send you an email with a link to log in to the app.",
+  "signInWithEmailInvalidPasswordConfirmation": "Passwords do not match",
+  "signInWithPhone": "phone number",
+  "signInPhoneTitle": "Phone Number",
+  "signInPhoneSubtitle": "We will send an SMS to confirm your number, it won't cost you nothing.",
+  "signInPhonePlaceholder": "Example: {example}",
+  "@signInPhonePlaceholder" : {
+    "placeholders": {
+      "example": { 
+        "type": "String"
+        }
+    }
+  },
+  "signInPhoneAutoRetrieve": "You may not need to enter the code as the app will attempt to detect it automatically.",
+  "signInPhoneLoadingDialog": "Waiting for automatic code detection ...",
+  "signInVerificationTitle": "Number verification",
+  "signInVerificationSubtitle": "Enter the 6-digit code we sent to {phoneNumber}",
+  "@signInVerificationSubtitle" : {
+    "placeholders": {
+      "phoneNumber": { 
+        "type": "String"
+        }
+    }
+  },
+  "signInVerificationNotReceived": "Did not receive the code?\nWait {seconds} seconds...",
+  "@signInVerificationNotReceived" : {
+    "placeholders": {
+      "seconds": { 
+        "type": "String"
+        }
+    }
+  },
+  "signInVerificationResend": "Resend the code",
+  "errorExpiredActionCode": "This link is no longer valid.",
+  "errorInvalidEmail": "This email address is not valid.",
+  "errorInvalidVerificationCode": "Invalid verification code!",
+  "errorUserDisabled": "This account has been disabled.",
+  "errorUserNotFound": "There is no account registered with this email address.",
+  "errorWrongPassword": "Wrong password.",
+  "errorEmailAlreadyInUse": "An account is already registered with this email address.",
+  "errorCredentialAlreadyInUse": "An account is already linked to this {provider} account.",
+  "@errorCredentialAlreadyInUse" : {
+    "placeholders": {
+      "provider": { 
+        "type": "String"
+        }
+    }
+  },
+  "errorWeakPassword": "This password is not strong enough.",
+  "errorOperationNotAllowed": "This operation is not allowed.",
+  "errorPhoneNotMobile": "You must enter a mobile phone number.",
+  "errorUnknown": "An unknown error has occurred.",
+  "unlinkTitle": "What do you want to do?",
+  "unlinkProvider": "Disconnect {provider}",
+  "@unlinkProvider" : {
+    "placeholders": {
+      "provider": { 
+        "type": "String"
+        }
+    }
+  }
+}

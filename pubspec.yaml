@@ -1,0 +1,45 @@
+name: flutter_app_core
+description: Reusable methods and widgets for building apps 
+version: 1.0.0
+homepage:
+
+environment:
+  sdk: '>=2.19.0 <3.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  cloud_firestore: ^4.3.2
+  cloud_functions: ^4.0.8
+  firebase_auth: ^4.2.6
+  firebase_messaging: ^14.2.2
+  firebase_storage: ^11.0.11
+  flutter_app_badger: ^1.5.0
+  flutter_libphonenumber: 1.1.0
+  flutter_riverpod: ^2.2.0
+  freezed_annotation: ^2.2.0
+  google_fonts: ^4.0.3
+  google_mobile_ads: ^2.3.0
+  google_sign_in: ^5.4.4
+  internet_connection_checker: ^1.0.0+1
+  intl: ^0.17.0
+  modal_bottom_sheet: ^2.1.2
+  numberpicker: ^2.0.1
+  pinput: ^2.2.12
+  purchases_flutter: ^4.9.1
+  riverpod_annotation: ^1.2.1
+  the_apple_sign_in: ^1.1.1
+  url_launcher: ^6.1.9
+  visibility_detector: ^0.3.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.1 
+  build_runner: ^2.3.3
+  freezed: ^2.3.2
+  riverpod_generator: ^1.2.0
+  riverpod_lint: ^1.0.0
