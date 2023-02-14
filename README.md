@@ -1,39 +1,20 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Flutter App Core
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+This repository is some kind of package that I import in all my personal Flutter projects because I reuse this code accross all my Flutter projects.
+To avoid some copy/paste across all the projects and annoying updates, I have created this repository as a single source for my reusable code.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
+Also, since I write some articles about coding with Flutter, these packages are public so everybody can access it.
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+It currently includes:
+- **ad_manager**: Google Mobile Ads utilities to display ads inside my apps
+- **extensions**: Useful stuff to do some standard things that Flutter team did not implemented
+- **firebase_storage_service**: A service class to perform upload and deletion on Firebase Cloud Storage
+- **firestore_service**: A service class to perform reads and writes to a Firestore database
+- **layout_builder**: My custom classes to display things the way I like in my Flutter apps
+- **notifications**: A service class to handle notifications through Firebase Messaging
+- **purchases**: A service class to handle in-app purchases and subscriptions with RevenueCat
+- **sign_in**: A complete auth system including ui to authenticate users through Firebase Auth
 
-## Features
+NOTE: I will update and/or maintain these packages for my internal projects only, so breaking changes may be introduced at any time.
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
-```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+[LICENSE: MIT](LICENSE)
