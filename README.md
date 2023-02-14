@@ -15,6 +15,10 @@ It currently includes:
 - **purchases**: A service class to handle in-app purchases and subscriptions with RevenueCat
 - **sign_in**: A complete auth system including ui to authenticate users through Firebase Auth
 
+This repository is hardly using:
+- [Freezed](https://pub.dev/packages/freezed)
+- [Riverpod](https://pub.dev/packages/flutter_riverpod)
+
 NOTE: I will update and/or maintain these packages for my internal projects only, so breaking changes may be introduced at any time.
 
 [LICENSE: MIT](LICENSE)
