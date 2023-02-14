@@ -57,7 +57,7 @@ class SignInButtonsController extends StateNotifier<SignInButtonsState> {
             _localizations,
             event.maybeWhen(
               signInWithApple: () => "Apple",
-              signInWithFacebook: () => "Facebook",
+              //signInWithFacebook: () => "Facebook",
               signInWithGoogle: () => "Google",
               orElse: () => "",
             ),

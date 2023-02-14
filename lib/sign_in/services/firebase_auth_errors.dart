@@ -1,6 +1,6 @@
 part of sign_in;
 
-extension Description on FirebaseAuthException {
+extension FirebaseAuthExceptionDescription on FirebaseAuthException {
   String description(
     FlutterAppCoreLocalizations l10n, [
     String? param,

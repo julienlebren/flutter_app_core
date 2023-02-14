@@ -1,6 +1,6 @@
 part of firestore_service;
 
-extension Description on FirebaseException {
+extension FirestoreExceptionDescription on FirebaseException {
   String description() {
     switch (code) {
       case "unavailable":
