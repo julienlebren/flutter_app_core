@@ -2,6 +2,7 @@ library localization;
 
 import 'dart:ui';
 import 'package:flutter_app_core/extensions/extensions.dart';
+import 'package:flutter_app_core/localization/flutter_app_core_l10n.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -61,4 +62,11 @@ Locale locale(LocaleRef ref) {
   }
 
   return availableLocales.first;
+}
+
+@Riverpod(keepAlive: true)
+FlutterAppCoreLocalizations flutterAppCoreLocalizations(
+    FlutterAppCoreLocalizationsRef ref) {
+  final locale = ref.watch(localeProvider);
+  return lookupFlutterAppCoreLocalizations(locale);
 }

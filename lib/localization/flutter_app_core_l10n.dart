@@ -16,7 +16,7 @@ import 'flutter_app_core_l10n_fr.dart';
 /// `supportedLocales` list. For example:
 ///
 /// ```dart
-/// import 'l10n/flutter_app_core_l10n.dart';
+/// import 'localization/flutter_app_core_l10n.dart';
 ///
 /// return MaterialApp(
 ///   localizationsDelegates: FlutterAppCoreLocalizations.localizationsDelegates,
