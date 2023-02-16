@@ -1,10 +1,5 @@
 part of sign_in;
 
-/*final signInRouterProvider =
-    Provider<Route<dynamic>? Function(RouteSettings settings, WidgetRef ref)>(
-  (_) => SignInRouter.onGenerateRoute,
-);*/
-
 final signInCustomRouterProvider =
     Provider<Route<dynamic>? Function(RouteSettings settings, WidgetRef ref)?>(
   (_) => null,
