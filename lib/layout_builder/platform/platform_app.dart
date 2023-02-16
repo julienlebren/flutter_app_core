@@ -1,7 +1,7 @@
 part of layout_builder;
 
 class PlatformApp
-    extends PlatformWidgetBase<ProviderScope, ProviderScope, ProviderScope> {
+    extends PlatformWidgetBase<MaterialApp, CupertinoApp, MaterialApp> {
   const PlatformApp({
     super.key,
     this.initialRoute,
@@ -24,9 +24,20 @@ class PlatformApp
   final Widget? home;
 
   @override
-  ProviderScope createMaterialWidget(BuildContext context, WidgetRef ref) {
+  MaterialApp createMaterialWidget(BuildContext context, WidgetRef ref) {
     final materialTheme = ref.watch(materialThemeProvider);
-    return ProviderScope(
+    final goRouter = ref.watch(goRouterProvider);
+    return MaterialApp.router(
+      routerConfig: goRouter,
+      locale: locale,
+      localizationsDelegates: localizationsDelegates,
+      supportedLocales: supportedLocales,
+      debugShowCheckedModeBanner: false,
+      theme: materialTheme,
+      builder: builder,
+    );
+
+    /*return ProviderScope(
       overrides: [
         routeProvider.overrideWithValue(onGenerateRoute),
       ],
@@ -42,13 +53,24 @@ class PlatformApp
         onGenerateRoute: onGenerateRoute,
         home: home,
       ),
-    );
+    );*/
   }
 
   @override
-  ProviderScope createCupertinoWidget(BuildContext context, WidgetRef ref) {
+  CupertinoApp createCupertinoWidget(BuildContext context, WidgetRef ref) {
     final cupertinoTheme = ref.watch(cupertinoThemeProvider);
-    return ProviderScope(
+    final goRouter = ref.watch(goRouterProvider);
+    return CupertinoApp.router(
+      routerConfig: goRouter,
+      locale: locale,
+      localizationsDelegates: localizationsDelegates,
+      supportedLocales: supportedLocales,
+      debugShowCheckedModeBanner: false,
+      theme: cupertinoTheme,
+      builder: builder,
+    );
+
+    /*return ProviderScope(
       overrides: [
         routeProvider.overrideWithValue(onGenerateRoute),
       ],
@@ -64,10 +86,10 @@ class PlatformApp
         onGenerateRoute: onGenerateRoute,
         home: home,
       ),
-    );
+    );*/
   }
 
   @override
-  ProviderScope createWebWidget(BuildContext context, WidgetRef ref) =>
+  MaterialApp createWebWidget(BuildContext context, WidgetRef ref) =>
       createMaterialWidget(context, ref);
 }

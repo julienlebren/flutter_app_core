@@ -26,6 +26,7 @@ class PlatformTextButton
       style: TextButton.styleFrom(
         foregroundColor: color,
         textStyle: TextStyle(
+          fontFamily: Theme.of(context).textTheme.bodyMedium?.fontFamily,
           fontSize: fontSize,
         ),
       ),

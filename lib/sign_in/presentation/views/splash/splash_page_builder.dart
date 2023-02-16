@@ -60,7 +60,9 @@ class SplashPageBuilder extends ConsumerWidget {
             needUserInformation: () => _pop(context),
             orElse: () {
               final supplier = ref.watch(signInSupplierProvider);
-              if (supplier != null && !supplier.isThirdParty) {
+              if (supplier != null &&
+                  supplier != SignInSupplier.anonymous &&
+                  !supplier.isThirdParty) {
                 _pop(context);
               }
             },

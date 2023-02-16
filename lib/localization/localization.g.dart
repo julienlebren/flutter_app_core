@@ -65,7 +65,8 @@ String _$flutterAppCoreLocalizationsHash() =>
 
 /// See also [flutterAppCoreLocalizations].
 @ProviderFor(flutterAppCoreLocalizations)
-final flutterAppCoreLocalizationsProvider = Provider<dynamic>.internal(
+final flutterAppCoreLocalizationsProvider =
+    Provider<FlutterAppCoreLocalizations>.internal(
   flutterAppCoreLocalizations,
   name: r'flutterAppCoreLocalizationsProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -75,5 +76,6 @@ final flutterAppCoreLocalizationsProvider = Provider<dynamic>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef FlutterAppCoreLocalizationsRef = ProviderRef<dynamic>;
+typedef FlutterAppCoreLocalizationsRef
+    = ProviderRef<FlutterAppCoreLocalizations>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

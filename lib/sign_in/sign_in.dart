@@ -20,6 +20,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:pinput/pinput.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:the_apple_sign_in/the_apple_sign_in.dart';
 
 part 'controllers/settings/settings_account_controller.dart';
@@ -64,7 +65,9 @@ part 'presentation/widgets/sign_in_page_builder.dart';
 part 'presentation/widgets/sign_in_tappable_field.dart';
 part 'services/firebase_auth_service.dart';
 part 'services/firebase_auth_errors.dart';
+
 part 'sign_in.freezed.dart';
+part 'sign_in.g.dart';
 
 class AuthSettings {
   AuthSettings({
@@ -72,18 +75,18 @@ class AuthSettings {
     required this.userStreamProvider,
     this.needUserInfoProvider,
     this.settingsNavigator,
-    this.userRef,
   });
 
   final List<SignInSupplier> suppliers;
   final StreamProvider userStreamProvider;
   final Provider<bool?>? needUserInfoProvider;
   final GlobalKey<NavigatorState>? settingsNavigator;
-  final CollectionReference? userRef;
 }
 
-final authSettingsProvider =
-    Provider<AuthSettings>((_) => throw UnimplementedError());
+@Riverpod(keepAlive: true)
+AuthSettings authSettings(AuthSettingsRef ref) {
+  throw UnimplementedError();
+}
 
 final authStateProvider =
     Provider.family<AuthState, AuthSettings>((ref, settings) {

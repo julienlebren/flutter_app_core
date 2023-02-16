@@ -15,8 +15,8 @@ extension SignInSupplierX on SignInSupplier {
     switch (this) {
       case SignInSupplier.google:
       case SignInSupplier.apple:
-      /*case SignInSupplier.facebook:
-        return true;*/
+        //case SignInSupplier.facebook:
+        return true;
       default:
         return false;
     }

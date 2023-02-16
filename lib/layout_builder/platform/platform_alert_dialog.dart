@@ -9,18 +9,21 @@ Future<bool?> showAlertDialog(
   List<PlatformDialogAction>? actions,
   bool displayCancelButton = true,
 }) {
-  if (isMaterial()) {
-    return showDialog(
+  if (isCupertino()) {
+    return showCupertinoDialog(
       context: context,
-      builder: (context) => AlertDialog(
+      builder: (context) => CupertinoAlertDialog(
         title: title != null ? Text(title) : null,
-        content: child ?? (content != null ? Text(content) : null),
+        content: child != null
+            ? Padding(padding: const EdgeInsets.only(top: 6), child: child)
+            : (content != null ? Text(content) : null),
         actions: <Widget>[
           if (displayCancelButton)
-            TextButton(
+            CupertinoDialogAction(
               child: Text(MaterialLocalizations.of(context)
                   .cancelButtonLabel
-                  .toUpperCase()),
+                  .toLowerCase()
+                  .capitalize()),
               onPressed: () => Navigator.of(context).pop(false),
             ),
           if (actions != null) ...actions,
@@ -28,20 +31,18 @@ Future<bool?> showAlertDialog(
       ),
     );
   }
-  return showCupertinoDialog(
+  return showDialog(
     context: context,
-    builder: (context) => CupertinoAlertDialog(
+    builder: (context) => AlertDialog(
+      insetPadding: context.dialogHorizontalPadding(),
       title: title != null ? Text(title) : null,
-      content: child != null
-          ? Padding(padding: const EdgeInsets.only(top: 6), child: child)
-          : (content != null ? Text(content) : null),
+      content: child ?? (content != null ? Text(content) : null),
       actions: <Widget>[
         if (displayCancelButton)
-          CupertinoDialogAction(
+          TextButton(
             child: Text(MaterialLocalizations.of(context)
                 .cancelButtonLabel
-                .toLowerCase()
-                .capitalize()),
+                .toUpperCase()),
             onPressed: () => Navigator.of(context).pop(false),
           ),
         if (actions != null) ...actions,

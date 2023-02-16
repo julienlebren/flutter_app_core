@@ -35,4 +35,13 @@ extension BuildContextWide on BuildContext {
       return 20;
     }
   }
+
+  EdgeInsets dialogHorizontalPadding() {
+    final screenWidth = MediaQuery.of(this).size.width;
+    if (screenWidth > Breakpoints.tablet) {
+      return EdgeInsets.symmetric(
+          horizontal: (screenWidth - Breakpoints.tablet) / 2);
+    }
+    return const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0);
+  }
 }
