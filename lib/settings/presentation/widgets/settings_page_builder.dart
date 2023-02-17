@@ -1,4 +1,4 @@
-part of layout_builder;
+part of settings;
 
 class SettingsPageBuilder extends ConsumerWidget {
   const SettingsPageBuilder({

@@ -1,4 +1,4 @@
-part of sign_in;
+part of settings;
 
 final redirectionSettingsProvider =
     Provider<AnonymousRedirectionSettings?>((_) => null);

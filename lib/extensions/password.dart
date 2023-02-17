@@ -1,4 +1,4 @@
-part of sign_in;
+part of extensions;
 
 extension Password on String {
   bool get hasUppercase => contains(RegExp(r'[A-Z]'));

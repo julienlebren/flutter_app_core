@@ -1,4 +1,4 @@
-part of sign_in;
+part of settings;
 
 @freezed
 class SettingsState with _$SettingsState {

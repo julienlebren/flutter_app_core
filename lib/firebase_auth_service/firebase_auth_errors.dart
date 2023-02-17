@@ -1,4 +1,4 @@
-part of sign_in;
+part of firebase_auth_service;
 
 extension FirebaseAuthExceptionDescription on FirebaseAuthException {
   String description(

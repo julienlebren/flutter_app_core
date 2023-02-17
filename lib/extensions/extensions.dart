@@ -10,4 +10,5 @@ part 'color.dart';
 part 'date.dart';
 part 'int.dart';
 part 'iterable.dart';
+part 'password.dart';
 part 'string.dart';

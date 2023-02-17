@@ -1,4 +1,4 @@
-part of sign_in;
+part of settings;
 
 final userEmailProvider = Provider<User?>((ref) {
   final userChanges = ref.watch(userChangesProvider);
@@ -104,7 +104,7 @@ class _ButtonsSection extends ConsumerWidget {
             FormSection(
               child: ProviderScope(
                 overrides: [
-                  _currentSupplier.overrideWithValue(supplier),
+                  currentSupplier.overrideWithValue(supplier),
                 ],
                 child: const SignInSupplierButton(),
               ),

@@ -15,7 +15,6 @@ void _handleSignIn(
   SignInButtonsEvent event,
 ) {
   ref.read(signInSupplierProvider.notifier).state = event.when(
-    //signInWithFacebook: () => SignInSupplier.facebook,
     signInWithGoogle: () => SignInSupplier.google,
     signInWithApple: () => SignInSupplier.apple,
     signInWithEmail: () => SignInSupplier.email,
@@ -156,7 +155,7 @@ class _SignInButtonsState extends ConsumerState<SignInButtons> {
                         (!isApple() && supplier != SignInSupplier.apple))
                       ProviderScope(
                         overrides: [
-                          _currentSupplier.overrideWithValue(supplier),
+                          currentSupplier.overrideWithValue(supplier),
                         ],
                         child: const SignInSupplierButton(),
                       ),
@@ -188,7 +187,7 @@ class SignInSupplierButton extends ConsumerWidget {
   }
 }
 
-final _currentSupplier = Provider<SignInSupplier>((ref) {
+final currentSupplier = Provider<SignInSupplier>((ref) {
   throw UnimplementedError();
 });
 
@@ -199,7 +198,7 @@ class SignInButton extends PlatformWidgetBase<ElevatedButton, CupertinoButton,
   @override
   ElevatedButton createMaterialWidget(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(signInThemeProvider);
-    final supplier = ref.watch(_currentSupplier);
+    final supplier = ref.watch(currentSupplier);
 
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
@@ -221,7 +220,7 @@ class SignInButton extends PlatformWidgetBase<ElevatedButton, CupertinoButton,
   @override
   CupertinoButton createCupertinoWidget(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(signInThemeProvider);
-    final supplier = ref.watch(_currentSupplier);
+    final supplier = ref.watch(currentSupplier);
 
     return CupertinoButton(
       color: theme.buttonBackgroundColor,
@@ -244,7 +243,7 @@ class SignInButtonContents extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final supplier = ref.watch(_currentSupplier);
+    final supplier = ref.watch(currentSupplier);
     final signInArea = ref.watch(signInAreaProvider);
     final l10n = ref.watch(flutterAppCoreLocalizationsProvider);
     final buttonTextColor = signInArea == SignInArea.settings

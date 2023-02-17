@@ -1,4 +1,4 @@
-part of sign_in;
+part of settings;
 
 final settingsDeleteControllerProvider = StateNotifierProvider.autoDispose<
     SettingsDeleteController, SettingsDeleteState>((ref) {

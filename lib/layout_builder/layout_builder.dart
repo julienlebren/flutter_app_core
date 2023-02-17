@@ -66,9 +66,6 @@ part 'platform/platform_textfield.dart';
 part 'platform/platform_textstyle.dart';
 part 'platform/platform_widget_base.dart';
 
-// Settings widgets
-part 'settings/settings_page_builder.dart';
-
 // Theme
 part 'theme/material_color.dart';
 part 'theme/theme_providers.dart';

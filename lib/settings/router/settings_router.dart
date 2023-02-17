@@ -1,4 +1,4 @@
-part of sign_in;
+part of settings;
 
 class SettingsRoutes {
   static const predicate = 'settings';

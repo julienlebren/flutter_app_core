@@ -1,4 +1,16 @@
-part of sign_in;
+library firebase_auth_service;
+
+import 'package:cloud_functions/cloud_functions.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_app_core/localization/flutter_app_core_l10n.dart';
+import 'package:flutter_libphonenumber/flutter_libphonenumber.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:the_apple_sign_in/the_apple_sign_in.dart';
+
+part 'firebase_auth_errors.dart';
+part 'firebase_auth_service.g.dart';
 
 class FirebaseAuthService {
   FirebaseAuthService._();
@@ -148,28 +160,6 @@ class FirebaseAuthService {
     }
   }
 
-  /*fFuture<User?> signInWithFacebook() async {
-    inal fb = FacebookLogin();
-    final response = await fb.logIn(permissions: [
-      FacebookPermission.publicProfile,
-      FacebookPermission.email,
-    ]);
-    switch (response.status) {
-      case FacebookLoginStatus.success:
-        final accessToken = response.accessToken;
-        final credential = FacebookAuthProvider.credential(accessToken!.token);
-
-        final userCredential = await _signInWithCredential(credential);
-        return userCredential.user;
-      case FacebookLoginStatus.cancel:
-        throw FirebaseAuthException(code: 'ERROR_ABORTED_BY_USER');
-      case FacebookLoginStatus.error:
-        throw FirebaseAuthException(code: 'ERROR_FACEBOOK_LOGIN_FAILED');
-      default:
-        throw UnimplementedError();
-    }
-  }*/
-
   Future<void> sendSignInLinkToEmail({
     required String email,
     required String url,
@@ -262,8 +252,20 @@ class FirebaseAuthService {
   Future<void> signOut() async {
     final googleSignIn = GoogleSignIn();
     await googleSignIn.signOut();
-    //final facebookLogin = FacebookLogin();
-    //await facebookLogin.logOut();
     await _firebaseAuth.signOut();
   }
 }
+
+/// A provider which returns the auth changes in Firebase
+/// We use a [StreamProvider] here to handle the status of the stream,
+/// it allows us to know when the stream is loading or when it has data.
+final authStateChangesProvider = StreamProvider<User?>(
+    (ref) => ref.watch(authServiceProvider).authStateChanges());
+
+final userChangesProvider = StreamProvider<User?>(
+    (ref) => ref.watch(authServiceProvider).userChanges());
+
+/// A provider which returns an instance of [FirebaseAuthService]
+@Riverpod(keepAlive: true)
+FirebaseAuthService authService(AuthServiceRef ref) =>
+    FirebaseAuthService.instance;

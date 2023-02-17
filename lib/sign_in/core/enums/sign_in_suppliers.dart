@@ -6,7 +6,6 @@ enum SignInSupplier {
   email,
   google,
   apple,
-  //facebook,
   phone,
 }
 
@@ -15,7 +14,6 @@ extension SignInSupplierX on SignInSupplier {
     switch (this) {
       case SignInSupplier.google:
       case SignInSupplier.apple:
-        //case SignInSupplier.facebook:
         return true;
       default:
         return false;
@@ -28,8 +26,6 @@ extension SignInSupplierX on SignInSupplier {
         return "Google";
       case SignInSupplier.apple:
         return "Apple";
-      /*case SignInSupplier.facebook:
-        return "Facebook";*/
       case SignInSupplier.email:
         return l10n.signInWithEmail;
       case SignInSupplier.emailLink:
@@ -45,8 +41,6 @@ extension SignInSupplierX on SignInSupplier {
         return "google.com";
       case SignInSupplier.apple:
         return "apple.com";
-      /*case SignInSupplier.facebook:
-        return "facebook.com";*/
       default:
         return "";
     }
@@ -72,13 +66,6 @@ extension SignInSupplierX on SignInSupplier {
             ),
           ),
         );
-      /*case SignInSupplier.facebook:
-        return Image.asset(
-          "assets/images/facebook-logo.png",
-          width: size,
-          height: size,
-          package: "sign_in",
-        );*/
       case SignInSupplier.email:
       case SignInSupplier.emailLink:
         return Icon(
@@ -97,27 +84,12 @@ extension SignInSupplierX on SignInSupplier {
     }
   }
 
-  SettingsAccountEvent? get settingsAccountEvent {
-    switch (this) {
-      case SignInSupplier.google:
-        return const SettingsAccountEvent.signInWithGoogle();
-      case SignInSupplier.apple:
-        return const SettingsAccountEvent.signInWithApple();
-      /*case SignInSupplier.facebook:
-        return const SettingsAccountEvent.signInWithFacebook();*/
-      default:
-        return null;
-    }
-  }
-
   SignInButtonsEvent get signInButtonsEvent {
     switch (this) {
       case SignInSupplier.google:
         return const SignInButtonsEvent.signInWithGoogle();
       case SignInSupplier.apple:
         return const SignInButtonsEvent.signInWithApple();
-      /*case SignInSupplier.facebook:
-        return const SignInButtonsEvent.signInWithFacebook();*/
       case SignInSupplier.anonymous:
         return const SignInButtonsEvent.signInAnonymously();
       case SignInSupplier.emailLink:

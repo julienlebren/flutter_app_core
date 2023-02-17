@@ -1,4 +1,4 @@
-part of sign_in;
+part of settings;
 
 final settingsAccountControllerProvider =
     StateNotifierProvider<SettingsAccountController, SettingsState>((ref) {
@@ -8,8 +8,6 @@ final settingsAccountControllerProvider =
 
 @freezed
 class SettingsAccountEvent with _$SettingsAccountEvent {
-  /*const factory SettingsAccountEvent.signInWithFacebook() =
-      _SettingsConnectFacebook;*/
   const factory SettingsAccountEvent.signInWithGoogle() =
       _SettingsConnectGoogle;
   const factory SettingsAccountEvent.signInWithApple() = _SettingsConnectApple;
@@ -28,7 +26,6 @@ class SettingsAccountController extends StateNotifier<SettingsState> {
     try {
       await event.when(
         signInWithApple: _service.signInWithApple,
-        //signInWithFacebook: _service.signInWithFacebook,
         signInWithGoogle: _service.signInWithGoogle,
         unlink: _service.unlink,
       );
@@ -46,3 +43,27 @@ class SettingsAccountController extends StateNotifier<SettingsState> {
     }
   }
 }
+
+/*
+@riverpod
+class SettingsAccountController extends _$SettingsAccountController {
+  @override
+  FutureOr<void> build() {
+    // return a value (or do nothing if the return type is void)
+  }
+
+  Future<bool> submit(SettingsAccountEvent event) async {
+    return true;
+    /*final service = ref.read(authServiceProvider);
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard(() {
+      event.when(
+        signInWithApple: service.signInWithApple,
+        signInWithGoogle: service.signInWithGoogle,
+        unlink: service.unlink,
+      );
+    });
+    return state.hasError == false;*/
+  }
+}
+*/
