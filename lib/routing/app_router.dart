@@ -20,8 +20,9 @@ List<GoRoute> routes(RoutesRef ref) {
   return [];
 }
 
-@Riverpod(keepAlive: true, dependencies: [routes, authSettings])
-GoRouter goRouter(GoRouterRef ref) {
+//@Riverpod(keepAlive: true, dependencies: [routes, authSplash, authSettings])
+//GoRouter goRouter(GoRouterRef ref) {
+final goRouterProvider = Provider<GoRouter>((ref) {
   final settings = ref.read(authSettingsProvider);
   final authSplashState = ref.watch(authSplashProvider(settings));
 
@@ -85,4 +86,7 @@ GoRouter goRouter(GoRouterRef ref) {
     ),
     //errorBuilder: (context, state) => const NotFoundScreen(),
   );
-}
+}, dependencies: [
+  authSettingsProvider,
+  authSplashProvider,
+]);
