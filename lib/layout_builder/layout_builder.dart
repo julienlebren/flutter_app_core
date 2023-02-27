@@ -124,7 +124,9 @@ mixin FormElement {}
 /// The provider of the [AppTheme]
 /// Needs to be overridden in the [ProviderScope] of the app.
 @Riverpod(keepAlive: true)
-AppTheme appTheme(AppThemeRef ref) => throw UnimplementedError();
+AppTheme appTheme(AppThemeRef ref) {
+  throw UnimplementedError("AppTheme has not been overridden as required.");
+}
 
 /// This provider is used by [Scaffold] or other widgets that handle
 /// an [AnnotatedRegion] to specify the layout of status bars

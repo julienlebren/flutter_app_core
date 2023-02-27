@@ -6,7 +6,7 @@ part of sign_in;
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authSettingsHash() => r'899034d4159b6e614dc816b8c91ac5f8d818345b';
+String _$authSettingsHash() => r'ecc77c22c09d6c926d31d24ae6d306a93459dfba';
 
 /// See also [authSettings].
 @ProviderFor(authSettings)

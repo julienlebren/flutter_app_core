@@ -67,7 +67,7 @@ class AuthSettings {
 
 @Riverpod(keepAlive: true)
 AuthSettings authSettings(AuthSettingsRef ref) {
-  throw UnimplementedError();
+  throw UnimplementedError("AuthSettings has not been overridden as required.");
 }
 
 @Riverpod(keepAlive: true, dependencies: [authSettings])

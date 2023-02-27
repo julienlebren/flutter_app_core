@@ -6,7 +6,7 @@ part of layout_builder;
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appThemeHash() => r'4189b0877db3050070563cf1c2300b23ce580092';
+String _$appThemeHash() => r'374903c0d774ef7e42f32991f90c42d595b6cde1';
 
 /// The provider of the [AppTheme]
 /// Needs to be overridden in the [ProviderScope] of the app.
