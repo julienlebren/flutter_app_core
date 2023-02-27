@@ -73,6 +73,7 @@ AuthState authState(AuthStateRef ref) {
       if (firebaseUser == null) {
         return const AuthState.notAuthed();
       } else {
+        return const AuthState.notAuthed();
         final isSigninIn = ref.watch(signInSupplierProvider) != null;
         AsyncValue<dynamic> user = ref.watch(userStreamProvider);
         return user.when(
