@@ -51,38 +51,18 @@ part 'presentation/widgets/sign_in_tappable_field.dart';
 part 'sign_in.freezed.dart';
 part 'sign_in.g.dart';
 
-/*
-class AuthSettings {
-  AuthSettings({
-    required this.suppliers,
-    required this.userStreamProvider,
-    this.needUserInfoProvider,
-    this.settingsNavigator,
-  });
-
-  final List<SignInSupplier> suppliers;
-  final StreamProvider userStreamProvider;
-  final Provider<bool?>? needUserInfoProvider;
-  final GlobalKey<NavigatorState>? settingsNavigator;
-}
-
-@Riverpod(keepAlive: true)
-AuthSettings authSettings(AuthSettingsRef ref) {
-  throw UnimplementedError("AuthSettings has not been overridden as required.");
-}
-*/
-
 @Riverpod(keepAlive: true)
 List<SignInSupplier> signInSuppliers(SignInSuppliersRef ref) => [];
 
 @Riverpod(keepAlive: true)
 bool? needUserInfo(NeedUserInfoRef ref) => null;
 
-final userStreamProvider = StreamProvider((_) {
+@Riverpod(keepAlive: true)
+Future<dynamic> userStream(UserStreamRef ref) {
   throw UnimplementedError("userStream has not been overridden as required.");
-});
+}
 
-@Riverpod(keepAlive: true, dependencies: [needUserInfo])
+@Riverpod(keepAlive: true, dependencies: [needUserInfo, userStream])
 AuthState authState(AuthStateRef ref) {
   final authStateChanges = ref.watch(authStateChangesProvider);
 
@@ -94,7 +74,7 @@ AuthState authState(AuthStateRef ref) {
         return const AuthState.notAuthed();
       } else {
         final isSigninIn = ref.watch(signInSupplierProvider) != null;
-        final user = ref.watch(userStreamProvider);
+        AsyncValue<dynamic> user = ref.watch(userStreamProvider);
         return user.when(
           loading: () {
             if (isSigninIn) {
@@ -173,6 +153,24 @@ SignInTheme signInTheme(SignInThemeRef ref) {
 }
 
 /*
+class AuthSettings {
+  AuthSettings({
+    required this.suppliers,
+    required this.userStreamProvider,
+    this.needUserInfoProvider,
+    this.settingsNavigator,
+  });
+
+  final List<SignInSupplier> suppliers;
+  final StreamProvider userStreamProvider;
+  final Provider<bool?>? needUserInfoProvider;
+  final GlobalKey<NavigatorState>? settingsNavigator;
+}
+
+@Riverpod(keepAlive: true)
+AuthSettings authSettings(AuthSettingsRef ref) {
+  throw UnimplementedError("AuthSettings has not been overridden as required.");
+}
 
 final authStateProvider =
     Provider.family<AuthState, AuthSettings>((ref, settings) {
