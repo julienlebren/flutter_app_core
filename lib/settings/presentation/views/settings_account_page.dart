@@ -29,9 +29,8 @@ class SettingsAccountPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(flutterAppCoreLocalizationsProvider);
     final isAnonymous = ref.watch(userAnonymousProvider);
-    final authSettings = ref.watch(authSettingsProvider);
 
-    ref.listen<AuthState>(authStateProvider(authSettings), (_, state) {
+    ref.listen<AuthState>(authStateProvider, (_, state) {
       state.maybeWhen(
         notAuthed: () {
           ref.read(currentTabIndexProvider.notifier).state = 0;
