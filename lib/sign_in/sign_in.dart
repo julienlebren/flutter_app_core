@@ -70,6 +70,99 @@ AuthSettings authSettings(AuthSettingsRef ref) {
   throw UnimplementedError();
 }
 
+@Riverpod(keepAlive: true, dependencies: [authSettings])
+AuthState authState(AuthStateRef ref) {
+  final settings = ref.watch(authSettingsProvider);
+  final authStateChanges = ref.watch(authStateChangesProvider);
+
+  return authStateChanges.when(
+    loading: () => const AuthState.initializing(),
+    error: (error, _) => AuthState.error(error.toString()),
+    data: (firebaseUser) {
+      if (firebaseUser == null) {
+        return const AuthState.notAuthed();
+      } else {
+        final isSigninIn = ref.watch(signInSupplierProvider) != null;
+        final user = ref.watch(settings.userStreamProvider);
+        return user.when(
+          loading: () {
+            if (isSigninIn) {
+              return const AuthState.notAuthed();
+            } else {
+              return const AuthState.initializing();
+            }
+          },
+          error: (error, stack) {
+            return AuthState.error(error.toString());
+          },
+          data: (user) {
+            if (user == null) {
+              return const AuthState.waitingUserCreation();
+            } else {
+              if (settings.needUserInfoProvider != null) {
+                final needUserInfo = ref.watch(settings.needUserInfoProvider!);
+                if (needUserInfo == true) {
+                  return const AuthState.needUserInformation();
+                } else if (needUserInfo == false) {
+                  return AuthState.authed(user);
+                } else {
+                  if (isSigninIn) {
+                    return const AuthState.notAuthed();
+                  } else {
+                    return const AuthState.initializing();
+                  }
+                }
+              } else {
+                return AuthState.authed(user);
+              }
+            }
+          },
+        );
+      }
+    },
+  );
+}
+
+@Riverpod(keepAlive: true, dependencies: [authState])
+AuthSplashState authSplash(AuthSplashRef ref) {
+  final authState = ref.watch(authStateProvider);
+
+  return authState.maybeWhen(
+    initializing: () => const AuthSplashState.initializing(),
+    needUserInformation: () {
+      final signInArea = ref.read(signInAreaProvider);
+      if (signInArea == SignInArea.signIn) {
+        return const AuthSplashState.notAuthed();
+      } else if (signInArea == SignInArea.settings) {
+        return const AuthSplashState.authed();
+      } else {
+        return const AuthSplashState.initializing();
+      }
+    },
+    authed: (_) => const AuthSplashState.authed(),
+    error: (error) => AuthSplashState.error(error),
+    orElse: () => const AuthSplashState.notAuthed(),
+  );
+}
+
+@Riverpod(keepAlive: true, dependencies: [appTheme, formTheme])
+SignInTheme signInTheme(SignInThemeRef ref) {
+  final appTheme = ref.watch(appThemeProvider);
+  final formTheme = ref.watch(formThemeProvider);
+
+  return SignInTheme(
+    primaryColor: appTheme.primaryColor,
+    scaffoldBackgroundColor: appTheme.scaffoldBackgroundColor,
+    textColor: appTheme.textColor,
+    buttonBackgroundColor: formTheme.rowBackgroundColor,
+    buttonTextColor: appTheme.textColor,
+    dividerColor: appTheme.dividerColor,
+    borderColor: appTheme.borderColor,
+  );
+}
+
+/*
+
 final authStateProvider =
     Provider.family<AuthState, AuthSettings>((ref, settings) {
   final authStateChanges = ref.watch(authStateChangesProvider);
@@ -142,3 +235,4 @@ final signInThemeProvider = Provider<SignInTheme>(
     formThemeProvider,
   ],
 );
+*/

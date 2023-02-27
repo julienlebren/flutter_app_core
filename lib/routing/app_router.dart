@@ -1,4 +1,3 @@
-import 'package:flutter_app_core/firebase_auth_service/firebase_auth_service.dart';
 import 'package:flutter_app_core/layout_builder/layout_builder.dart';
 import 'package:flutter_app_core/sign_in/sign_in.dart';
 import 'package:go_router/go_router.dart';

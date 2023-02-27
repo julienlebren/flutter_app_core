@@ -1,32 +1,5 @@
 part of sign_in;
 
-final authSplashProvider = Provider.family<AuthSplashState, AuthSettings>(
-  (ref, settings) {
-    final authState = ref.watch(authStateProvider(settings));
-
-    return authState.maybeWhen(
-      initializing: () => const AuthSplashState.initializing(),
-      needUserInformation: () {
-        final signInArea = ref.read(signInAreaProvider);
-        if (signInArea == SignInArea.signIn) {
-          return const AuthSplashState.notAuthed();
-        } else if (signInArea == SignInArea.settings) {
-          return const AuthSplashState.authed();
-        } else {
-          return const AuthSplashState.initializing();
-        }
-      },
-      authed: (_) => const AuthSplashState.authed(),
-      error: (error) => AuthSplashState.error(error),
-      orElse: () => const AuthSplashState.notAuthed(),
-    );
-  },
-  dependencies: [
-    signInAreaProvider,
-    authStateProvider,
-  ],
-);
-
 class SplashPageBuilder extends ConsumerWidget {
   const SplashPageBuilder({
     required this.home,
@@ -48,9 +21,7 @@ class SplashPageBuilder extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final settings = ref.read(authSettingsProvider);
-
-    ref.listen<AuthState>(authStateProvider(settings), (
+    ref.listen<AuthState>(authStateProvider, (
       previousState,
       authState,
     ) {
@@ -85,7 +56,7 @@ class SplashPageBuilder extends ConsumerWidget {
       );
     });
 
-    final authSplashState = ref.watch(authSplashProvider(settings));
+    final authSplashState = ref.watch(authSplashProvider);
 
     return authSplashState.maybeWhen(
       initializing: () => loader,

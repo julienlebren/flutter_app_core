@@ -37,13 +37,11 @@ PurchasesSettings purchasesSettings(PurchasesSettingsRef ref) {
   );
 }
 
-final purchasesServiceProvider = Provider<PurchasesService>(
-  (ref) {
-    final settings = ref.watch(purchasesSettingsProvider);
-    return PurchasesService(settings: settings);
-  },
-  dependencies: [purchasesSettingsProvider],
-);
+@Riverpod(keepAlive: true, dependencies: [purchasesSettings])
+PurchasesService purchasesService(PurchasesServiceRef ref) {
+  final settings = ref.watch(purchasesSettingsProvider);
+  return PurchasesService(settings: settings);
+}
 
 final purchasesControllerProvider =
     StateNotifierProvider.autoDispose<PurchasesController, PurchasesState>(
@@ -52,25 +50,20 @@ final purchasesControllerProvider =
   return PurchasesController(service);
 }, dependencies: [purchasesServiceProvider]);
 
-final purchasesThemeProvider = Provider<PurchasesTheme>(
-  (ref) {
-    final appTheme = ref.watch(appThemeProvider);
+@Riverpod(keepAlive: true, dependencies: [appTheme, formTheme])
+PurchasesTheme purchasesTheme(PurchasesThemeRef ref) {
+  final appTheme = ref.watch(appThemeProvider);
 
-    return PurchasesTheme(
-      primaryColor: appTheme.primaryColor,
-      backgroundColor: appTheme.scaffoldBackgroundColor,
-      textColor: appTheme.textColor,
-      cupertinoDisclaimerColor: Colors.grey,
-      textButtonColor: appTheme.primaryColor,
-      featureBackgroundColor: Colors.transparent,
-      featureTitleColor: appTheme.textColor,
-      featureCaptionColor: Colors.grey,
-      featureIconColor: appTheme.primaryColor,
-      purchaseButtonBorderRadius: appTheme.elevatedButtonRadius,
-    );
-  },
-  dependencies: [
-    appThemeProvider,
-    formThemeProvider,
-  ],
-);
+  return PurchasesTheme(
+    primaryColor: appTheme.primaryColor,
+    backgroundColor: appTheme.scaffoldBackgroundColor,
+    textColor: appTheme.textColor,
+    cupertinoDisclaimerColor: Colors.grey,
+    textButtonColor: appTheme.primaryColor,
+    featureBackgroundColor: Colors.transparent,
+    featureTitleColor: appTheme.textColor,
+    featureCaptionColor: Colors.grey,
+    featureIconColor: appTheme.primaryColor,
+    purchaseButtonBorderRadius: appTheme.elevatedButtonRadius,
+  );
+}

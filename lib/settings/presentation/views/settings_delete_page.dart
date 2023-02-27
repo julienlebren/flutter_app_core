@@ -6,12 +6,11 @@ class SettingsDeletePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(flutterAppCoreLocalizationsProvider);
-    final authSettings = ref.watch(authSettingsProvider);
     final isSaving = ref.watch(
       settingsDeleteControllerProvider.select((state) => state.isLoading),
     );
 
-    ref.listen<AuthState>(authStateProvider(authSettings), (_, state) {
+    ref.listen<AuthState>(authStateProvider, (_, state) {
       state.maybeWhen(
         notAuthed: () {
           ref.read(currentTabIndexProvider.notifier).state = 0;
