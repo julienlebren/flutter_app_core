@@ -15,6 +15,8 @@ export 'purchases/purchases.dart';
 export 'settings/settings.dart';
 export 'sign_in/sign_in.dart';
 
+export 'package:go_router/go_router.dart';
+
 /*
 class App extends ConsumerWidget {
   const App({Key? key}) : super(key: key);
