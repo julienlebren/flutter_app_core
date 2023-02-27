@@ -6,21 +6,36 @@ part of sign_in;
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authSettingsHash() => r'ecc77c22c09d6c926d31d24ae6d306a93459dfba';
+String _$signInSuppliersHash() => r'3cc5220dc8b17b42ddaabf37f85a17c64a7a5f3b';
 
-/// See also [authSettings].
-@ProviderFor(authSettings)
-final authSettingsProvider = Provider<AuthSettings>.internal(
-  authSettings,
-  name: r'authSettingsProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$authSettingsHash,
+/// See also [signInSuppliers].
+@ProviderFor(signInSuppliers)
+final signInSuppliersProvider = Provider<List<SignInSupplier>>.internal(
+  signInSuppliers,
+  name: r'signInSuppliersProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$signInSuppliersHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef AuthSettingsRef = ProviderRef<AuthSettings>;
-String _$authStateHash() => r'4fc09ef0444d9d702bc728d7bcd46a5b4d637982';
+typedef SignInSuppliersRef = ProviderRef<List<SignInSupplier>>;
+String _$needUserInfoHash() => r'5071717346419634f801b6254f396490eebeeaa5';
+
+/// See also [needUserInfo].
+@ProviderFor(needUserInfo)
+final needUserInfoProvider = Provider<bool?>.internal(
+  needUserInfo,
+  name: r'needUserInfoProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$needUserInfoHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef NeedUserInfoRef = ProviderRef<bool?>;
+String _$authStateHash() => r'8cf5b84901e9348defc97fa4e4af36426f54d515';
 
 /// See also [authState].
 @ProviderFor(authState)
@@ -29,8 +44,8 @@ final authStateProvider = Provider<AuthState>.internal(
   name: r'authStateProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$authStateHash,
-  dependencies: <ProviderOrFamily>[authSettingsProvider],
-  allTransitiveDependencies: <ProviderOrFamily>[authSettingsProvider],
+  dependencies: <ProviderOrFamily>[needUserInfoProvider],
+  allTransitiveDependencies: <ProviderOrFamily>[needUserInfoProvider],
 );
 
 typedef AuthStateRef = ProviderRef<AuthState>;
@@ -46,7 +61,7 @@ final authSplashProvider = Provider<AuthSplashState>.internal(
   dependencies: <ProviderOrFamily>[authStateProvider],
   allTransitiveDependencies: <ProviderOrFamily>[
     authStateProvider,
-    authSettingsProvider
+    needUserInfoProvider
   ],
 );
 

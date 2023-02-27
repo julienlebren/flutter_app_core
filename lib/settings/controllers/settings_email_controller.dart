@@ -8,7 +8,6 @@ final settingsEmailControllerProvider = StateNotifierProvider.autoDispose<
   return SettingsEmailController(service, localizations);
 }, dependencies: [
   authServiceProvider,
-  authSettingsProvider,
   flutterAppCoreLocalizationsProvider,
 ]);
 

@@ -51,6 +51,7 @@ part 'presentation/widgets/sign_in_tappable_field.dart';
 part 'sign_in.freezed.dart';
 part 'sign_in.g.dart';
 
+/*
 class AuthSettings {
   AuthSettings({
     required this.suppliers,
@@ -69,10 +70,20 @@ class AuthSettings {
 AuthSettings authSettings(AuthSettingsRef ref) {
   throw UnimplementedError("AuthSettings has not been overridden as required.");
 }
+*/
 
-@Riverpod(keepAlive: true, dependencies: [authSettings])
+@Riverpod(keepAlive: true)
+List<SignInSupplier> signInSuppliers(SignInSuppliersRef ref) => [];
+
+@Riverpod(keepAlive: true)
+bool? needUserInfo(NeedUserInfoRef ref) => null;
+
+final userStreamProvider = StreamProvider((_) {
+  throw UnimplementedError("userStream has not been overridden as required.");
+});
+
+@Riverpod(keepAlive: true, dependencies: [needUserInfo])
 AuthState authState(AuthStateRef ref) {
-  final settings = ref.watch(authSettingsProvider);
   final authStateChanges = ref.watch(authStateChangesProvider);
 
   return authStateChanges.when(
@@ -83,7 +94,7 @@ AuthState authState(AuthStateRef ref) {
         return const AuthState.notAuthed();
       } else {
         final isSigninIn = ref.watch(signInSupplierProvider) != null;
-        final user = ref.watch(settings.userStreamProvider);
+        final user = ref.watch(userStreamProvider);
         return user.when(
           loading: () {
             if (isSigninIn) {
@@ -99,8 +110,8 @@ AuthState authState(AuthStateRef ref) {
             if (user == null) {
               return const AuthState.waitingUserCreation();
             } else {
-              if (settings.needUserInfoProvider != null) {
-                final needUserInfo = ref.watch(settings.needUserInfoProvider!);
+              final needUserInfo = ref.watch(needUserInfoProvider);
+              if (needUserInfo != null) {
                 if (needUserInfo == true) {
                   return const AuthState.needUserInformation();
                 } else if (needUserInfo == false) {
