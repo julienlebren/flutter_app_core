@@ -70,6 +70,7 @@ AuthSettings authSettings(AuthSettingsRef ref) {
 
 @Riverpod(keepAlive: true, dependencies: [authSettings])
 AuthState authState(AuthStateRef ref) {
+  print("authState called");
   final settings = ref.watch(authSettingsProvider);
   final authStateChanges = ref.watch(authStateChangesProvider);
 
