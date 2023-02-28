@@ -2,6 +2,7 @@ part of sign_in;
 
 @Riverpod(keepAlive: true)
 AuthSplashState authSplash(AuthSplashRef ref) {
+  print("authSplash called");
   final authState = ref.watch(authStateProvider);
 
   return authState.maybeWhen(
@@ -47,6 +48,7 @@ class SplashPageBuilder extends ConsumerWidget {
       previousState,
       authState,
     ) {
+      print("authSplash listened");
       authState.maybeWhen(
         authed: (_) {
           previousState?.maybeWhen(
