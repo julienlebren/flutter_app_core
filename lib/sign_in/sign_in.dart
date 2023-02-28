@@ -51,72 +51,75 @@ part 'presentation/widgets/sign_in_tappable_field.dart';
 part 'sign_in.freezed.dart';
 part 'sign_in.g.dart';
 
-@Riverpod(keepAlive: true)
-List<SignInSupplier> signInSuppliers(SignInSuppliersRef ref) => [];
+class AuthSettings {
+  AuthSettings({
+    required this.suppliers,
+    required this.userStreamProvider,
+    this.needUserInfoProvider,
+  });
+
+  final List<SignInSupplier> suppliers;
+  final StreamProvider userStreamProvider;
+  final Provider<bool?>? needUserInfoProvider;
+}
 
 @Riverpod(keepAlive: true)
-bool? needUserInfo(NeedUserInfoRef ref) => null;
+AuthSettings authSettings(AuthSettingsRef ref) {
+  throw UnimplementedError("AuthSettings has not been overridden as required.");
+}
 
-final userStreamProvider = StreamProvider((ref) {
-  throw UnimplementedError("userStream has not been overridden as required.");
-});
+@Riverpod(keepAlive: true, dependencies: [authSettings])
+AuthState authState(AuthStateRef ref) {
+  final settings = ref.watch(authSettingsProvider);
+  final authStateChanges = ref.watch(authStateChangesProvider);
 
-final authStateProvider = Provider<AuthState>(
-  (ref) {
-    final authStateChanges = ref.watch(authStateChangesProvider);
-
-    return authStateChanges.when(
-      loading: () => const AuthState.initializing(),
-      error: (error, _) => AuthState.error(error.toString()),
-      data: (firebaseUser) {
-        if (firebaseUser == null) {
-          return const AuthState.notAuthed();
-        } else {
-          final isSigninIn = ref.watch(signInSupplierProvider) != null;
-          final user = ref.watch(userStreamProvider);
-          return user.when(
-            loading: () {
-              if (isSigninIn) {
-                return const AuthState.notAuthed();
-              } else {
-                return const AuthState.initializing();
-              }
-            },
-            error: (error, stack) {
-              return AuthState.error(error.toString());
-            },
-            data: (user) {
-              if (user == null) {
-                return const AuthState.waitingUserCreation();
-              } else {
-                final needUserInfo = ref.watch(needUserInfoProvider);
-                if (needUserInfo != null) {
-                  if (needUserInfo == true) {
-                    return const AuthState.needUserInformation();
-                  } else if (needUserInfo == false) {
-                    return AuthState.authed(user);
-                  } else {
-                    if (isSigninIn) {
-                      return const AuthState.notAuthed();
-                    } else {
-                      return const AuthState.initializing();
-                    }
-                  }
-                } else {
+  return authStateChanges.when(
+    loading: () => const AuthState.initializing(),
+    error: (error, _) => AuthState.error(error.toString()),
+    data: (firebaseUser) {
+      if (firebaseUser == null) {
+        return const AuthState.notAuthed();
+      } else {
+        final isSigninIn = ref.watch(signInSupplierProvider) != null;
+        final user = ref.watch(settings.userStreamProvider);
+        return user.when(
+          loading: () {
+            if (isSigninIn) {
+              return const AuthState.notAuthed();
+            } else {
+              return const AuthState.initializing();
+            }
+          },
+          error: (error, stack) {
+            return AuthState.error(error.toString());
+          },
+          data: (user) {
+            if (user == null) {
+              return const AuthState.waitingUserCreation();
+            } else {
+              if (settings.needUserInfoProvider != null) {
+                final needUserInfo = ref.watch(settings.needUserInfoProvider!);
+                if (needUserInfo == true) {
+                  return const AuthState.needUserInformation();
+                } else if (needUserInfo == false) {
                   return AuthState.authed(user);
+                } else {
+                  if (isSigninIn) {
+                    return const AuthState.notAuthed();
+                  } else {
+                    return const AuthState.initializing();
+                  }
                 }
+              } else {
+                return AuthState.authed(user);
               }
-            },
-          );
-        }
-      },
-    );
-  },
-  dependencies: [
-    userStreamProvider,
-    needUserInfoProvider,
-  ],
-);
+            }
+          },
+        );
+      }
+    },
+  );
+}
 
 @Riverpod(keepAlive: true)
 AuthSplashState authSplash(AuthSplashRef ref) {
@@ -157,25 +160,6 @@ SignInTheme signInTheme(SignInThemeRef ref) {
 }
 
 /*
-class AuthSettings {
-  AuthSettings({
-    required this.suppliers,
-    required this.userStreamProvider,
-    this.needUserInfoProvider,
-    this.settingsNavigator,
-  });
-
-  final List<SignInSupplier> suppliers;
-  final StreamProvider userStreamProvider;
-  final Provider<bool?>? needUserInfoProvider;
-  final GlobalKey<NavigatorState>? settingsNavigator;
-}
-
-@Riverpod(keepAlive: true)
-AuthSettings authSettings(AuthSettingsRef ref) {
-  throw UnimplementedError("AuthSettings has not been overridden as required.");
-}
-
 final authStateProvider =
     Provider.family<AuthState, AuthSettings>((ref, settings) {
   final authStateChanges = ref.watch(authStateChangesProvider);
