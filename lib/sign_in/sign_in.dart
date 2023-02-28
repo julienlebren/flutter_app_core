@@ -121,28 +121,6 @@ AuthState authState(AuthStateRef ref) {
   );
 }
 
-@Riverpod(keepAlive: true)
-AuthSplashState authSplash(AuthSplashRef ref) {
-  final authState = ref.watch(authStateProvider);
-
-  return authState.maybeWhen(
-    initializing: () => const AuthSplashState.initializing(),
-    needUserInformation: () {
-      final signInArea = ref.read(signInAreaProvider);
-      if (signInArea == SignInArea.signIn) {
-        return const AuthSplashState.notAuthed();
-      } else if (signInArea == SignInArea.settings) {
-        return const AuthSplashState.authed();
-      } else {
-        return const AuthSplashState.initializing();
-      }
-    },
-    authed: (_) => const AuthSplashState.authed(),
-    error: (error) => AuthSplashState.error(error),
-    orElse: () => const AuthSplashState.notAuthed(),
-  );
-}
-
 @Riverpod(keepAlive: true, dependencies: [appTheme, formTheme])
 SignInTheme signInTheme(SignInThemeRef ref) {
   final appTheme = ref.watch(appThemeProvider);
@@ -211,25 +189,4 @@ final authStateProvider =
     },
   );
 });
-
-final signInThemeProvider = Provider<SignInTheme>(
-  (ref) {
-    final appTheme = ref.watch(appThemeProvider);
-    final formTheme = ref.watch(formThemeProvider);
-
-    return SignInTheme(
-      primaryColor: appTheme.primaryColor,
-      scaffoldBackgroundColor: appTheme.scaffoldBackgroundColor,
-      textColor: appTheme.textColor,
-      buttonBackgroundColor: formTheme.rowBackgroundColor,
-      buttonTextColor: appTheme.textColor,
-      dividerColor: appTheme.dividerColor,
-      borderColor: appTheme.borderColor,
-    );
-  },
-  dependencies: [
-    appThemeProvider,
-    formThemeProvider,
-  ],
-);
 */
