@@ -35,38 +35,7 @@ final needUserInfoProvider = Provider<bool?>.internal(
 );
 
 typedef NeedUserInfoRef = ProviderRef<bool?>;
-String _$userStreamHash() => r'7a2942a7174be930b9ab36509f37f5d384381d8f';
-
-/// See also [userStream].
-@ProviderFor(userStream)
-final userStreamProvider = FutureProvider<dynamic>.internal(
-  userStream,
-  name: r'userStreamProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$userStreamHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef UserStreamRef = FutureProviderRef<dynamic>;
-String _$authStateHash() => r'0d341ee63e6a43c64678f55b786b2ad05613047e';
-
-/// See also [authState].
-@ProviderFor(authState)
-final authStateProvider = Provider<AuthState>.internal(
-  authState,
-  name: r'authStateProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$authStateHash,
-  dependencies: <ProviderOrFamily>[needUserInfoProvider, userStreamProvider],
-  allTransitiveDependencies: <ProviderOrFamily>[
-    needUserInfoProvider,
-    userStreamProvider
-  ],
-);
-
-typedef AuthStateRef = ProviderRef<AuthState>;
-String _$authSplashHash() => r'846fc0a868920ef80bd52d0cdb60bc5db90ac7a4';
+String _$authSplashHash() => r'6905c9eac6b00bc4d414621f90dff630b793c0eb';
 
 /// See also [authSplash].
 @ProviderFor(authSplash)
@@ -75,12 +44,8 @@ final authSplashProvider = Provider<AuthSplashState>.internal(
   name: r'authSplashProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$authSplashHash,
-  dependencies: <ProviderOrFamily>[authStateProvider],
-  allTransitiveDependencies: <ProviderOrFamily>[
-    authStateProvider,
-    needUserInfoProvider,
-    userStreamProvider
-  ],
+  dependencies: null,
+  allTransitiveDependencies: null,
 );
 
 typedef AuthSplashRef = ProviderRef<AuthSplashState>;
