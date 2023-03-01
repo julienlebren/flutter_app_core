@@ -21,6 +21,20 @@ final signInSuppliersProvider = Provider<List<SignInSupplier>>.internal(
 );
 
 typedef SignInSuppliersRef = ProviderRef<List<SignInSupplier>>;
+String _$authStateHash() => r'74b98dc7b757ecf532f46dde45c9345ce50d484a';
+
+/// See also [authState].
+@ProviderFor(authState)
+final authStateProvider = Provider<AuthState>.internal(
+  authState,
+  name: r'authStateProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$authStateHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef AuthStateRef = ProviderRef<AuthState>;
 String _$signInThemeHash() => r'1ee8be66795bf5ae1b98d380383650f7360b06d9';
 
 /// See also [signInTheme].

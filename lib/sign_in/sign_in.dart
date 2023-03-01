@@ -3,12 +3,14 @@ library sign_in;
 import 'dart:async';
 import 'dart:ui' as ui;
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_core/extensions/extensions.dart';
 import 'package:flutter_app_core/firebase_auth_service/firebase_auth_service.dart';
+import 'package:flutter_app_core/firestore_service/firestore_service.dart';
 import 'package:flutter_app_core/layout_builder/layout_builder.dart';
 import 'package:flutter_app_core/localization/flutter_app_core_l10n.dart';
 import 'package:flutter_app_core/localization/localization.dart';
@@ -27,8 +29,10 @@ part 'controllers/sign_in_email_register_controller.dart';
 part 'controllers/sign_in_phone_controller.dart';
 part 'controllers/sign_in_phone_verification_controller.dart';
 part 'core/enums/sign_in_suppliers.dart';
+part 'core/enums/firestore_path.dart';
 part 'core/models/auth_splash_state.dart';
 part 'core/models/auth_state.dart';
+part 'core/models/firestore_user.dart';
 part 'core/models/sign_in_theme.dart';
 part 'presentation/painters/apple_logo.dart';
 part 'presentation/painters/google_logo.dart';
@@ -54,6 +58,77 @@ part 'sign_in.g.dart';
 @Riverpod(keepAlive: true)
 List<SignInSupplier> signInSuppliers(SignInSuppliersRef ref) => [];
 
+final userRef = FirebaseFirestore.instance
+    .collection(FirestorePath.users.name)
+    .withConverter<FirestoreUser>(
+      fromFirestore: (snapshot, _) {
+        final userFromJson = FirestoreUser.fromJson(snapshot.data()!);
+        return userFromJson.copyWith(id: snapshot.id);
+      },
+      toFirestore: (_, __) => {},
+    );
+
+final userStreamProvider = StreamProvider<FirestoreUser?>((ref) {
+  final authStateChanges = ref.watch(authStateChangesProvider);
+
+  return authStateChanges.maybeWhen(
+    data: (user) {
+      if (user != null) {
+        return userRef
+            .doc(user.uid)
+            .snapshots()
+            .map((snapshot) => snapshot.data());
+      } else {
+        return const Stream.empty();
+      }
+    },
+    orElse: () => const Stream.empty(),
+  );
+});
+
+@Riverpod(keepAlive: true)
+AuthState authState(AuthStateRef ref) {
+  print("authState called");
+  final authStateChanges = ref.watch(authStateChangesProvider);
+
+  return authStateChanges.when(
+    loading: () => const AuthState.initializing(),
+    error: (error, _) => AuthState.error(error.toString()),
+    data: (firebaseUser) {
+      if (firebaseUser == null) {
+        return const AuthState.notAuthed();
+      } else {
+        final isSigninIn = ref.watch(signInSupplierProvider) != null;
+        final user = ref.watch(userStreamProvider);
+        return user.when(
+          loading: () {
+            if (isSigninIn) {
+              return const AuthState.notAuthed();
+            } else {
+              return const AuthState.initializing();
+            }
+          },
+          error: (error, stack) {
+            return AuthState.error(error.toString());
+          },
+          data: (user) {
+            if (user == null) {
+              return const AuthState.waitingUserCreation();
+            } else {
+              if (user.needInfo) {
+                return const AuthState.needUserInformation();
+              } else {
+                return AuthState.authed(user);
+              }
+            }
+          },
+        );
+      }
+    },
+  );
+}
+
+/*
 final userStreamProvider = StreamProvider((_) => const Stream.empty());
 
 final needUserInfoProvider = Provider<bool?>((_) => null);
@@ -111,7 +186,7 @@ final authStateProvider = Provider<AuthState>((ref) {
 }, dependencies: [
   userStreamProvider,
   needUserInfoProvider,
-]);
+]);*/
 
 @Riverpod(keepAlive: true, dependencies: [appTheme, formTheme])
 SignInTheme signInTheme(SignInThemeRef ref) {
