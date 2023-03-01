@@ -1,7 +1,7 @@
 part of layout_builder;
 
 class PlatformApp
-    extends PlatformWidgetBase<ProviderScope, CupertinoApp, ProviderScope> {
+    extends PlatformWidgetBase<MaterialApp, CupertinoApp, MaterialApp> {
   const PlatformApp({
     super.key,
     this.initialRoute,
@@ -24,9 +24,9 @@ class PlatformApp
   final Widget? home;
 
   @override
-  ProviderScope createMaterialWidget(BuildContext context, WidgetRef ref) {
+  MaterialApp createMaterialWidget(BuildContext context, WidgetRef ref) {
     final materialTheme = ref.watch(materialThemeProvider);
-    /*final goRouter = ref.watch(goRouterProvider);
+    final goRouter = ref.watch(goRouterProvider);
     return MaterialApp.router(
       routerConfig: goRouter,
       locale: locale,
@@ -35,9 +35,9 @@ class PlatformApp
       debugShowCheckedModeBanner: false,
       theme: materialTheme,
       builder: builder,
-    );*/
+    );
 
-    return ProviderScope(
+    /*return ProviderScope(
       overrides: [
         routeProvider.overrideWithValue(onGenerateRoute),
       ],
@@ -53,7 +53,7 @@ class PlatformApp
         onGenerateRoute: onGenerateRoute,
         home: home,
       ),
-    );
+    );*/
   }
 
   @override
@@ -90,6 +90,6 @@ class PlatformApp
   }
 
   @override
-  ProviderScope createWebWidget(BuildContext context, WidgetRef ref) =>
+  MaterialApp createWebWidget(BuildContext context, WidgetRef ref) =>
       createMaterialWidget(context, ref);
 }
