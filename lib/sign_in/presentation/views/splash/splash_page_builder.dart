@@ -25,7 +25,6 @@ class SplashPageBuilder extends ConsumerWidget {
       previousState,
       authState,
     ) {
-      print("authSplash listened");
       authState.maybeWhen(
         authed: (_) {
           previousState?.maybeWhen(
