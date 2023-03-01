@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_core/extensions/extensions.dart';
 import 'package:flutter_app_core/firebase_auth_service/firebase_auth_service.dart';
-import 'package:flutter_app_core/firestore_service/firestore_service.dart';
 import 'package:flutter_app_core/layout_builder/layout_builder.dart';
 import 'package:flutter_app_core/localization/flutter_app_core_l10n.dart';
 import 'package:flutter_app_core/localization/localization.dart';
@@ -29,7 +28,6 @@ part 'controllers/sign_in_email_register_controller.dart';
 part 'controllers/sign_in_phone_controller.dart';
 part 'controllers/sign_in_phone_verification_controller.dart';
 part 'core/enums/sign_in_suppliers.dart';
-part 'core/enums/firestore_path.dart';
 part 'core/models/auth_splash_state.dart';
 part 'core/models/auth_state.dart';
 part 'core/models/firestore_user.dart';
@@ -55,11 +53,19 @@ part 'presentation/widgets/sign_in_tappable_field.dart';
 part 'sign_in.freezed.dart';
 part 'sign_in.g.dart';
 
+/// Name of the users collection
+const firestoreUserPath = "users";
+
+/// Provider which defines the list of sign-in suppliers
+/// Default is empty, you need to override it on the main scope
 @Riverpod(keepAlive: true)
 List<SignInSupplier> signInSuppliers(SignInSuppliersRef ref) => [];
 
+/// A reference to the user document with a conversion to [FirestoreUser]
+/// Your custom [User] model in the app should implement all the variables
+/// of [FirestoreUser] to ensure everything will work well.
 final userRef = FirebaseFirestore.instance
-    .collection(FirestorePath.users.name)
+    .collection(firestoreUserPath)
     .withConverter<FirestoreUser>(
       fromFirestore: (snapshot, _) {
         final userFromJson = FirestoreUser.fromJson(snapshot.data()!);
@@ -128,82 +134,6 @@ AuthState authState(AuthStateRef ref) {
   );
 }
 
-/*
-final userStreamProvider = StreamProvider((_) => const Stream.empty());
-
-final needUserInfoProvider = Provider<bool?>((_) => null);
-
-final authStateProvider = Provider<AuthState>((ref) {
-  print("authState called");
-  final authStateChanges = ref.watch(authStateChangesProvider);
-
-  return authStateChanges.when(
-    loading: () => const AuthState.initializing(),
-    error: (error, _) => AuthState.error(error.toString()),
-    data: (firebaseUser) {
-      if (firebaseUser == null) {
-        return const AuthState.notAuthed();
-      } else {
-        final isSigninIn = ref.watch(signInSupplierProvider) != null;
-        final user = ref.watch(userStreamProvider);
-        return user.when(
-          loading: () {
-            if (isSigninIn) {
-              return const AuthState.notAuthed();
-            } else {
-              return const AuthState.initializing();
-            }
-          },
-          error: (error, stack) {
-            return AuthState.error(error.toString());
-          },
-          data: (user) {
-            if (user == null) {
-              return const AuthState.waitingUserCreation();
-            } else {
-              final needUserInfo = ref.watch(needUserInfoProvider);
-              if (needUserInfo != null) {
-                if (needUserInfo == true) {
-                  return const AuthState.needUserInformation();
-                } else if (needUserInfo == false) {
-                  return AuthState.authed(user);
-                } else {
-                  if (isSigninIn) {
-                    return const AuthState.notAuthed();
-                  } else {
-                    return const AuthState.initializing();
-                  }
-                }
-              } else {
-                return AuthState.authed(user);
-              }
-            }
-          },
-        );
-      }
-    },
-  );
-}, dependencies: [
-  userStreamProvider,
-  needUserInfoProvider,
-]);*/
-
-@Riverpod(keepAlive: true, dependencies: [appTheme, formTheme])
-SignInTheme signInTheme(SignInThemeRef ref) {
-  final appTheme = ref.watch(appThemeProvider);
-  final formTheme = ref.watch(formThemeProvider);
-
-  return SignInTheme(
-    primaryColor: appTheme.primaryColor,
-    scaffoldBackgroundColor: appTheme.scaffoldBackgroundColor,
-    textColor: appTheme.textColor,
-    buttonBackgroundColor: formTheme.rowBackgroundColor,
-    buttonTextColor: appTheme.textColor,
-    dividerColor: appTheme.dividerColor,
-    borderColor: appTheme.borderColor,
-  );
-}
-
 @Riverpod(keepAlive: true)
 AuthSplashState authSplash(AuthSplashRef ref) {
   print("authSplash called");
@@ -227,72 +157,18 @@ AuthSplashState authSplash(AuthSplashRef ref) {
   );
 }
 
-/*
-class AuthSettings {
-  AuthSettings({
-    required this.suppliers,
-    required this.userStreamProvider,
-    this.needUserInfoProvider,
-  });
+@Riverpod(keepAlive: true, dependencies: [appTheme, formTheme])
+SignInTheme signInTheme(SignInThemeRef ref) {
+  final appTheme = ref.watch(appThemeProvider);
+  final formTheme = ref.watch(formThemeProvider);
 
-  final List<SignInSupplier> suppliers;
-  final StreamProvider userStreamProvider;
-  final Provider<bool?>? needUserInfoProvider;
-}
-@Riverpod(keepAlive: true)
-AuthSettings authSettings(AuthSettingsRef ref) {
-  throw UnimplementedError("AuthSettings has not been overridden as required.");
-}
-
-final authStateProvider =
-    Provider.family<AuthState, AuthSettings>((ref, settings) {
-  final authStateChanges = ref.watch(authStateChangesProvider);
-
-  return authStateChanges.when(
-    loading: () => const AuthState.initializing(),
-    error: (error, _) => AuthState.error(error.toString()),
-    data: (firebaseUser) {
-      if (firebaseUser == null) {
-        return const AuthState.notAuthed();
-      } else {
-        final isSigninIn = ref.watch(signInSupplierProvider) != null;
-        final user = ref.watch(settings.userStreamProvider);
-        return user.when(
-          loading: () {
-            if (isSigninIn) {
-              return const AuthState.notAuthed();
-            } else {
-              return const AuthState.initializing();
-            }
-          },
-          error: (error, stack) {
-            return AuthState.error(error.toString());
-          },
-          data: (user) {
-            if (user == null) {
-              return const AuthState.waitingUserCreation();
-            } else {
-              if (settings.needUserInfoProvider != null) {
-                final needUserInfo = ref.watch(settings.needUserInfoProvider!);
-                if (needUserInfo == true) {
-                  return const AuthState.needUserInformation();
-                } else if (needUserInfo == false) {
-                  return AuthState.authed(user);
-                } else {
-                  if (isSigninIn) {
-                    return const AuthState.notAuthed();
-                  } else {
-                    return const AuthState.initializing();
-                  }
-                }
-              } else {
-                return AuthState.authed(user);
-              }
-            }
-          },
-        );
-      }
-    },
+  return SignInTheme(
+    primaryColor: appTheme.primaryColor,
+    scaffoldBackgroundColor: appTheme.scaffoldBackgroundColor,
+    textColor: appTheme.textColor,
+    buttonBackgroundColor: formTheme.rowBackgroundColor,
+    buttonTextColor: appTheme.textColor,
+    dividerColor: appTheme.dividerColor,
+    borderColor: appTheme.borderColor,
   );
-});
-*/
+}
