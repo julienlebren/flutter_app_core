@@ -48,9 +48,20 @@ final signInSuppliersProvider = Provider<List<SignInSupplier>>.internal(
 );
 
 typedef SignInSuppliersRef = ProviderRef<List<SignInSupplier>>;
-String _$authStateHash() => r'59e506e5bf2d669860b91dba5b8dba425652294f';
+String _$authStateHash() => r'5c23d931f0299e4cfa6031cf1e036fb40e36d91f';
 
-/// See also [authState].
+/// The provider for the [AuthState] of the app
+/// Watches the authStateChanges of the Firebase auth stream,
+/// then if the user is authenticated, watches the Firestore
+/// user document from the [firestoreUserPath] defined below.
+/// If the document does not exist, we consider that the creation
+/// is in progress in Cloud Functions (waitingUserCreation).
+/// If the document exists and the user.needInfo is true, it seems
+/// that the user needs to add more information to complete the
+/// registration process.
+/// Otherwise, the user is authenticated!
+///
+/// Copied from [authState].
 @ProviderFor(authState)
 final authStateProvider = Provider<AuthState>.internal(
   authState,
@@ -62,9 +73,12 @@ final authStateProvider = Provider<AuthState>.internal(
 );
 
 typedef AuthStateRef = ProviderRef<AuthState>;
-String _$authSplashHash() => r'3b0eb4cde3bfa39dc1fc351c1dd18f884eaad7b3';
+String _$authSplashHash() => r'6905c9eac6b00bc4d414621f90dff630b793c0eb';
 
-/// See also [authSplash].
+/// Simplified version of [AuthState], this provider is used
+/// in the [SplashPageBuilder] and managed less cases than [AuthState].
+///
+/// Copied from [authSplash].
 @ProviderFor(authSplash)
 final authSplashProvider = Provider<AuthSplashState>.internal(
   authSplash,
@@ -78,7 +92,9 @@ final authSplashProvider = Provider<AuthSplashState>.internal(
 typedef AuthSplashRef = ProviderRef<AuthSplashState>;
 String _$signInThemeHash() => r'1ee8be66795bf5ae1b98d380383650f7360b06d9';
 
-/// See also [signInTheme].
+/// Theming the sign-in pages
+///
+/// Copied from [signInTheme].
 @ProviderFor(signInTheme)
 final signInThemeProvider = Provider<SignInTheme>.internal(
   signInTheme,

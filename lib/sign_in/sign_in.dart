@@ -74,6 +74,9 @@ final userRef = FirebaseFirestore.instance
       toFirestore: (_, __) => {},
     );
 
+/// A provider for listening changed to the Firestore user object
+/// Only intended to return a correct [AuthState], not to get custom properties
+/// of the real [User] object used in the app.
 final userStreamProvider = StreamProvider<FirestoreUser?>((ref) {
   final authStateChanges = ref.watch(authStateChangesProvider);
 
@@ -92,9 +95,18 @@ final userStreamProvider = StreamProvider<FirestoreUser?>((ref) {
   );
 });
 
+/// The provider for the [AuthState] of the app
+/// Watches the authStateChanges of the Firebase auth stream,
+/// then if the user is authenticated, watches the Firestore
+/// user document from the [firestoreUserPath] defined below.
+/// If the document does not exist, we consider that the creation
+/// is in progress in Cloud Functions (waitingUserCreation).
+/// If the document exists and the user.needInfo is true, it seems
+/// that the user needs to add more information to complete the
+/// registration process.
+/// Otherwise, the user is authenticated!
 @Riverpod(keepAlive: true)
 AuthState authState(AuthStateRef ref) {
-  print("authState called");
   final authStateChanges = ref.watch(authStateChangesProvider);
 
   return authStateChanges.when(
@@ -134,9 +146,10 @@ AuthState authState(AuthStateRef ref) {
   );
 }
 
+/// Simplified version of [AuthState], this provider is used
+/// in the [SplashPageBuilder] and managed less cases than [AuthState].
 @Riverpod(keepAlive: true)
 AuthSplashState authSplash(AuthSplashRef ref) {
-  print("authSplash called");
   final authState = ref.watch(authStateProvider);
 
   return authState.maybeWhen(
@@ -157,6 +170,7 @@ AuthSplashState authSplash(AuthSplashRef ref) {
   );
 }
 
+/// Theming the sign-in pages
 @Riverpod(keepAlive: true, dependencies: [appTheme, formTheme])
 SignInTheme signInTheme(SignInThemeRef ref) {
   final appTheme = ref.watch(appThemeProvider);
