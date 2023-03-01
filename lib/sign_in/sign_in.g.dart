@@ -48,7 +48,7 @@ final signInSuppliersProvider = Provider<List<SignInSupplier>>.internal(
 );
 
 typedef SignInSuppliersRef = ProviderRef<List<SignInSupplier>>;
-String _$userStreamHash() => r'741e0fa23b77cb5e91b155fb893f9cfde38dd656';
+String _$userStreamHash() => r'e0edde7adc2f67cd7f4cb506f6f80c18b6e90ad5';
 
 /// A provider for listening changed to the Firestore user object
 /// Only intended to return a correct [AuthState], not to get custom properties
@@ -66,7 +66,7 @@ final userStreamProvider = StreamProvider<FirestoreUser?>.internal(
 );
 
 typedef UserStreamRef = StreamProviderRef<FirestoreUser?>;
-String _$authStateHash() => r'e79fbdbd2de4d16aa0059e92ccfb99fd7ca5754f';
+String _$authStateHash() => r'5c23d931f0299e4cfa6031cf1e036fb40e36d91f';
 
 /// The provider for the [AuthState] of the app
 /// Watches the authStateChanges of the Firebase auth stream,

@@ -37,7 +37,7 @@ PurchasesSettings purchasesSettings(PurchasesSettingsRef ref) {
   );
 }
 
-@Riverpod(keepAlive: true, dependencies: [purchasesSettings])
+@Riverpod(keepAlive: true)
 PurchasesService purchasesService(PurchasesServiceRef ref) {
   final settings = ref.watch(purchasesSettingsProvider);
   return PurchasesService(settings: settings);

@@ -79,9 +79,9 @@ final userRef = FirebaseFirestore.instance
 /// of the real [User] object used in the app.
 @Riverpod(keepAlive: true)
 Stream<FirestoreUser?> userStream(UserStreamRef ref) {
-  final firebaseUser = ref.watch(firebaseUserProvider);
+  final authStateChanges = ref.watch(authStateChangesProvider);
 
-  return firebaseUser.maybeWhen(
+  return authStateChanges.maybeWhen(
     data: (user) {
       if (user != null) {
         return userRef
@@ -108,9 +108,9 @@ Stream<FirestoreUser?> userStream(UserStreamRef ref) {
 /// Otherwise, the user is authenticated!
 @Riverpod(keepAlive: true)
 AuthState authState(AuthStateRef ref) {
-  final firebaseUser = ref.watch(firebaseUserProvider);
+  final authStateChanges = ref.watch(authStateChangesProvider);
 
-  return firebaseUser.when(
+  return authStateChanges.when(
     loading: () => const AuthState.initializing(),
     error: (error, _) => AuthState.error(error.toString()),
     data: (firebaseUser) {

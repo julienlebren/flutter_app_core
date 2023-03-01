@@ -55,19 +55,4 @@ final authServiceProvider = Provider<FirebaseAuthService>.internal(
 );
 
 typedef AuthServiceRef = ProviderRef<FirebaseAuthService>;
-String _$firebaseUserHash() => r'e7371fce40c357b2afb8745fe2d1c2a3b5abcf26';
-
-/// See also [FirebaseUser].
-@ProviderFor(FirebaseUser)
-final firebaseUserProvider =
-    StreamNotifierProvider<FirebaseUser, User?>.internal(
-  FirebaseUser.new,
-  name: r'firebaseUserProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$firebaseUserHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$FirebaseUser = StreamNotifier<User?>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
