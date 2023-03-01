@@ -1,28 +1,5 @@
 part of sign_in;
 
-@Riverpod(keepAlive: true)
-AuthSplashState authSplash(AuthSplashRef ref) {
-  print("authSplash called");
-  final authState = ref.watch(authStateProvider);
-
-  return authState.maybeWhen(
-    initializing: () => const AuthSplashState.initializing(),
-    needUserInformation: () {
-      final signInArea = ref.read(signInAreaProvider);
-      if (signInArea == SignInArea.signIn) {
-        return const AuthSplashState.notAuthed();
-      } else if (signInArea == SignInArea.settings) {
-        return const AuthSplashState.authed();
-      } else {
-        return const AuthSplashState.initializing();
-      }
-    },
-    authed: (_) => const AuthSplashState.authed(),
-    error: (error) => AuthSplashState.error(error),
-    orElse: () => const AuthSplashState.notAuthed(),
-  );
-}
-
 class SplashPageBuilder extends ConsumerWidget {
   const SplashPageBuilder({
     required this.home,

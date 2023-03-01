@@ -68,9 +68,7 @@ class _ButtonsSection extends ConsumerWidget {
     final l10n = ref.watch(flutterAppCoreLocalizationsProvider);
     final signInTheme = ref.watch(signInThemeProvider);
     final suppliers = ref
-        .watch(authSettingsProvider.select(
-          (settings) => settings.suppliers,
-        ))
+        .watch(signInSuppliersProvider)
         .where((supplier) => supplier != SignInSupplier.anonymous)
         .toList();
 
@@ -163,9 +161,7 @@ class _SocialSection extends ConsumerWidget {
     final l10n = ref.watch(flutterAppCoreLocalizationsProvider);
     final formTheme = ref.watch(formThemeProvider);
     final suppliers = ref
-        .watch(authSettingsProvider.select(
-          (settings) => settings.suppliers,
-        ))
+        .watch(signInSuppliersProvider)
         .where((supplier) => supplier.isThirdParty)
         .toList();
 
