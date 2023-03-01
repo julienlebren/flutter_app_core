@@ -74,6 +74,7 @@
   "settingsLogoutConfirmation": "Êtes-vous sûr de vouloir vous déconnecter ?",
   "settingsUndefined": "Non défini",
   "signInAnonymously": "Continuer sans créer de compte",
+  "signInNoSupplier": "Aucun fournisseur d'authentification n'a été configuré pour cette app.",
   "signInWith": "Continuer avec {supplier}",
   "signInWithEmail": "un e-mail",
   "signInWithEmailLink": "un e-mail",

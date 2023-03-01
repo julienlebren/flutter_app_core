@@ -567,6 +567,12 @@ abstract class FlutterAppCoreLocalizations {
   /// **'Continue without registration'**
   String get signInAnonymously;
 
+  /// No description provided for @signInNoSupplier.
+  ///
+  /// In en, this message translates to:
+  /// **'No auth provider has been set for this app.'**
+  String get signInNoSupplier;
+
   /// No description provided for @signInWith.
   ///
   /// In en, this message translates to:

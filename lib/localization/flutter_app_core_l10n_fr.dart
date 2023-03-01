@@ -266,6 +266,9 @@ class FlutterAppCoreLocalizationsFr extends FlutterAppCoreLocalizations {
   String get signInAnonymously => 'Continuer sans créer de compte';
 
   @override
+  String get signInNoSupplier => 'Aucun fournisseur d\'authentification n\'a été configuré pour cette app.';
+
+  @override
   String signInWith(String supplier) {
     return 'Continuer avec $supplier';
   }

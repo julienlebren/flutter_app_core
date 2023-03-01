@@ -266,6 +266,9 @@ class FlutterAppCoreLocalizationsEn extends FlutterAppCoreLocalizations {
   String get signInAnonymously => 'Continue without registration';
 
   @override
+  String get signInNoSupplier => 'No auth provider has been set for this app.';
+
+  @override
   String signInWith(String supplier) {
     return 'Continue with $supplier';
   }

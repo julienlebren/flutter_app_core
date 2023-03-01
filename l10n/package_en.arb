@@ -165,6 +165,7 @@
   "settingsLogoutConfirmation": "Are you sure you want to logout?",
   "settingsUndefined": "Not set",
   "signInAnonymously": "Continue without registration",
+  "signInNoSupplier": "No auth provider has been set for this app.",
   "signInWith": "Continue with {supplier}",
   "@signInWith" : {
     "placeholders": {
