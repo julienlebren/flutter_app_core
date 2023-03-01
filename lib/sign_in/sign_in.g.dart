@@ -48,7 +48,25 @@ final signInSuppliersProvider = Provider<List<SignInSupplier>>.internal(
 );
 
 typedef SignInSuppliersRef = ProviderRef<List<SignInSupplier>>;
-String _$authStateHash() => r'5c23d931f0299e4cfa6031cf1e036fb40e36d91f';
+String _$userStreamHash() => r'741e0fa23b77cb5e91b155fb893f9cfde38dd656';
+
+/// A provider for listening changed to the Firestore user object
+/// Only intended to return a correct [AuthState], not to get custom properties
+/// of the real [User] object used in the app.
+///
+/// Copied from [userStream].
+@ProviderFor(userStream)
+final userStreamProvider = StreamProvider<FirestoreUser?>.internal(
+  userStream,
+  name: r'userStreamProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$userStreamHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef UserStreamRef = StreamProviderRef<FirestoreUser?>;
+String _$authStateHash() => r'e79fbdbd2de4d16aa0059e92ccfb99fd7ca5754f';
 
 /// The provider for the [AuthState] of the app
 /// Watches the authStateChanges of the Firebase auth stream,
@@ -90,23 +108,23 @@ final authSplashProvider = Provider<AuthSplashState>.internal(
 );
 
 typedef AuthSplashRef = ProviderRef<AuthSplashState>;
-String _$signInThemeHash() => r'1ee8be66795bf5ae1b98d380383650f7360b06d9';
+String _$signInThemeHash() => r'3d380ef5a1f0d9edce90bf2578bcfa95e90e5f35';
 
 /// Theming the sign-in pages
 ///
 /// Copied from [signInTheme].
 @ProviderFor(signInTheme)
-final signInThemeProvider = Provider<SignInTheme>.internal(
+final signInThemeProvider = AutoDisposeProvider<SignInTheme>.internal(
   signInTheme,
   name: r'signInThemeProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$signInThemeHash,
-  dependencies: <ProviderOrFamily>[appThemeProvider, formThemeProvider],
+  dependencies: <ProviderOrFamily>[formThemeProvider],
   allTransitiveDependencies: <ProviderOrFamily>[
-    appThemeProvider,
-    formThemeProvider
+    formThemeProvider,
+    appThemeProvider
   ],
 );
 
-typedef SignInThemeRef = ProviderRef<SignInTheme>;
+typedef SignInThemeRef = AutoDisposeProviderRef<SignInTheme>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

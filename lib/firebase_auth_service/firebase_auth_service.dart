@@ -4,13 +4,28 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_app_core/localization/flutter_app_core_l10n.dart';
 import 'package:flutter_libphonenumber/flutter_libphonenumber.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:the_apple_sign_in/the_apple_sign_in.dart';
 
 part 'firebase_auth_errors.dart';
 part 'firebase_auth_service.g.dart';
+
+@Riverpod(keepAlive: true)
+class FirebaseUser extends _$FirebaseUser {
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  @override
+  Stream<User?> build() {
+    return _firebaseAuth.authStateChanges();
+  }
+
+  Future<void> signOut() async {
+    final googleSignIn = GoogleSignIn();
+    await googleSignIn.signOut();
+    await _firebaseAuth.signOut();
+  }
+}
 
 class FirebaseAuthService {
   FirebaseAuthService._();
@@ -259,11 +274,15 @@ class FirebaseAuthService {
 /// A provider which returns the auth changes in Firebase
 /// We use a [StreamProvider] here to handle the status of the stream,
 /// it allows us to know when the stream is loading or when it has data.
-final authStateChangesProvider = StreamProvider<User?>(
-    (ref) => ref.watch(authServiceProvider).authStateChanges());
+@Riverpod(keepAlive: true)
+Stream<User?> authStateChanges(AuthStateChangesRef ref) {
+  return ref.watch(authServiceProvider).authStateChanges();
+}
 
-final userChangesProvider = StreamProvider<User?>(
-    (ref) => ref.watch(authServiceProvider).userChanges());
+@Riverpod(keepAlive: true)
+Stream<User?> userChanges(UserChangesRef ref) {
+  return ref.watch(authServiceProvider).userChanges();
+}
 
 /// A provider which returns an instance of [FirebaseAuthService]
 @Riverpod(keepAlive: true)

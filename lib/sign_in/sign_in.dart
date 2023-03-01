@@ -77,10 +77,11 @@ final userRef = FirebaseFirestore.instance
 /// A provider for listening changed to the Firestore user object
 /// Only intended to return a correct [AuthState], not to get custom properties
 /// of the real [User] object used in the app.
-final userStreamProvider = StreamProvider<FirestoreUser?>((ref) {
-  final authStateChanges = ref.watch(authStateChangesProvider);
+@Riverpod(keepAlive: true)
+Stream<FirestoreUser?> userStream(UserStreamRef ref) {
+  final firebaseUser = ref.watch(firebaseUserProvider);
 
-  return authStateChanges.maybeWhen(
+  return firebaseUser.maybeWhen(
     data: (user) {
       if (user != null) {
         return userRef
@@ -93,7 +94,7 @@ final userStreamProvider = StreamProvider<FirestoreUser?>((ref) {
     },
     orElse: () => const Stream.empty(),
   );
-});
+}
 
 /// The provider for the [AuthState] of the app
 /// Watches the authStateChanges of the Firebase auth stream,
@@ -107,9 +108,9 @@ final userStreamProvider = StreamProvider<FirestoreUser?>((ref) {
 /// Otherwise, the user is authenticated!
 @Riverpod(keepAlive: true)
 AuthState authState(AuthStateRef ref) {
-  final authStateChanges = ref.watch(authStateChangesProvider);
+  final firebaseUser = ref.watch(firebaseUserProvider);
 
-  return authStateChanges.when(
+  return firebaseUser.when(
     loading: () => const AuthState.initializing(),
     error: (error, _) => AuthState.error(error.toString()),
     data: (firebaseUser) {
@@ -171,7 +172,7 @@ AuthSplashState authSplash(AuthSplashRef ref) {
 }
 
 /// Theming the sign-in pages
-@Riverpod(keepAlive: true, dependencies: [appTheme, formTheme])
+@Riverpod(dependencies: [formTheme])
 SignInTheme signInTheme(SignInThemeRef ref) {
   final appTheme = ref.watch(appThemeProvider);
   final formTheme = ref.watch(formThemeProvider);

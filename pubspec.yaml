@@ -1,6 +1,6 @@
 name: flutter_app_core
 description: Reusable methods and widgets for building apps 
-version: 1.0.6
+version: 1.0.7
 homepage:
 
 environment:
@@ -31,7 +31,7 @@ dependencies:
   numberpicker: ^2.0.1
   pinput: ^2.2.12
   purchases_flutter: ^4.9.1
-  riverpod_annotation: ^1.2.1
+  riverpod_annotation: ^2.0.0
   the_apple_sign_in: ^1.1.1
   url_launcher: ^6.1.9
   visibility_detector: ^0.3.3
@@ -41,7 +41,8 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^2.0.1 
   build_runner: ^2.3.3
+  custom_lint: ^0.2.12
   freezed: ^2.3.2
   json_serializable: ^6.6.1
-  riverpod_generator: ^1.2.0
-  riverpod_lint: ^1.0.0
+  riverpod_generator: ^2.0.0
+  riverpod_lint: ^1.1.1
