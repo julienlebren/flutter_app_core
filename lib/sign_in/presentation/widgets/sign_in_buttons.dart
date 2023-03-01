@@ -82,87 +82,92 @@ class _SignInButtonsState extends ConsumerState<SignInButtons> {
     );
     final suppliers = ref.watch(signInSuppliersProvider);
 
-    ref.listen<SignInButtonsState>(signInButtonsControllerProvider, (_, state) {
-      state.maybeWhen(
-        initial: () {
-          ref.read(signInSupplierProvider.notifier).state = null;
-        },
-        error: (errorText) {
-          showErrorDialog(
-            context,
-            ref,
-            title: l10n.errorTitle,
-            content: errorText,
-          );
-        },
-        orElse: () => null,
-      );
-    });
+    if (suppliers.isEmpty) {
+      return const SizedBox.shrink();
+    } else {
+      ref.listen<SignInButtonsState>(signInButtonsControllerProvider,
+          (_, state) {
+        state.maybeWhen(
+          initial: () {
+            ref.read(signInSupplierProvider.notifier).state = null;
+          },
+          error: (errorText) {
+            showErrorDialog(
+              context,
+              ref,
+              title: l10n.errorTitle,
+              content: errorText,
+            );
+          },
+          orElse: () => null,
+        );
+      });
 
-    final iconSize = theme.buttonFontSize * 1.6;
+      final iconSize = theme.buttonFontSize * 1.6;
 
-    final buttonHeight =
-        iconSize + (theme.buttonPadding * 2) + theme.spaceBetweenButtons + 1;
+      final buttonHeight =
+          iconSize + (theme.buttonPadding * 2) + theme.spaceBetweenButtons + 1;
 
-    double boxHeight = buttonHeight * suppliers.length;
-    if (suppliers.contains(SignInSupplier.apple) && !isApple()) {
-      boxHeight -= buttonHeight;
-    }
+      double boxHeight = buttonHeight * suppliers.length;
+      if (suppliers.contains(SignInSupplier.apple) && !isApple()) {
+        boxHeight -= buttonHeight;
+      }
 
-    if (suppliers.last != SignInSupplier.anonymous) {
-      boxHeight += 16;
-    }
+      if (suppliers.last != SignInSupplier.anonymous) {
+        boxHeight += 16;
+      }
 
-    return SizedBox(
-      width: double.infinity,
-      height: boxHeight,
-      child: isLoading
-          ? Center(
-              child: SizedBox(
-                width: 30,
-                height: 30,
-                child: PlatformActivityIndicator(
-                    color: theme.scaffoldBackgroundColor.brightness ==
-                            Brightness.dark
-                        ? Colors.white
-                        : null),
-              ),
-            )
-          : Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                for (final supplier in suppliers) ...[
-                  if (supplier == SignInSupplier.anonymous) ...[
-                    SizedBox(
-                      width: double.infinity,
-                      child: PlatformTextButton(
-                        title: l10n.signInAnonymously,
-                        onPressed: () {
-                          _handleSignIn(
-                              context, ref, supplier.signInButtonsEvent);
-                        },
-                        color: (theme.scaffoldBackgroundColor.brightness ==
-                                Brightness.dark
-                            ? Colors.white
-                            : Colors.black),
+      return SizedBox(
+        width: double.infinity,
+        height: boxHeight,
+        child: isLoading
+            ? Center(
+                child: SizedBox(
+                  width: 30,
+                  height: 30,
+                  child: PlatformActivityIndicator(
+                      color: theme.scaffoldBackgroundColor.brightness ==
+                              Brightness.dark
+                          ? Colors.white
+                          : null),
+                ),
+              )
+            : Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  for (final supplier in suppliers) ...[
+                    if (supplier == SignInSupplier.anonymous) ...[
+                      SizedBox(
+                        width: double.infinity,
+                        child: PlatformTextButton(
+                          title: l10n.signInAnonymously,
+                          onPressed: () {
+                            _handleSignIn(
+                                context, ref, supplier.signInButtonsEvent);
+                          },
+                          color: (theme.scaffoldBackgroundColor.brightness ==
+                                  Brightness.dark
+                              ? Colors.white
+                              : Colors.black),
+                        ),
                       ),
-                    ),
-                  ] else ...[
-                    if (isApple() ||
-                        (!isApple() && supplier != SignInSupplier.apple))
-                      ProviderScope(
-                        overrides: [
-                          currentSupplier.overrideWithValue(supplier),
-                        ],
-                        child: const SignInSupplierButton(),
-                      ),
-                    SizedBox(height: theme.spaceBetweenButtons),
+                    ] else ...[
+                      if (isApple() ||
+                          (!isApple() && supplier != SignInSupplier.apple))
+                        ProviderScope(
+                          overrides: [
+                            currentSupplier.overrideWithValue(supplier),
+                          ],
+                          child: const SignInSupplierButton(),
+                        ),
+                      SizedBox(height: theme.spaceBetweenButtons),
+                    ],
                   ],
                 ],
-              ],
-            ),
-    );
+              ),
+      );
+    }
   }
 }
 

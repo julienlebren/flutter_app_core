@@ -1,4 +1,4 @@
-/*part of sign_in;
+part of sign_in;
 
 @freezed
 class FirestoreUser with _$FirestoreUser {
@@ -14,4 +14,3 @@ class FirestoreUser with _$FirestoreUser {
   factory FirestoreUser.fromJson(Map<String, dynamic> json) =>
       _$FirestoreUserFromJson(json);
 }
-*/

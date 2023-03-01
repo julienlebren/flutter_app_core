@@ -14,255 +14,6 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-FirestoreUser _$FirestoreUserFromJson(Map<String, dynamic> json) {
-  return _FirestoreUser.fromJson(json);
-}
-
-/// @nodoc
-mixin _$FirestoreUser {
-  String? get id => throw _privateConstructorUsedError;
-  String? get displayName => throw _privateConstructorUsedError;
-  String? get emailAddress => throw _privateConstructorUsedError;
-  bool get emailVerified => throw _privateConstructorUsedError;
-  bool get hasPassword => throw _privateConstructorUsedError;
-  bool get needInfo => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $FirestoreUserCopyWith<FirestoreUser> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $FirestoreUserCopyWith<$Res> {
-  factory $FirestoreUserCopyWith(
-          FirestoreUser value, $Res Function(FirestoreUser) then) =
-      _$FirestoreUserCopyWithImpl<$Res, FirestoreUser>;
-  @useResult
-  $Res call(
-      {String? id,
-      String? displayName,
-      String? emailAddress,
-      bool emailVerified,
-      bool hasPassword,
-      bool needInfo});
-}
-
-/// @nodoc
-class _$FirestoreUserCopyWithImpl<$Res, $Val extends FirestoreUser>
-    implements $FirestoreUserCopyWith<$Res> {
-  _$FirestoreUserCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? displayName = freezed,
-    Object? emailAddress = freezed,
-    Object? emailVerified = null,
-    Object? hasPassword = null,
-    Object? needInfo = null,
-  }) {
-    return _then(_value.copyWith(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      displayName: freezed == displayName
-          ? _value.displayName
-          : displayName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      emailAddress: freezed == emailAddress
-          ? _value.emailAddress
-          : emailAddress // ignore: cast_nullable_to_non_nullable
-              as String?,
-      emailVerified: null == emailVerified
-          ? _value.emailVerified
-          : emailVerified // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hasPassword: null == hasPassword
-          ? _value.hasPassword
-          : hasPassword // ignore: cast_nullable_to_non_nullable
-              as bool,
-      needInfo: null == needInfo
-          ? _value.needInfo
-          : needInfo // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$_FirestoreUserCopyWith<$Res>
-    implements $FirestoreUserCopyWith<$Res> {
-  factory _$$_FirestoreUserCopyWith(
-          _$_FirestoreUser value, $Res Function(_$_FirestoreUser) then) =
-      __$$_FirestoreUserCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String? id,
-      String? displayName,
-      String? emailAddress,
-      bool emailVerified,
-      bool hasPassword,
-      bool needInfo});
-}
-
-/// @nodoc
-class __$$_FirestoreUserCopyWithImpl<$Res>
-    extends _$FirestoreUserCopyWithImpl<$Res, _$_FirestoreUser>
-    implements _$$_FirestoreUserCopyWith<$Res> {
-  __$$_FirestoreUserCopyWithImpl(
-      _$_FirestoreUser _value, $Res Function(_$_FirestoreUser) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? displayName = freezed,
-    Object? emailAddress = freezed,
-    Object? emailVerified = null,
-    Object? hasPassword = null,
-    Object? needInfo = null,
-  }) {
-    return _then(_$_FirestoreUser(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      displayName: freezed == displayName
-          ? _value.displayName
-          : displayName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      emailAddress: freezed == emailAddress
-          ? _value.emailAddress
-          : emailAddress // ignore: cast_nullable_to_non_nullable
-              as String?,
-      emailVerified: null == emailVerified
-          ? _value.emailVerified
-          : emailVerified // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hasPassword: null == hasPassword
-          ? _value.hasPassword
-          : hasPassword // ignore: cast_nullable_to_non_nullable
-              as bool,
-      needInfo: null == needInfo
-          ? _value.needInfo
-          : needInfo // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$_FirestoreUser implements _FirestoreUser {
-  const _$_FirestoreUser(
-      {this.id,
-      this.displayName,
-      this.emailAddress,
-      this.emailVerified = false,
-      this.hasPassword = false,
-      this.needInfo = false});
-
-  factory _$_FirestoreUser.fromJson(Map<String, dynamic> json) =>
-      _$$_FirestoreUserFromJson(json);
-
-  @override
-  final String? id;
-  @override
-  final String? displayName;
-  @override
-  final String? emailAddress;
-  @override
-  @JsonKey()
-  final bool emailVerified;
-  @override
-  @JsonKey()
-  final bool hasPassword;
-  @override
-  @JsonKey()
-  final bool needInfo;
-
-  @override
-  String toString() {
-    return 'FirestoreUser(id: $id, displayName: $displayName, emailAddress: $emailAddress, emailVerified: $emailVerified, hasPassword: $hasPassword, needInfo: $needInfo)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_FirestoreUser &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.displayName, displayName) ||
-                other.displayName == displayName) &&
-            (identical(other.emailAddress, emailAddress) ||
-                other.emailAddress == emailAddress) &&
-            (identical(other.emailVerified, emailVerified) ||
-                other.emailVerified == emailVerified) &&
-            (identical(other.hasPassword, hasPassword) ||
-                other.hasPassword == hasPassword) &&
-            (identical(other.needInfo, needInfo) ||
-                other.needInfo == needInfo));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, id, displayName, emailAddress,
-      emailVerified, hasPassword, needInfo);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_FirestoreUserCopyWith<_$_FirestoreUser> get copyWith =>
-      __$$_FirestoreUserCopyWithImpl<_$_FirestoreUser>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_FirestoreUserToJson(
-      this,
-    );
-  }
-}
-
-abstract class _FirestoreUser implements FirestoreUser {
-  const factory _FirestoreUser(
-      {final String? id,
-      final String? displayName,
-      final String? emailAddress,
-      final bool emailVerified,
-      final bool hasPassword,
-      final bool needInfo}) = _$_FirestoreUser;
-
-  factory _FirestoreUser.fromJson(Map<String, dynamic> json) =
-      _$_FirestoreUser.fromJson;
-
-  @override
-  String? get id;
-  @override
-  String? get displayName;
-  @override
-  String? get emailAddress;
-  @override
-  bool get emailVerified;
-  @override
-  bool get hasPassword;
-  @override
-  bool get needInfo;
-  @override
-  @JsonKey(ignore: true)
-  _$$_FirestoreUserCopyWith<_$_FirestoreUser> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
 /// @nodoc
 mixin _$SignInButtonsEvent {
   @optionalTypeArgs
@@ -7148,6 +6899,255 @@ abstract class _AuthError implements AuthState {
   String get error;
   @JsonKey(ignore: true)
   _$$_AuthErrorCopyWith<_$_AuthError> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+FirestoreUser _$FirestoreUserFromJson(Map<String, dynamic> json) {
+  return _FirestoreUser.fromJson(json);
+}
+
+/// @nodoc
+mixin _$FirestoreUser {
+  String? get id => throw _privateConstructorUsedError;
+  String? get displayName => throw _privateConstructorUsedError;
+  String? get emailAddress => throw _privateConstructorUsedError;
+  bool get emailVerified => throw _privateConstructorUsedError;
+  bool get hasPassword => throw _privateConstructorUsedError;
+  bool get needInfo => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $FirestoreUserCopyWith<FirestoreUser> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $FirestoreUserCopyWith<$Res> {
+  factory $FirestoreUserCopyWith(
+          FirestoreUser value, $Res Function(FirestoreUser) then) =
+      _$FirestoreUserCopyWithImpl<$Res, FirestoreUser>;
+  @useResult
+  $Res call(
+      {String? id,
+      String? displayName,
+      String? emailAddress,
+      bool emailVerified,
+      bool hasPassword,
+      bool needInfo});
+}
+
+/// @nodoc
+class _$FirestoreUserCopyWithImpl<$Res, $Val extends FirestoreUser>
+    implements $FirestoreUserCopyWith<$Res> {
+  _$FirestoreUserCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? displayName = freezed,
+    Object? emailAddress = freezed,
+    Object? emailVerified = null,
+    Object? hasPassword = null,
+    Object? needInfo = null,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      displayName: freezed == displayName
+          ? _value.displayName
+          : displayName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      emailAddress: freezed == emailAddress
+          ? _value.emailAddress
+          : emailAddress // ignore: cast_nullable_to_non_nullable
+              as String?,
+      emailVerified: null == emailVerified
+          ? _value.emailVerified
+          : emailVerified // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasPassword: null == hasPassword
+          ? _value.hasPassword
+          : hasPassword // ignore: cast_nullable_to_non_nullable
+              as bool,
+      needInfo: null == needInfo
+          ? _value.needInfo
+          : needInfo // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_FirestoreUserCopyWith<$Res>
+    implements $FirestoreUserCopyWith<$Res> {
+  factory _$$_FirestoreUserCopyWith(
+          _$_FirestoreUser value, $Res Function(_$_FirestoreUser) then) =
+      __$$_FirestoreUserCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String? id,
+      String? displayName,
+      String? emailAddress,
+      bool emailVerified,
+      bool hasPassword,
+      bool needInfo});
+}
+
+/// @nodoc
+class __$$_FirestoreUserCopyWithImpl<$Res>
+    extends _$FirestoreUserCopyWithImpl<$Res, _$_FirestoreUser>
+    implements _$$_FirestoreUserCopyWith<$Res> {
+  __$$_FirestoreUserCopyWithImpl(
+      _$_FirestoreUser _value, $Res Function(_$_FirestoreUser) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? displayName = freezed,
+    Object? emailAddress = freezed,
+    Object? emailVerified = null,
+    Object? hasPassword = null,
+    Object? needInfo = null,
+  }) {
+    return _then(_$_FirestoreUser(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      displayName: freezed == displayName
+          ? _value.displayName
+          : displayName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      emailAddress: freezed == emailAddress
+          ? _value.emailAddress
+          : emailAddress // ignore: cast_nullable_to_non_nullable
+              as String?,
+      emailVerified: null == emailVerified
+          ? _value.emailVerified
+          : emailVerified // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasPassword: null == hasPassword
+          ? _value.hasPassword
+          : hasPassword // ignore: cast_nullable_to_non_nullable
+              as bool,
+      needInfo: null == needInfo
+          ? _value.needInfo
+          : needInfo // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_FirestoreUser implements _FirestoreUser {
+  const _$_FirestoreUser(
+      {this.id,
+      this.displayName,
+      this.emailAddress,
+      this.emailVerified = false,
+      this.hasPassword = false,
+      this.needInfo = false});
+
+  factory _$_FirestoreUser.fromJson(Map<String, dynamic> json) =>
+      _$$_FirestoreUserFromJson(json);
+
+  @override
+  final String? id;
+  @override
+  final String? displayName;
+  @override
+  final String? emailAddress;
+  @override
+  @JsonKey()
+  final bool emailVerified;
+  @override
+  @JsonKey()
+  final bool hasPassword;
+  @override
+  @JsonKey()
+  final bool needInfo;
+
+  @override
+  String toString() {
+    return 'FirestoreUser(id: $id, displayName: $displayName, emailAddress: $emailAddress, emailVerified: $emailVerified, hasPassword: $hasPassword, needInfo: $needInfo)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_FirestoreUser &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.displayName, displayName) ||
+                other.displayName == displayName) &&
+            (identical(other.emailAddress, emailAddress) ||
+                other.emailAddress == emailAddress) &&
+            (identical(other.emailVerified, emailVerified) ||
+                other.emailVerified == emailVerified) &&
+            (identical(other.hasPassword, hasPassword) ||
+                other.hasPassword == hasPassword) &&
+            (identical(other.needInfo, needInfo) ||
+                other.needInfo == needInfo));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, displayName, emailAddress,
+      emailVerified, hasPassword, needInfo);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_FirestoreUserCopyWith<_$_FirestoreUser> get copyWith =>
+      __$$_FirestoreUserCopyWithImpl<_$_FirestoreUser>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_FirestoreUserToJson(
+      this,
+    );
+  }
+}
+
+abstract class _FirestoreUser implements FirestoreUser {
+  const factory _FirestoreUser(
+      {final String? id,
+      final String? displayName,
+      final String? emailAddress,
+      final bool emailVerified,
+      final bool hasPassword,
+      final bool needInfo}) = _$_FirestoreUser;
+
+  factory _FirestoreUser.fromJson(Map<String, dynamic> json) =
+      _$_FirestoreUser.fromJson;
+
+  @override
+  String? get id;
+  @override
+  String? get displayName;
+  @override
+  String? get emailAddress;
+  @override
+  bool get emailVerified;
+  @override
+  bool get hasPassword;
+  @override
+  bool get needInfo;
+  @override
+  @JsonKey(ignore: true)
+  _$$_FirestoreUserCopyWith<_$_FirestoreUser> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

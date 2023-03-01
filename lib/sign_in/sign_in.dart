@@ -30,6 +30,7 @@ part 'controllers/sign_in_phone_verification_controller.dart';
 part 'core/enums/sign_in_suppliers.dart';
 part 'core/models/auth_splash_state.dart';
 part 'core/models/auth_state.dart';
+part 'core/models/firestore_user.dart';
 part 'core/models/sign_in_theme.dart';
 part 'presentation/painters/apple_logo.dart';
 part 'presentation/painters/google_logo.dart';
@@ -170,19 +171,4 @@ SignInTheme signInTheme(SignInThemeRef ref) {
     dividerColor: appTheme.dividerColor,
     borderColor: appTheme.borderColor,
   );
-}
-
-@freezed
-class FirestoreUser with _$FirestoreUser {
-  const factory FirestoreUser({
-    String? id,
-    String? displayName,
-    String? emailAddress,
-    @Default(false) bool emailVerified,
-    @Default(false) bool hasPassword,
-    @Default(false) bool needInfo,
-  }) = _FirestoreUser;
-
-  factory FirestoreUser.fromJson(Map<String, dynamic> json) =>
-      _$FirestoreUserFromJson(json);
 }
