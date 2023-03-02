@@ -6,11 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_core/flutter_app_core.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 part 'controllers/purchases_controller.dart';
 part 'core/models/purchases_event.dart';
@@ -31,11 +27,7 @@ const googlePlayURL = "https://play.google.com/store/account/subscriptions";
 const appStoreURL = "https://apps.apple.com/account/subscriptions";
 
 @Riverpod(keepAlive: true)
-PurchasesSettings purchasesSettings(PurchasesSettingsRef ref) {
-  throw UnimplementedError(
-    "You need to override purchasesSettingsProvider before calling purchasesServiceProvider!",
-  );
-}
+external PurchasesSettings purchasesSettings();
 
 @Riverpod(keepAlive: true)
 PurchasesService purchasesService(PurchasesServiceRef ref) {
@@ -50,7 +42,7 @@ final purchasesControllerProvider =
   return PurchasesController(service);
 }, dependencies: [purchasesServiceProvider]);
 
-@Riverpod(keepAlive: true)
+@Riverpod(keepAlive: true, dependencies: [appTheme])
 PurchasesTheme purchasesTheme(PurchasesThemeRef ref) {
   final appTheme = ref.watch(appThemeProvider);
 

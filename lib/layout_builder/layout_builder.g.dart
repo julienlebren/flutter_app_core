@@ -6,7 +6,7 @@ part of layout_builder;
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appThemeHash() => r'374903c0d774ef7e42f32991f90c42d595b6cde1';
+String _$appThemeHash() => r'87792610294216f07da25d93169dd6c7d0989db4';
 
 /// The provider of the [AppTheme]
 /// Needs to be overridden in the [ProviderScope] of the app.
@@ -14,7 +14,10 @@ String _$appThemeHash() => r'374903c0d774ef7e42f32991f90c42d595b6cde1';
 /// Copied from [appTheme].
 @ProviderFor(appTheme)
 final appThemeProvider = Provider<AppTheme>.internal(
-  appTheme,
+  (_) => throw UnsupportedError(
+    'The provider "appThemeProvider" is expected to get overridden/scoped, '
+    'but was accessed without an override.',
+  ),
   name: r'appThemeProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$appThemeHash,

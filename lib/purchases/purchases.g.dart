@@ -6,12 +6,15 @@ part of purchases;
 // RiverpodGenerator
 // **************************************************************************
 
-String _$purchasesSettingsHash() => r'0b5c1ac7be08fb891926b663f592e44b83347c4e';
+String _$purchasesSettingsHash() => r'664e42b014657601ad28152caec4174b82cc542a';
 
 /// See also [purchasesSettings].
 @ProviderFor(purchasesSettings)
 final purchasesSettingsProvider = Provider<PurchasesSettings>.internal(
-  purchasesSettings,
+  (_) => throw UnsupportedError(
+    'The provider "purchasesSettingsProvider" is expected to get overridden/scoped, '
+    'but was accessed without an override.',
+  ),
   name: r'purchasesSettingsProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
@@ -36,7 +39,7 @@ final purchasesServiceProvider = Provider<PurchasesService>.internal(
 );
 
 typedef PurchasesServiceRef = ProviderRef<PurchasesService>;
-String _$purchasesThemeHash() => r'6d4f2f505deedbd5ce81cf7ef2e596596f000708';
+String _$purchasesThemeHash() => r'3ebbd1dfb8d2e8a1740999ab9a0ac0153661b3c4';
 
 /// See also [purchasesTheme].
 @ProviderFor(purchasesTheme)
@@ -46,8 +49,8 @@ final purchasesThemeProvider = Provider<PurchasesTheme>.internal(
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$purchasesThemeHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
+  dependencies: <ProviderOrFamily>[appThemeProvider],
+  allTransitiveDependencies: <ProviderOrFamily>[appThemeProvider],
 );
 
 typedef PurchasesThemeRef = ProviderRef<PurchasesTheme>;
