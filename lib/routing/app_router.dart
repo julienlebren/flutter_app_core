@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_app_core/layout_builder/layout_builder.dart';
 import 'package:flutter_app_core/sign_in/sign_in.dart';
 import 'package:go_router/go_router.dart';
@@ -32,10 +33,21 @@ GoRouter goRouter(GoRouterRef ref) {
       GoRoute(
         path: '/login',
         name: SignInRoute.emailLogin.name,
-        pageBuilder: (context, state) => platformPage(
+        /*pageBuilder: (context, state) => platformPage(
           key: state.pageKey,
           child: const SignInEmailLoginPage(),
-        ),
+        ),*/
+        pageBuilder: (context, state) {
+          return CustomTransitionPage<void>(
+            key: state.pageKey,
+            child: const SignInEmailLoginPage(),
+            barrierDismissible: true,
+            barrierColor: Colors.black38,
+            opaque: false,
+            transitionDuration: Duration.zero,
+            transitionsBuilder: (_, __, ___, child) => child,
+          );
+        },
       ),
       GoRoute(
         path: '/register',
