@@ -48,7 +48,25 @@ final signInSuppliersProvider = Provider<List<SignInSupplier>>.internal(
 );
 
 typedef SignInSuppliersRef = ProviderRef<List<SignInSupplier>>;
-String _$userStreamHash() => r'e0edde7adc2f67cd7f4cb506f6f80c18b6e90ad5';
+String _$userRefHash() => r'2565bab2f92085ec83d23a4176b6a59d5fb114f7';
+
+/// A reference to the user document with a conversion to [FirestoreUser]
+/// Your custom [User] model in the app should implement all the variables
+/// of [FirestoreUser] to ensure everything will work well.
+///
+/// Copied from [userRef].
+@ProviderFor(userRef)
+final userRefProvider = Provider<CollectionReference<Object?>>.internal(
+  userRef,
+  name: r'userRefProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$userRefHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef UserRefRef = ProviderRef<CollectionReference<Object?>>;
+String _$userStreamHash() => r'66b2200693204f1a68cd998be6c2ab4895af2ec2';
 
 /// A provider for listening changed to the Firestore user object
 /// Only intended to return a correct [AuthState], not to get custom properties
@@ -56,7 +74,7 @@ String _$userStreamHash() => r'e0edde7adc2f67cd7f4cb506f6f80c18b6e90ad5';
 ///
 /// Copied from [userStream].
 @ProviderFor(userStream)
-final userStreamProvider = StreamProvider<FirestoreUser?>.internal(
+final userStreamProvider = StreamProvider<dynamic>.internal(
   userStream,
   name: r'userStreamProvider',
   debugGetCreateSourceHash:
@@ -65,7 +83,7 @@ final userStreamProvider = StreamProvider<FirestoreUser?>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef UserStreamRef = StreamProviderRef<FirestoreUser?>;
+typedef UserStreamRef = StreamProviderRef<dynamic>;
 String _$authStateHash() => r'5c23d931f0299e4cfa6031cf1e036fb40e36d91f';
 
 /// The provider for the [AuthState] of the app

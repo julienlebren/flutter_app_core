@@ -65,26 +65,30 @@ const firestoreUserPath = "users";
 /// A reference to the user document with a conversion to [FirestoreUser]
 /// Your custom [User] model in the app should implement all the variables
 /// of [FirestoreUser] to ensure everything will work well.
-final userRef = FirebaseFirestore.instance
-    .collection(firestoreUserPath)
-    .withConverter<FirestoreUser>(
-      fromFirestore: (snapshot, _) {
-        final userFromJson = FirestoreUser.fromJson(snapshot.data()!);
-        return userFromJson.copyWith(id: snapshot.id);
-      },
-      toFirestore: (_, __) => {},
-    );
+@Riverpod(keepAlive: true)
+CollectionReference userRef<T>(UserRefRef ref) {
+  return FirebaseFirestore.instance
+      .collection(firestoreUserPath)
+      .withConverter<FirestoreUser>(
+        fromFirestore: (snapshot, _) {
+          final userFromJson = FirestoreUser.fromJson(snapshot.data()!);
+          return userFromJson.copyWith(id: snapshot.id);
+        },
+        toFirestore: (_, __) => {},
+      );
+}
 
 /// A provider for listening changed to the Firestore user object
 /// Only intended to return a correct [AuthState], not to get custom properties
 /// of the real [User] object used in the app.
 @Riverpod(keepAlive: true)
-Stream<FirestoreUser?> userStream(UserStreamRef ref) {
+Stream<dynamic> userStream(UserStreamRef ref) {
   final authStateChanges = ref.watch(authStateChangesProvider);
 
   return authStateChanges.maybeWhen(
     data: (user) {
       if (user != null) {
+        final userRef = ref.read(userRefProvider);
         return userRef
             .doc(user.uid)
             .snapshots()
