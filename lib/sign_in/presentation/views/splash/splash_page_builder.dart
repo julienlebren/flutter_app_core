@@ -44,7 +44,7 @@ class SplashPageBuilder extends ConsumerWidget {
           if (supplier != null && !supplier.isThirdParty) {
             //final navigator = SignInNavigatorKeys.modal.currentState!;
             //navigator.pushReplacementNamed(SignInRoutes.signInUserInfoPage);
-            context.pushReplacement(SignInRoute.info.name);
+            context.pushReplacementNamed(SignInRoute.info.name);
           } else {
             Future.delayed(const Duration(milliseconds: 300), () {
               //final navigator = Navigator.of(context, rootNavigator: true);
