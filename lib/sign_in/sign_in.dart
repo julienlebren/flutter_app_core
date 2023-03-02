@@ -13,6 +13,7 @@ import 'package:flutter_app_core/firebase_auth_service/firebase_auth_service.dar
 import 'package:flutter_app_core/layout_builder/layout_builder.dart';
 import 'package:flutter_app_core/localization/flutter_app_core_l10n.dart';
 import 'package:flutter_app_core/localization/localization.dart';
+import 'package:flutter_app_core/routing/app_router.dart';
 import 'package:flutter_libphonenumber/flutter_libphonenumber.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
