@@ -13,7 +13,6 @@ void _handleSignIn(
     signInWithGoogle: () => SignInSupplier.google,
     signInWithApple: () => SignInSupplier.apple,
     signInWithEmail: () => SignInSupplier.email,
-    signInWithEmailLink: (_) => SignInSupplier.emailLink,
     signInWithPhone: () => SignInSupplier.phone,
     signInAnonymously: () => SignInSupplier.anonymous,
   );
@@ -22,17 +21,14 @@ void _handleSignIn(
     ref.read(signInAreaProvider.notifier).state = SignInArea.signIn;
   }
 
-  final navigator = Navigator.of(context, rootNavigator: true);
+  //final navigator = Navigator.of(context, rootNavigator: true);
 
   event.maybeWhen(
     signInWithPhone: () {
-      navigator.pushNamed(SignInRoutes.signInPhonePage, arguments: true);
+      context.goNamed(SignInRoute.phoneLogin.name);
     },
     signInWithEmail: () {
       context.goNamed(SignInRoute.emailRegister.name);
-    },
-    signInWithEmailLink: (_) {
-      navigator.pushNamed(SignInRoutes.signInEmailLinkPage, arguments: true);
     },
     orElse: () {
       final controller = ref.read(signInButtonsControllerProvider.notifier);

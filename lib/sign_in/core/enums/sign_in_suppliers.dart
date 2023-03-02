@@ -2,7 +2,6 @@ part of sign_in;
 
 enum SignInSupplier {
   anonymous,
-  emailLink,
   email,
   google,
   apple,
@@ -28,8 +27,6 @@ extension SignInSupplierX on SignInSupplier {
         return "Apple";
       case SignInSupplier.email:
         return l10n.signInWithEmail;
-      case SignInSupplier.emailLink:
-        return l10n.signInWithEmailLink;
       default:
         return "";
     }
@@ -67,7 +64,6 @@ extension SignInSupplierX on SignInSupplier {
           ),
         );
       case SignInSupplier.email:
-      case SignInSupplier.emailLink:
         return Icon(
           Icons.email_outlined,
           color: color,
@@ -92,8 +88,6 @@ extension SignInSupplierX on SignInSupplier {
         return const SignInButtonsEvent.signInWithApple();
       case SignInSupplier.anonymous:
         return const SignInButtonsEvent.signInAnonymously();
-      case SignInSupplier.emailLink:
-        return const SignInButtonsEvent.signInWithEmailLink("");
       case SignInSupplier.email:
         return const SignInButtonsEvent.signInWithEmail();
       case SignInSupplier.phone:

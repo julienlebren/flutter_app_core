@@ -98,8 +98,9 @@ class _SignInEmailLoginFormState extends ConsumerState<SignInEmailLoginForm> {
           title: l10n.signInWithEmailForgotPassword,
           fontSize: 14,
           onPressed: () {
-            final navigator = SignInNavigatorKeys.modal.currentState!;
-            navigator.pushNamed(SignInRoutes.signInEmailResetPage);
+            //final navigator = SignInNavigatorKeys.modal.currentState!;
+            //navigator.pushNamed(SignInRoutes.signInEmailResetPage);
+            context.goNamed(SignInRoute.emailReset.name);
           },
         ),
         SignInSubmitButton(
@@ -114,9 +115,9 @@ class _SignInEmailLoginFormState extends ConsumerState<SignInEmailLoginForm> {
         PlatformTextButton(
           title: l10n.signInWithEmailCreateAccount,
           onPressed: () {
-            final navigator = SignInNavigatorKeys.modal.currentState!;
-            navigator
-                .pushReplacementNamed(SignInRoutes.signInEmailRegisterPage);
+            //final navigator = SignInNavigatorKeys.modal.currentState!;
+            //navigator.pushReplacementNamed(SignInRoutes.signInEmailRegisterPage);
+            context.pushReplacement(SignInRoute.emailRegister.name);
           },
         ),
       ],

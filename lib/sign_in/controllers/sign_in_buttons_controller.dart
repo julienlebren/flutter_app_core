@@ -15,8 +15,6 @@ class SignInButtonsEvent with _$SignInButtonsEvent {
   const factory SignInButtonsEvent.signInWithGoogle() = _SignInWithGoogle;
   const factory SignInButtonsEvent.signInWithApple() = _SignInWithApple;
   const factory SignInButtonsEvent.signInWithEmail() = _SignInWithEmail;
-  const factory SignInButtonsEvent.signInWithEmailLink(String email) =
-      _SignInWithEmailLink;
   const factory SignInButtonsEvent.signInWithPhone() = _SignInWithPhone;
   const factory SignInButtonsEvent.signInAnonymously() = _SignInAnonymously;
 }

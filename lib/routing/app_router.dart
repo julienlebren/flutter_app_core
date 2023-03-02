@@ -13,6 +13,7 @@ enum SignInRoute {
   phoneLogin,
   phoneVerification,
   countries,
+  info,
 }
 
 @Riverpod(keepAlive: true)
