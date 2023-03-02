@@ -27,6 +27,7 @@ part 'controllers/sign_in_email_reset_controller.dart';
 part 'controllers/sign_in_email_register_controller.dart';
 part 'controllers/sign_in_phone_controller.dart';
 part 'controllers/sign_in_phone_verification_controller.dart';
+part 'core/enums/sign_in_SignInArea.dart';
 part 'core/enums/sign_in_suppliers.dart';
 part 'core/models/auth_splash_state.dart';
 part 'core/models/auth_state.dart';
@@ -157,9 +158,9 @@ AuthSplashState authSplash(AuthSplashRef ref) {
     initializing: () => const AuthSplashState.initializing(),
     needUserInformation: () {
       final signInArea = ref.read(signInAreaProvider);
-      if (signInArea == Area.signIn) {
+      if (signInArea == SignInArea.signIn) {
         return const AuthSplashState.notAuthed();
-      } else if (signInArea == Area.settings) {
+      } else if (signInArea == SignInArea.settings) {
         return const AuthSplashState.authed();
       } else {
         return const AuthSplashState.initializing();
@@ -172,7 +173,7 @@ AuthSplashState authSplash(AuthSplashRef ref) {
 }
 
 /// Theming the sign-in pages
-@Riverpod(dependencies: [formTheme])
+@riverpod
 SignInTheme signInTheme(SignInThemeRef ref) {
   final appTheme = ref.watch(appThemeProvider);
   final formTheme = ref.watch(formThemeProvider);
@@ -188,11 +189,7 @@ SignInTheme signInTheme(SignInThemeRef ref) {
   );
 }
 
-enum Area {
-  signIn,
-  settings,
-}
-
+/*
 @Riverpod(keepAlive: true)
 class SignInArea extends _$SignInArea {
   @override
@@ -200,3 +197,12 @@ class SignInArea extends _$SignInArea {
 
   void update(Area area) => state = area;
 }
+
+@Riverpod(keepAlive: true)
+class SignInSupplier extends _$SignInSupplier {
+  @override
+  Supplier? build() => null;
+
+  void update(Supplier? supplier) => state = supplier;
+}
+*/

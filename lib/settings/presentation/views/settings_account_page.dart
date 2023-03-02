@@ -69,7 +69,7 @@ class _ButtonsSection extends ConsumerWidget {
     final signInTheme = ref.watch(signInThemeProvider);
     final suppliers = ref
         .watch(signInSuppliersProvider)
-        .where((supplier) => supplier != SignInSupplier.anonymous)
+        .where((supplier) => supplier != Supplier.anonymous)
         .toList();
 
     ref.listen<SignInButtonsState>(signInButtonsControllerProvider, (_, state) {
