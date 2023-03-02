@@ -27,7 +27,11 @@ const googlePlayURL = "https://play.google.com/store/account/subscriptions";
 const appStoreURL = "https://apps.apple.com/account/subscriptions";
 
 @Riverpod(keepAlive: true)
-external PurchasesSettings purchasesSettings();
+PurchasesSettings purchasesSettings(PurchasesSettingsRef ref) {
+  throw UnimplementedError(
+    "You need to override purchasesSettingsProvider before calling purchasesServiceProvider!",
+  );
+}
 
 @Riverpod(keepAlive: true)
 PurchasesService purchasesService(PurchasesServiceRef ref) {

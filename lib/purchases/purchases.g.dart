@@ -6,15 +6,12 @@ part of purchases;
 // RiverpodGenerator
 // **************************************************************************
 
-String _$purchasesSettingsHash() => r'664e42b014657601ad28152caec4174b82cc542a';
+String _$purchasesSettingsHash() => r'0b5c1ac7be08fb891926b663f592e44b83347c4e';
 
 /// See also [purchasesSettings].
 @ProviderFor(purchasesSettings)
 final purchasesSettingsProvider = Provider<PurchasesSettings>.internal(
-  (_) => throw UnsupportedError(
-    'The provider "purchasesSettingsProvider" is expected to get overridden/scoped, '
-    'but was accessed without an override.',
-  ),
+  purchasesSettings,
   name: r'purchasesSettingsProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null

@@ -120,8 +120,10 @@ mixin FormElement {}
 
 /// The provider of the [AppTheme]
 /// Needs to be overridden in the [ProviderScope] of the app.
-@Riverpod(keepAlive: true)
-external AppTheme appTheme();
+@Riverpod(keepAlive: true, dependencies: [])
+AppTheme appTheme(AppThemeRef ref) {
+  throw UnimplementedError("AppTheme has not been overridden as required.");
+}
 
 /// This provider is used by [Scaffold] or other widgets that handle
 /// an [AnnotatedRegion] to specify the layout of status bars
@@ -207,7 +209,7 @@ ThemeData materialTheme(MaterialThemeRef ref) {
 
 /// The [CupertinoThemeData] that will be used in the [CupertinoApp]
 /// Retrieves all the data from the [AppTheme].
-@Riverpod(keepAlive: true)
+@Riverpod(keepAlive: true, dependencies: [appTheme])
 CupertinoThemeData cupertinoTheme(CupertinoThemeRef ref) {
   final appTheme = ref.watch(appThemeProvider);
   return CupertinoThemeData(
@@ -225,7 +227,7 @@ CupertinoThemeData cupertinoTheme(CupertinoThemeRef ref) {
 /// Theme with specific parameters for List that can be overridden
 /// at any part of the app with inside a ProviderScope for specific needs
 /// (such as have a greater padding in a view).
-@Riverpod(keepAlive: true)
+@Riverpod(keepAlive: true, dependencies: [appTheme])
 ListViewTheme listViewTheme(ListViewThemeRef ref) {
   final appTheme = ref.watch(appThemeProvider);
   return ListViewTheme(
@@ -238,7 +240,7 @@ ListViewTheme listViewTheme(ListViewThemeRef ref) {
 /// Theme with specific parameters for Form hat can be overridden
 /// at any part of the app with inside a ProviderScope for specific needs
 /// (such as a special backgroundColor in one form).
-@Riverpod(keepAlive: true)
+@Riverpod(keepAlive: true, dependencies: [appTheme])
 FormTheme formTheme(FormThemeRef ref) {
   final appTheme = ref.watch(appThemeProvider);
   if (appTheme.brightness == Brightness.dark) {

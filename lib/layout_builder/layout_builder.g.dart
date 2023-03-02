@@ -6,7 +6,7 @@ part of layout_builder;
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appThemeHash() => r'87792610294216f07da25d93169dd6c7d0989db4';
+String _$appThemeHash() => r'6bba72e7da26a3d3418575dc5682b5c8bea1b6fb';
 
 /// The provider of the [AppTheme]
 /// Needs to be overridden in the [ProviderScope] of the app.
@@ -14,20 +14,17 @@ String _$appThemeHash() => r'87792610294216f07da25d93169dd6c7d0989db4';
 /// Copied from [appTheme].
 @ProviderFor(appTheme)
 final appThemeProvider = Provider<AppTheme>.internal(
-  (_) => throw UnsupportedError(
-    'The provider "appThemeProvider" is expected to get overridden/scoped, '
-    'but was accessed without an override.',
-  ),
+  appTheme,
   name: r'appThemeProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$appThemeHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
+  dependencies: <ProviderOrFamily>[],
+  allTransitiveDependencies: <ProviderOrFamily>[],
 );
 
 typedef AppThemeRef = ProviderRef<AppTheme>;
 String _$systemOverlayStyleHash() =>
-    r'07459e47b01f44aacbfd67b95e6d9baa971c6e16';
+    r'db28f542137066ca77767481e11bdcf6377e3ff0';
 
 /// This provider is used by [Scaffold] or other widgets that handle
 /// an [AnnotatedRegion] to specify the layout of status bars
@@ -41,12 +38,12 @@ final systemOverlayStyleProvider = Provider<SystemUiOverlayStyle>.internal(
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$systemOverlayStyleHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
+  dependencies: <ProviderOrFamily>[appThemeProvider],
+  allTransitiveDependencies: <ProviderOrFamily>[appThemeProvider],
 );
 
 typedef SystemOverlayStyleRef = ProviderRef<SystemUiOverlayStyle>;
-String _$materialThemeHash() => r'5747aa0bcbab0eb9327481f1763ed267e0a48679';
+String _$materialThemeHash() => r'5f47695a6be42a684e7396e72070a2e4e8dbe817';
 
 /// The [ThemeData] that will be used in the [MaterialApp]
 /// Retrieves all the data from the [AppTheme].
@@ -59,12 +56,12 @@ final materialThemeProvider = Provider<ThemeData>.internal(
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$materialThemeHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
+  dependencies: <ProviderOrFamily>[appThemeProvider],
+  allTransitiveDependencies: <ProviderOrFamily>[appThemeProvider],
 );
 
 typedef MaterialThemeRef = ProviderRef<ThemeData>;
-String _$cupertinoThemeHash() => r'c33236a1e693a148beb90e4e2e51612f54257ae8';
+String _$cupertinoThemeHash() => r'9a8840e2cc224ff225fa94cd65f811ee857da498';
 
 /// The [CupertinoThemeData] that will be used in the [CupertinoApp]
 /// Retrieves all the data from the [AppTheme].
@@ -77,12 +74,12 @@ final cupertinoThemeProvider = Provider<CupertinoThemeData>.internal(
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$cupertinoThemeHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
+  dependencies: <ProviderOrFamily>[appThemeProvider],
+  allTransitiveDependencies: <ProviderOrFamily>[appThemeProvider],
 );
 
 typedef CupertinoThemeRef = ProviderRef<CupertinoThemeData>;
-String _$listViewThemeHash() => r'b830bd11e0017d1f4167df2ebfae3db523a0789a';
+String _$listViewThemeHash() => r'1979a08ae9b47e437c44707bd7f074a74c06f211';
 
 /// Theme with specific parameters for List that can be overridden
 /// at any part of the app with inside a ProviderScope for specific needs
@@ -96,12 +93,12 @@ final listViewThemeProvider = Provider<ListViewTheme>.internal(
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$listViewThemeHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
+  dependencies: <ProviderOrFamily>[appThemeProvider],
+  allTransitiveDependencies: <ProviderOrFamily>[appThemeProvider],
 );
 
 typedef ListViewThemeRef = ProviderRef<ListViewTheme>;
-String _$formThemeHash() => r'60d98ae6519d0eb2a8b29d54931129808d6a0eae';
+String _$formThemeHash() => r'a51a4599927b89f0367f62c073120bdef72e260a';
 
 /// Theme with specific parameters for Form hat can be overridden
 /// at any part of the app with inside a ProviderScope for specific needs
@@ -114,8 +111,8 @@ final formThemeProvider = Provider<FormTheme>.internal(
   name: r'formThemeProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$formThemeHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
+  dependencies: <ProviderOrFamily>[appThemeProvider],
+  allTransitiveDependencies: <ProviderOrFamily>[appThemeProvider],
 );
 
 typedef FormThemeRef = ProviderRef<FormTheme>;
