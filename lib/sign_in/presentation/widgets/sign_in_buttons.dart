@@ -29,14 +29,7 @@ void _handleSignIn(
       navigator.pushNamed(SignInRoutes.signInPhonePage, arguments: true);
     },
     signInWithEmail: () {
-      final signInArea = ref.watch(signInAreaProvider);
-      if (signInArea == SignInArea.settings) {
-        navigator.pushNamed(SignInRoutes.signInEmailRegisterPage,
-            arguments: true);
-      } else {
-        navigator.pushNamed(SignInRoutes.signInEmailRegisterPage,
-            arguments: true);
-      }
+      context.goNamed(SignInRoutes.signInEmailRegisterPage);
     },
     signInWithEmailLink: (_) {
       navigator.pushNamed(SignInRoutes.signInEmailLinkPage, arguments: true);
