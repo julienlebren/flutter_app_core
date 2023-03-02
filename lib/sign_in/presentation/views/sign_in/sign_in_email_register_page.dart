@@ -104,7 +104,7 @@ class _SignInEmailRegisterPageFormState
                 }
               : null,
         ),
-        if (signInArea == SignInArea.signIn)
+        if (signInArea == Area.signIn)
           PlatformTextButton(
             title: l10n.signInWithEmailAlreadyAccount,
             onPressed: () {

@@ -2,13 +2,6 @@ part of sign_in;
 
 final signInSupplierProvider = StateProvider<SignInSupplier?>((_) => null);
 
-enum SignInArea {
-  signIn,
-  settings,
-}
-
-final signInAreaProvider = StateProvider<SignInArea?>((_) => null);
-
 void _handleSignIn(
   BuildContext context,
   WidgetRef ref,
@@ -24,7 +17,7 @@ void _handleSignIn(
   );
 
   if (ref.read(signInAreaProvider) == null) {
-    ref.read(signInAreaProvider.notifier).state = SignInArea.signIn;
+    ref.read(signInAreaProvider.notifier).update(Area.signIn);
   }
 
   final navigator = Navigator.of(context, rootNavigator: true);
@@ -35,7 +28,7 @@ void _handleSignIn(
     },
     signInWithEmail: () {
       final signInArea = ref.watch(signInAreaProvider);
-      if (signInArea == SignInArea.settings) {
+      if (signInArea == Area.settings) {
         navigator.pushNamed(SignInRoutes.signInEmailRegisterPage,
             arguments: true);
       } else {
@@ -245,7 +238,7 @@ class SignInButtonContents extends ConsumerWidget {
     final supplier = ref.watch(currentSupplier);
     final signInArea = ref.watch(signInAreaProvider);
     final l10n = ref.watch(flutterAppCoreLocalizationsProvider);
-    final buttonTextColor = signInArea == SignInArea.settings
+    final buttonTextColor = signInArea == Area.settings
         ? ref.watch(appThemeProvider.select((theme) => theme.textColor))
         : ref.watch(signInThemeProvider.select(
             (theme) => theme.buttonTextColor,
@@ -260,7 +253,7 @@ class SignInButtonContents extends ConsumerWidget {
         supplier.icon(size: iconSize, color: buttonTextColor),
         const Spacer(),
         Text(
-          signInArea == SignInArea.settings
+          signInArea == Area.settings
               ? l10n.settingsCreateAccountWith(supplier.name(l10n))
               : l10n.signInWith(supplier.name(l10n)),
           style: TextStyle(
