@@ -50,7 +50,7 @@ final purchasesControllerProvider =
   return PurchasesController(service);
 }, dependencies: [purchasesServiceProvider]);
 
-@Riverpod(keepAlive: true, dependencies: [appTheme, formTheme])
+@Riverpod(keepAlive: true)
 PurchasesTheme purchasesTheme(PurchasesThemeRef ref) {
   final appTheme = ref.watch(appThemeProvider);
 

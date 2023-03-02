@@ -91,7 +91,7 @@ final authStateProvider = Provider<AuthState>.internal(
 );
 
 typedef AuthStateRef = ProviderRef<AuthState>;
-String _$authSplashHash() => r'711491c36ddf11bf6b00d95f107daa7e1cddb611';
+String _$authSplashHash() => r'6905c9eac6b00bc4d414621f90dff630b793c0eb';
 
 /// Simplified version of [AuthState], this provider is used
 /// in the [SplashPageBuilder] and managed less cases than [AuthState].
@@ -108,7 +108,7 @@ final authSplashProvider = Provider<AuthSplashState>.internal(
 );
 
 typedef AuthSplashRef = ProviderRef<AuthSplashState>;
-String _$signInThemeHash() => r'3d380ef5a1f0d9edce90bf2578bcfa95e90e5f35';
+String _$signInThemeHash() => r'8822fa8c26dea86a7cbd0a7a792ad7d871476f9c';
 
 /// Theming the sign-in pages
 ///
@@ -119,26 +119,9 @@ final signInThemeProvider = AutoDisposeProvider<SignInTheme>.internal(
   name: r'signInThemeProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$signInThemeHash,
-  dependencies: <ProviderOrFamily>[formThemeProvider],
-  allTransitiveDependencies: <ProviderOrFamily>[
-    formThemeProvider,
-    appThemeProvider
-  ],
-);
-
-typedef SignInThemeRef = AutoDisposeProviderRef<SignInTheme>;
-String _$signInAreaHash() => r'686d99fb11335a7a33c7b8e30f8659c48589d342';
-
-/// See also [SignInArea].
-@ProviderFor(SignInArea)
-final signInAreaProvider = NotifierProvider<SignInArea, Area?>.internal(
-  SignInArea.new,
-  name: r'signInAreaProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$signInAreaHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$SignInArea = Notifier<Area?>;
+typedef SignInThemeRef = AutoDisposeProviderRef<SignInTheme>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

@@ -58,7 +58,7 @@ class _DeleteButton extends ConsumerWidget {
           onPressed: () {
             // Détermine la zone de SignIn dans laquelle on se situe (signIn ou settings),
             //ce qui influencera certains paramètres comme la couleur des boutons Apple/Google/etc
-            ref.read(signInAreaProvider.notifier).update(Area.signIn);
+            ref.read(signInAreaProvider.notifier).state = SignInArea.signIn;
 
             final controller =
                 ref.read(settingsDeleteControllerProvider.notifier);
@@ -103,7 +103,7 @@ class _LogoutButton extends ConsumerWidget {
           onPressed: () {
             // Détermine la zone de SignIn dans laquelle on se situe (signIn ou settings),
             //ce qui influencera certains paramètres comme la couleur des boutons Apple/Google/etc
-            ref.read(signInAreaProvider.notifier).update(Area.signIn);
+            ref.read(signInAreaProvider.notifier).state = SignInArea.signIn;
 
             final controller =
                 ref.read(signInButtonsControllerProvider.notifier);

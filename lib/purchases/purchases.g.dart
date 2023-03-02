@@ -36,7 +36,7 @@ final purchasesServiceProvider = Provider<PurchasesService>.internal(
 );
 
 typedef PurchasesServiceRef = ProviderRef<PurchasesService>;
-String _$purchasesThemeHash() => r'2c1f31bf29d27ac8445a4558f6e75c85e70bf774';
+String _$purchasesThemeHash() => r'6d4f2f505deedbd5ce81cf7ef2e596596f000708';
 
 /// See also [purchasesTheme].
 @ProviderFor(purchasesTheme)
@@ -46,11 +46,8 @@ final purchasesThemeProvider = Provider<PurchasesTheme>.internal(
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$purchasesThemeHash,
-  dependencies: <ProviderOrFamily>[appThemeProvider, formThemeProvider],
-  allTransitiveDependencies: <ProviderOrFamily>[
-    appThemeProvider,
-    formThemeProvider
-  ],
+  dependencies: null,
+  allTransitiveDependencies: null,
 );
 
 typedef PurchasesThemeRef = ProviderRef<PurchasesTheme>;

@@ -131,7 +131,7 @@ AppTheme appTheme(AppThemeRef ref) {
 /// This provider is used by [Scaffold] or other widgets that handle
 /// an [AnnotatedRegion] to specify the layout of status bars
 /// and navigation bar on Android devices.
-@Riverpod(keepAlive: true, dependencies: [appTheme])
+@Riverpod(keepAlive: true)
 SystemUiOverlayStyle systemOverlayStyle(SystemOverlayStyleRef ref) {
   final appTheme = ref.watch(appThemeProvider);
 
@@ -157,7 +157,7 @@ SystemUiOverlayStyle systemOverlayStyle(SystemOverlayStyleRef ref) {
 
 /// The [ThemeData] that will be used in the [MaterialApp]
 /// Retrieves all the data from the [AppTheme].
-@Riverpod(keepAlive: true, dependencies: [appTheme])
+@Riverpod(keepAlive: true)
 ThemeData materialTheme(MaterialThemeRef ref) {
   final appTheme = ref.watch(appThemeProvider);
   return ThemeData(
@@ -212,7 +212,7 @@ ThemeData materialTheme(MaterialThemeRef ref) {
 
 /// The [CupertinoThemeData] that will be used in the [CupertinoApp]
 /// Retrieves all the data from the [AppTheme].
-@Riverpod(keepAlive: true, dependencies: [appTheme])
+@Riverpod(keepAlive: true)
 CupertinoThemeData cupertinoTheme(CupertinoThemeRef ref) {
   final appTheme = ref.watch(appThemeProvider);
   return CupertinoThemeData(
@@ -230,7 +230,7 @@ CupertinoThemeData cupertinoTheme(CupertinoThemeRef ref) {
 /// Theme with specific parameters for List that can be overridden
 /// at any part of the app with inside a ProviderScope for specific needs
 /// (such as have a greater padding in a view).
-@Riverpod(keepAlive: true, dependencies: [appTheme])
+@Riverpod(keepAlive: true)
 ListViewTheme listViewTheme(ListViewThemeRef ref) {
   final appTheme = ref.watch(appThemeProvider);
   return ListViewTheme(
@@ -243,7 +243,7 @@ ListViewTheme listViewTheme(ListViewThemeRef ref) {
 /// Theme with specific parameters for Form hat can be overridden
 /// at any part of the app with inside a ProviderScope for specific needs
 /// (such as a special backgroundColor in one form).
-@Riverpod(keepAlive: true, dependencies: [appTheme])
+@Riverpod(keepAlive: true)
 FormTheme formTheme(FormThemeRef ref) {
   final appTheme = ref.watch(appThemeProvider);
   if (appTheme.brightness == Brightness.dark) {
