@@ -8,12 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_core/flutter_app_core.dart';
 import 'package:flutter_app_core/routing/app_router.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:numberpicker/numberpicker.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 export 'constants/breakpoints.dart';
@@ -124,14 +121,12 @@ mixin FormElement {}
 /// The provider of the [AppTheme]
 /// Needs to be overridden in the [ProviderScope] of the app.
 @Riverpod(keepAlive: true)
-AppTheme appTheme(AppThemeRef ref) {
-  throw UnimplementedError("AppTheme has not been overridden as required.");
-}
+external AppTheme appTheme();
 
 /// This provider is used by [Scaffold] or other widgets that handle
 /// an [AnnotatedRegion] to specify the layout of status bars
 /// and navigation bar on Android devices.
-@Riverpod(keepAlive: true)
+@Riverpod(keepAlive: true, dependencies: [appTheme])
 SystemUiOverlayStyle systemOverlayStyle(SystemOverlayStyleRef ref) {
   final appTheme = ref.watch(appThemeProvider);
 
@@ -157,7 +152,7 @@ SystemUiOverlayStyle systemOverlayStyle(SystemOverlayStyleRef ref) {
 
 /// The [ThemeData] that will be used in the [MaterialApp]
 /// Retrieves all the data from the [AppTheme].
-@Riverpod(keepAlive: true)
+@Riverpod(keepAlive: true, dependencies: [appTheme])
 ThemeData materialTheme(MaterialThemeRef ref) {
   final appTheme = ref.watch(appThemeProvider);
   return ThemeData(
