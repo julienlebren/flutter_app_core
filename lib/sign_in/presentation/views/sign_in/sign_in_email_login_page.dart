@@ -19,7 +19,7 @@ class SignInEmailLoginPage extends ConsumerWidget {
     ));
 
     return Padding(
-      padding: const EdgeInsets.all(48),
+      padding: const EdgeInsets.all(300),
       child: SignInPageBuilder(
         title: l10n.signInWithEmailTitle,
         leadingButton: const SignInCloseButton(),

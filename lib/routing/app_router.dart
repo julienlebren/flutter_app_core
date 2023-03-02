@@ -37,6 +37,25 @@ GoRouter goRouter(GoRouterRef ref) {
           key: state.pageKey,
           child: const SignInEmailLoginPage(),
         ),*/
+        /*pageBuilder: (BuildContext context, GoRouterState state) {
+            return CustomTransitionPage<void>(
+              key: state.pageKey,
+              child: const DetailsScreen(),
+              transitionDuration: const Duration(milliseconds: 150),
+              transitionsBuilder: (BuildContext context,
+                  Animation<double> animation,
+                  Animation<double> secondaryAnimation,
+                  Widget child) {
+                // Change the opacity of the screen using a Curve based on the the animation's
+                // value
+                return FadeTransition(
+                  opacity:
+                      CurveTween(curve: Curves.easeInOut).animate(animation),
+                  child: child,
+                );
+              },
+            );
+          },*/
         pageBuilder: (context, state) {
           return CustomTransitionPage<void>(
             key: state.pageKey,
