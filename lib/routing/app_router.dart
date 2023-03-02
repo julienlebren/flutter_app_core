@@ -71,10 +71,21 @@ GoRouter goRouter(GoRouterRef ref) {
       GoRoute(
         path: '/register',
         name: SignInRoute.emailRegister.name,
-        pageBuilder: (context, state) => platformPage(
+        /*pageBuilder: (context, state) => platformPage(
           key: state.pageKey,
           child: const SignInEmailRegisterPage(),
-        ),
+        ),*/
+        pageBuilder: (context, state) {
+          return CustomTransitionPage<void>(
+            key: state.pageKey,
+            child: const SignInEmailRegisterPage(),
+            barrierDismissible: true,
+            barrierColor: Colors.black38,
+            opaque: false,
+            transitionDuration: Duration.zero,
+            transitionsBuilder: (_, __, ___, child) => child,
+          );
+        },
       ),
       GoRoute(
         path: '/reset',
