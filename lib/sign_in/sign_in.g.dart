@@ -91,7 +91,7 @@ final authStateProvider = Provider<AuthState>.internal(
 );
 
 typedef AuthStateRef = ProviderRef<AuthState>;
-String _$authSplashHash() => r'6905c9eac6b00bc4d414621f90dff630b793c0eb';
+String _$authSplashHash() => r'711491c36ddf11bf6b00d95f107daa7e1cddb611';
 
 /// Simplified version of [AuthState], this provider is used
 /// in the [SplashPageBuilder] and managed less cases than [AuthState].
@@ -127,4 +127,18 @@ final signInThemeProvider = AutoDisposeProvider<SignInTheme>.internal(
 );
 
 typedef SignInThemeRef = AutoDisposeProviderRef<SignInTheme>;
+String _$signInAreaHash() => r'686d99fb11335a7a33c7b8e30f8659c48589d342';
+
+/// See also [SignInArea].
+@ProviderFor(SignInArea)
+final signInAreaProvider = NotifierProvider<SignInArea, Area?>.internal(
+  SignInArea.new,
+  name: r'signInAreaProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$signInAreaHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$SignInArea = Notifier<Area?>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

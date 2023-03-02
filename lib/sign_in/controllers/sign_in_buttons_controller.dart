@@ -12,7 +12,6 @@ final signInButtonsControllerProvider = StateNotifierProvider.autoDispose<
 
 @freezed
 class SignInButtonsEvent with _$SignInButtonsEvent {
-  //const factory SignInButtonsEvent.signInWithFacebook() = _SignInWithFacebook;
   const factory SignInButtonsEvent.signInWithGoogle() = _SignInWithGoogle;
   const factory SignInButtonsEvent.signInWithApple() = _SignInWithApple;
   const factory SignInButtonsEvent.signInWithEmail() = _SignInWithEmail;
@@ -42,7 +41,6 @@ class SignInButtonsController extends StateNotifier<SignInButtonsState> {
     try {
       await event.maybeWhen(
         signInWithApple: _service.signInWithApple,
-        //signInWithFacebook: _service.signInWithFacebook,
         signInWithGoogle: _service.signInWithGoogle,
         signInAnonymously: _service.signInAnonymously,
         orElse: () => null,
@@ -57,7 +55,6 @@ class SignInButtonsController extends StateNotifier<SignInButtonsState> {
             _localizations,
             event.maybeWhen(
               signInWithApple: () => "Apple",
-              //signInWithFacebook: () => "Facebook",
               signInWithGoogle: () => "Google",
               orElse: () => "",
             ),

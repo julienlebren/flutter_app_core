@@ -21,7 +21,7 @@ final purchasesSettingsProvider = Provider<PurchasesSettings>.internal(
 );
 
 typedef PurchasesSettingsRef = ProviderRef<PurchasesSettings>;
-String _$purchasesServiceHash() => r'dd8a52a1e702724dfce6cf597dbe8e212c3c5350';
+String _$purchasesServiceHash() => r'8cffbead69b4a7ecf59fff778f7fc97bbefac2b0';
 
 /// See also [purchasesService].
 @ProviderFor(purchasesService)
@@ -31,8 +31,8 @@ final purchasesServiceProvider = Provider<PurchasesService>.internal(
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$purchasesServiceHash,
-  dependencies: <ProviderOrFamily>[purchasesSettingsProvider],
-  allTransitiveDependencies: <ProviderOrFamily>[purchasesSettingsProvider],
+  dependencies: null,
+  allTransitiveDependencies: null,
 );
 
 typedef PurchasesServiceRef = ProviderRef<PurchasesService>;

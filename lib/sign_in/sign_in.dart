@@ -53,13 +53,13 @@ part 'presentation/widgets/sign_in_tappable_field.dart';
 part 'sign_in.freezed.dart';
 part 'sign_in.g.dart';
 
-/// Name of the users collection
-const firestoreUserPath = "users";
-
 /// Provider which defines the list of sign-in suppliers
 /// Default is empty, you need to override it on the main scope
 @Riverpod(keepAlive: true)
 List<SignInSupplier> signInSuppliers(SignInSuppliersRef ref) => [];
+
+/// Name of the users collection
+const firestoreUserPath = "users";
 
 /// A reference to the user document with a conversion to [FirestoreUser]
 /// Your custom [User] model in the app should implement all the variables
@@ -157,9 +157,9 @@ AuthSplashState authSplash(AuthSplashRef ref) {
     initializing: () => const AuthSplashState.initializing(),
     needUserInformation: () {
       final signInArea = ref.read(signInAreaProvider);
-      if (signInArea == SignInArea.signIn) {
+      if (signInArea == Area.signIn) {
         return const AuthSplashState.notAuthed();
-      } else if (signInArea == SignInArea.settings) {
+      } else if (signInArea == Area.settings) {
         return const AuthSplashState.authed();
       } else {
         return const AuthSplashState.initializing();
@@ -186,4 +186,17 @@ SignInTheme signInTheme(SignInThemeRef ref) {
     dividerColor: appTheme.dividerColor,
     borderColor: appTheme.borderColor,
   );
+}
+
+enum Area {
+  signIn,
+  settings,
+}
+
+@Riverpod(keepAlive: true)
+class SignInArea extends _$SignInArea {
+  @override
+  Area? build() => null;
+
+  void update(Area area) => state = area;
 }
