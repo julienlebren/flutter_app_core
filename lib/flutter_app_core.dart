@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_export_of_internal_element
+
 library flutter_app_core;
 
 //import 'package:flutter/material.dart';
@@ -16,6 +18,8 @@ export 'settings/settings.dart';
 export 'sign_in/sign_in.dart';
 
 export 'package:go_router/go_router.dart';
+export 'package:flutter_riverpod/flutter_riverpod.dart';
+export 'package:riverpod_annotation/riverpod_annotation.dart';
 
 /*
 class App extends ConsumerWidget {
