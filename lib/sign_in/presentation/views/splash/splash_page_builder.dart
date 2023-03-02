@@ -32,7 +32,7 @@ class SplashPageBuilder extends ConsumerWidget {
             orElse: () {
               final supplier = ref.watch(signInSupplierProvider);
               if (supplier != null &&
-                  supplier != Supplier.anonymous &&
+                  supplier != SignInSupplier.anonymous &&
                   !supplier.isThirdParty) {
                 _pop(context);
               }

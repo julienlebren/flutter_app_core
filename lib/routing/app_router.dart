@@ -21,6 +21,7 @@ List<GoRoute> routes(RoutesRef ref) {
 }
 
 @Riverpod(keepAlive: true)
+// ignore: unsupported_provider_value
 GoRouter goRouter(GoRouterRef ref) {
   return GoRouter(
     initialLocation: '/',

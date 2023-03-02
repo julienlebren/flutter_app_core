@@ -3,9 +3,9 @@ part of settings;
 extension SignInSupplierSettings on SignInSupplier {
   SettingsAccountEvent? get settingsAccountEvent {
     switch (this) {
-      case Supplier.google:
+      case SignInSupplier.google:
         return const SettingsAccountEvent.signInWithGoogle();
-      case Supplier.apple:
+      case SignInSupplier.apple:
         return const SettingsAccountEvent.signInWithApple();
       default:
         return null;

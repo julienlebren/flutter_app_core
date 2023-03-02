@@ -27,7 +27,7 @@ part 'controllers/sign_in_email_reset_controller.dart';
 part 'controllers/sign_in_email_register_controller.dart';
 part 'controllers/sign_in_phone_controller.dart';
 part 'controllers/sign_in_phone_verification_controller.dart';
-part 'core/enums/sign_in_SignInArea.dart';
+part 'core/enums/sign_in_area.dart';
 part 'core/enums/sign_in_suppliers.dart';
 part 'core/models/auth_splash_state.dart';
 part 'core/models/auth_state.dart';
