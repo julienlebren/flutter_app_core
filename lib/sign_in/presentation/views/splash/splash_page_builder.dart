@@ -42,13 +42,14 @@ class SplashPageBuilder extends ConsumerWidget {
         needUserInformation: () {
           final supplier = ref.watch(signInSupplierProvider);
           if (supplier != null && !supplier.isThirdParty) {
-            final navigator = SignInNavigatorKeys.modal.currentState!;
-            navigator.pushReplacementNamed(SignInRoutes.signInUserInfoPage);
+            //final navigator = SignInNavigatorKeys.modal.currentState!;
+            //navigator.pushReplacementNamed(SignInRoutes.signInUserInfoPage);
+            context.pushReplacement(SignInRoute.info.name);
           } else {
-            final navigator = Navigator.of(context, rootNavigator: true);
             Future.delayed(const Duration(milliseconds: 300), () {
-              navigator.pushNamed(SignInRoutes.signInUserInfoPage,
-                  arguments: true);
+              //final navigator = Navigator.of(context, rootNavigator: true);
+              //navigator.pushNamed(SignInRoutes.signInUserInfoPage, arguments: true);
+              context.push(SignInRoute.info.name);
             });
           }
         },

@@ -30,7 +30,8 @@ extension BuildContextModal on BuildContext {
         useRootNavigator: true,
       );
     } else if (isMaterial()) {
-      Navigator.of(this, rootNavigator: true).pushNamed(routeName);
+      goNamed(routeName);
+      //Navigator.of(this, rootNavigator: true).pushNamed(routeName);
     } else {
       throw UnsupportedPlatformException();
     }

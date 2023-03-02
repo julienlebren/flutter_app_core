@@ -30,8 +30,9 @@ class SignInPhonePage extends ConsumerWidget {
 
     ref.listen<SignInPhoneState>(signInPhoneControllerProvider, (_, state) {
       if (state.isSuccess) {
-        final navigator = SignInNavigatorKeys.modal.currentState!;
-        navigator.pushNamed(SignInRoutes.signInPhoneVerificationPage);
+        //final navigator = SignInNavigatorKeys.modal.currentState!;
+        //navigator.pushNamed(SignInRoutes.signInPhoneVerificationPage);
+        context.goNamed(SignInRoute.phoneVerification.name);
       }
     });
 
@@ -89,8 +90,9 @@ class _SignInPhoneFormState extends ConsumerState<SignInPhoneForm> {
         ),
       );
     } else {
-      final navigator = SignInNavigatorKeys.modal.currentState!;
-      navigator.pushNamed(SignInRoutes.signInCountriesPage);
+      //final navigator = SignInNavigatorKeys.modal.currentState!;
+      //navigator.pushNamed(SignInRoutes.signInCountriesPage);
+      context.goNamed(SignInRoute.countries.name);
     }
   }
 
