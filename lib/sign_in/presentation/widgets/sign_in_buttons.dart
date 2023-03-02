@@ -29,7 +29,7 @@ void _handleSignIn(
       navigator.pushNamed(SignInRoutes.signInPhonePage, arguments: true);
     },
     signInWithEmail: () {
-      context.goNamed(SignInRoutes.signInEmailRegisterPage);
+      context.goNamed(SignInRoute.emailRegister.name);
     },
     signInWithEmailLink: (_) {
       navigator.pushNamed(SignInRoutes.signInEmailLinkPage, arguments: true);
