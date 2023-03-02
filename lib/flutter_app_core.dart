@@ -20,6 +20,7 @@ export 'sign_in/sign_in.dart';
 export 'package:go_router/go_router.dart';
 export 'package:flutter_riverpod/flutter_riverpod.dart';
 export 'package:riverpod_annotation/riverpod_annotation.dart';
+export 'package:freezed_annotation/freezed_annotation.dart';
 
 /*
 class App extends ConsumerWidget {
