@@ -22,6 +22,21 @@ List<GoRoute> routes(RoutesRef ref) {
   return [];
 }
 
+CustomTransitionPage modalTransition({
+  LocalKey? key,
+  required Widget child,
+}) {
+  return CustomTransitionPage<void>(
+    key: key,
+    child: const SignInEmailLoginPage(),
+    barrierDismissible: true,
+    barrierColor: Colors.black38,
+    opaque: false,
+    transitionDuration: Duration.zero,
+    transitionsBuilder: (_, __, ___, child) => child,
+  );
+}
+
 @Riverpod(keepAlive: true)
 // ignore: unsupported_provider_value
 GoRouter goRouter(GoRouterRef ref) {
@@ -50,68 +65,61 @@ GoRouter goRouter(GoRouterRef ref) {
             path: 'login',
             name: SignInRoute.emailLogin.name,
             pageBuilder: (context, state) {
-              return CustomTransitionPage<void>(
+              return modalTransition(
                 key: state.pageKey,
                 child: const SignInEmailLoginPage(),
-                barrierDismissible: true,
-                barrierColor: Colors.black38,
-                opaque: false,
-                transitionDuration: Duration.zero,
-                transitionsBuilder: (_, __, ___, child) => child,
               );
             },
           ),
           GoRoute(
             path: 'register',
             name: SignInRoute.emailRegister.name,
-            /*pageBuilder: (context, state) => platformPage(
-          key: state.pageKey,
-          child: const SignInEmailRegisterPage(),
-        ),*/
             pageBuilder: (context, state) {
-              return CustomTransitionPage<void>(
+              return modalTransition(
                 key: state.pageKey,
                 child: const SignInEmailRegisterPage(),
-                barrierDismissible: true,
-                barrierColor: Colors.black38,
-                opaque: false,
-                transitionDuration: Duration.zero,
-                transitionsBuilder: (_, __, ___, child) => child,
               );
             },
           ),
           GoRoute(
             path: 'reset',
             name: SignInRoute.emailReset.name,
-            pageBuilder: (context, state) => platformPage(
-              key: state.pageKey,
-              child: const SignInEmailResetPage(),
-            ),
+            pageBuilder: (context, state) {
+              return modalTransition(
+                key: state.pageKey,
+                child: const SignInEmailResetPage(),
+              );
+            },
           ),
           GoRoute(
             path: 'phone',
             name: SignInRoute.phoneLogin.name,
-            pageBuilder: (context, state) => platformPage(
-              key: state.pageKey,
-              child: const SignInPhonePage(),
-            ),
+            pageBuilder: (context, state) {
+              return modalTransition(
+                key: state.pageKey,
+                child: const SignInPhonePage(),
+              );
+            },
           ),
           GoRoute(
             path: 'verification',
             name: SignInRoute.phoneVerification.name,
-            pageBuilder: (context, state) => platformPage(
-              key: state.pageKey,
-              child: const SignInPhoneVerificationPage(),
-            ),
+            pageBuilder: (context, state) {
+              return modalTransition(
+                key: state.pageKey,
+                child: const SignInPhoneVerificationPage(),
+              );
+            },
           ),
           GoRoute(
             path: 'countries',
             name: SignInRoute.countries.name,
-            pageBuilder: (context, state) => platformPage(
-              key: state.pageKey,
-              child: const CountriesPage(),
-              fullscreenDialog: true,
-            ),
+            pageBuilder: (context, state) {
+              return modalTransition(
+                key: state.pageKey,
+                child: const CountriesPage(),
+              );
+            },
           ),
         ],
       ),
