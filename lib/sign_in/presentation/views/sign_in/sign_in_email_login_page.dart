@@ -18,15 +18,12 @@ class SignInEmailLoginPage extends ConsumerWidget {
       (state) => state.isLoading,
     ));
 
-    return Padding(
-      padding: const EdgeInsets.all(300),
-      child: SignInPageBuilder(
-        title: l10n.signInWithEmailTitle,
-        leadingButton: const SignInCloseButton(),
-        errorText: errorText,
-        isLoading: isLoading,
-        child: const SignInEmailLoginForm(),
-      ),
+    return SignInPageBuilder(
+      title: l10n.signInWithEmailTitle,
+      leadingButton: const SignInCloseButton(),
+      errorText: errorText,
+      isLoading: isLoading,
+      child: const SignInEmailLoginForm(),
     );
   }
 }
