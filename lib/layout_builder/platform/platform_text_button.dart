@@ -24,6 +24,7 @@ class PlatformTextButton
     return TextButton(
       onPressed: onPressed,
       style: TextButton.styleFrom(
+        padding: EdgeInsets.all(padding),
         foregroundColor: color,
         textStyle: TextStyle(
           fontFamily: Theme.of(context).textTheme.bodyMedium?.fontFamily,
