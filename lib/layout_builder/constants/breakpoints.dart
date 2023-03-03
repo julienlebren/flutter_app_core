@@ -4,6 +4,7 @@ class Breakpoints {
   static const desktop = 1060;
   static const tablet = 834;
   static const mobile = 375;
+  static const modal = 500;
 
   static const twoColLayoutMinWidth = 640;
 }
@@ -47,10 +48,10 @@ extension BuildContextWide on BuildContext {
 
   EdgeInsets modalPadding() {
     final screenWidth = MediaQuery.of(this).size.width;
-    if (screenWidth > Breakpoints.tablet) {
+    if (screenWidth > Breakpoints.modal) {
       return EdgeInsets.symmetric(
-        horizontal: (screenWidth - Breakpoints.tablet) / 2,
-        vertical: 50,
+        horizontal: (screenWidth - Breakpoints.modal) / 2,
+        vertical: 100,
       );
     }
     return EdgeInsets.zero;
