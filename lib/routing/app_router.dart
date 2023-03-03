@@ -25,102 +25,96 @@ List<GoRoute> routes(RoutesRef ref) {
 @Riverpod(keepAlive: true)
 // ignore: unsupported_provider_value
 GoRouter goRouter(GoRouterRef ref) {
+  final routes = ref.watch(routesProvider);
+  final mainRoute = routes.firstWhere(
+    (route) => route.path == '/',
+    orElse: () {
+      throw Exception(
+          "Unable to find a route with path '/', did you override goRouterProvider in the root ProviderScope?");
+    },
+  );
+  final otherRoutes = routes.where((route) => route.path != '/');
+
   return GoRouter(
     initialLocation: '/',
     debugLogDiagnostics: false,
     //refreshListenable: ref.watch(authStateChangesProvider),
     routes: [
       GoRoute(
-        path: '/login',
-        name: SignInRoute.emailLogin.name,
-        /*pageBuilder: (context, state) => platformPage(
-          key: state.pageKey,
-          child: const SignInEmailLoginPage(),
-        ),*/
-        /*pageBuilder: (BuildContext context, GoRouterState state) {
-            return CustomTransitionPage<void>(
-              key: state.pageKey,
-              child: const DetailsScreen(),
-              transitionDuration: const Duration(milliseconds: 150),
-              transitionsBuilder: (BuildContext context,
-                  Animation<double> animation,
-                  Animation<double> secondaryAnimation,
-                  Widget child) {
-                // Change the opacity of the screen using a Curve based on the the animation's
-                // value
-                return FadeTransition(
-                  opacity:
-                      CurveTween(curve: Curves.easeInOut).animate(animation),
-                  child: child,
-                );
-              },
-            );
-          },*/
-        pageBuilder: (context, state) {
-          return CustomTransitionPage<void>(
-            key: state.pageKey,
-            child: const SignInEmailLoginPage(),
-            barrierDismissible: true,
-            barrierColor: Colors.black38,
-            opaque: false,
-            transitionDuration: Duration.zero,
-            transitionsBuilder: (_, __, ___, child) => child,
-          );
-        },
-      ),
-      GoRoute(
-        path: '/register',
-        name: SignInRoute.emailRegister.name,
-        /*pageBuilder: (context, state) => platformPage(
+        path: '/',
+        name: SignInRoute.landing.name,
+        pageBuilder: mainRoute.pageBuilder,
+        routes: [
+          ...otherRoutes,
+          GoRoute(
+            path: '/login',
+            name: SignInRoute.emailLogin.name,
+            pageBuilder: (context, state) {
+              return CustomTransitionPage<void>(
+                key: state.pageKey,
+                child: const SignInEmailLoginPage(),
+                barrierDismissible: true,
+                barrierColor: Colors.black38,
+                opaque: false,
+                transitionDuration: Duration.zero,
+                transitionsBuilder: (_, __, ___, child) => child,
+              );
+            },
+          ),
+          GoRoute(
+            path: '/register',
+            name: SignInRoute.emailRegister.name,
+            /*pageBuilder: (context, state) => platformPage(
           key: state.pageKey,
           child: const SignInEmailRegisterPage(),
         ),*/
-        pageBuilder: (context, state) {
-          return CustomTransitionPage<void>(
-            key: state.pageKey,
-            child: const SignInEmailRegisterPage(),
-            barrierDismissible: true,
-            barrierColor: Colors.black38,
-            opaque: false,
-            transitionDuration: Duration.zero,
-            transitionsBuilder: (_, __, ___, child) => child,
-          );
-        },
+            pageBuilder: (context, state) {
+              return CustomTransitionPage<void>(
+                key: state.pageKey,
+                child: const SignInEmailRegisterPage(),
+                barrierDismissible: true,
+                barrierColor: Colors.black38,
+                opaque: false,
+                transitionDuration: Duration.zero,
+                transitionsBuilder: (_, __, ___, child) => child,
+              );
+            },
+          ),
+          GoRoute(
+            path: '/reset',
+            name: SignInRoute.emailReset.name,
+            pageBuilder: (context, state) => platformPage(
+              key: state.pageKey,
+              child: const SignInEmailResetPage(),
+            ),
+          ),
+          GoRoute(
+            path: '/phone',
+            name: SignInRoute.phoneLogin.name,
+            pageBuilder: (context, state) => platformPage(
+              key: state.pageKey,
+              child: const SignInPhonePage(),
+            ),
+          ),
+          GoRoute(
+            path: '/verification',
+            name: SignInRoute.phoneVerification.name,
+            pageBuilder: (context, state) => platformPage(
+              key: state.pageKey,
+              child: const SignInPhoneVerificationPage(),
+            ),
+          ),
+          GoRoute(
+            path: '/countries',
+            name: SignInRoute.countries.name,
+            pageBuilder: (context, state) => platformPage(
+              key: state.pageKey,
+              child: const CountriesPage(),
+              fullscreenDialog: true,
+            ),
+          ),
+        ],
       ),
-      GoRoute(
-        path: '/reset',
-        name: SignInRoute.emailReset.name,
-        pageBuilder: (context, state) => platformPage(
-          key: state.pageKey,
-          child: const SignInEmailResetPage(),
-        ),
-      ),
-      GoRoute(
-        path: '/phone',
-        name: SignInRoute.phoneLogin.name,
-        pageBuilder: (context, state) => platformPage(
-          key: state.pageKey,
-          child: const SignInPhonePage(),
-        ),
-      ),
-      GoRoute(
-        path: '/verification',
-        name: SignInRoute.phoneVerification.name,
-        pageBuilder: (context, state) => platformPage(
-          key: state.pageKey,
-          child: const SignInPhoneVerificationPage(),
-        ),
-      ),
-      GoRoute(
-        path: '/countries',
-        name: SignInRoute.countries.name,
-        pageBuilder: (context, state) => platformPage(
-          key: state.pageKey,
-          child: const CountriesPage(),
-          fullscreenDialog: true,
-        ),
-      ),
-      ...ref.watch(routesProvider),
     ],
     //errorBuilder: (context, state) => const NotFoundScreen(),
   );
