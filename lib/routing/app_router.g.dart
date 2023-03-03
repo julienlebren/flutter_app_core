@@ -20,7 +20,7 @@ final routesProvider = Provider<List<GoRoute>>.internal(
 );
 
 typedef RoutesRef = ProviderRef<List<GoRoute>>;
-String _$modalTransitionHash() => r'5433df2c291541a4a0c519342960871aba7d3774';
+String _$modalTransitionHash() => r'eecb7fef83d6cb8de22766b00a45356c53a8944e';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -43,15 +43,14 @@ class _SystemHash {
   }
 }
 
-typedef ModalTransitionRef
-    = AutoDisposeProviderRef<CustomTransitionPage<dynamic>>;
+typedef ModalTransitionRef = AutoDisposeProviderRef<Page<dynamic>>;
 
 /// See also [modalTransition].
 @ProviderFor(modalTransition)
 const modalTransitionProvider = ModalTransitionFamily();
 
 /// See also [modalTransition].
-class ModalTransitionFamily extends Family<CustomTransitionPage<dynamic>> {
+class ModalTransitionFamily extends Family<Page<dynamic>> {
   /// See also [modalTransition].
   const ModalTransitionFamily();
 
@@ -92,8 +91,7 @@ class ModalTransitionFamily extends Family<CustomTransitionPage<dynamic>> {
 }
 
 /// See also [modalTransition].
-class ModalTransitionProvider
-    extends AutoDisposeProvider<CustomTransitionPage<dynamic>> {
+class ModalTransitionProvider extends AutoDisposeProvider<Page<dynamic>> {
   /// See also [modalTransition].
   ModalTransitionProvider({
     this.key,
@@ -135,7 +133,7 @@ class ModalTransitionProvider
   }
 }
 
-String _$goRouterHash() => r'de431d9e026315de66907f33dd2d3f0671b85df4';
+String _$goRouterHash() => r'29818a9f646606ad96096cce403c9b39f5ade2c2';
 
 /// See also [goRouter].
 @ProviderFor(goRouter)
