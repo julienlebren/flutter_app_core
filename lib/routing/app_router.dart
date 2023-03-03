@@ -47,7 +47,7 @@ GoRouter goRouter(GoRouterRef ref) {
         routes: [
           ...otherRoutes,
           GoRoute(
-            path: '/login',
+            path: 'login',
             name: SignInRoute.emailLogin.name,
             pageBuilder: (context, state) {
               return CustomTransitionPage<void>(
@@ -62,7 +62,7 @@ GoRouter goRouter(GoRouterRef ref) {
             },
           ),
           GoRoute(
-            path: '/register',
+            path: 'register',
             name: SignInRoute.emailRegister.name,
             /*pageBuilder: (context, state) => platformPage(
           key: state.pageKey,
@@ -81,7 +81,7 @@ GoRouter goRouter(GoRouterRef ref) {
             },
           ),
           GoRoute(
-            path: '/reset',
+            path: 'reset',
             name: SignInRoute.emailReset.name,
             pageBuilder: (context, state) => platformPage(
               key: state.pageKey,
@@ -89,7 +89,7 @@ GoRouter goRouter(GoRouterRef ref) {
             ),
           ),
           GoRoute(
-            path: '/phone',
+            path: 'phone',
             name: SignInRoute.phoneLogin.name,
             pageBuilder: (context, state) => platformPage(
               key: state.pageKey,
@@ -97,7 +97,7 @@ GoRouter goRouter(GoRouterRef ref) {
             ),
           ),
           GoRoute(
-            path: '/verification',
+            path: 'verification',
             name: SignInRoute.phoneVerification.name,
             pageBuilder: (context, state) => platformPage(
               key: state.pageKey,
@@ -105,7 +105,7 @@ GoRouter goRouter(GoRouterRef ref) {
             ),
           ),
           GoRoute(
-            path: '/countries',
+            path: 'countries',
             name: SignInRoute.countries.name,
             pageBuilder: (context, state) => platformPage(
               key: state.pageKey,
