@@ -48,27 +48,13 @@ final signInSuppliersProvider = Provider<List<SignInSupplier>>.internal(
 );
 
 typedef SignInSuppliersRef = ProviderRef<List<SignInSupplier>>;
-String _$userRefHash() => r'2565bab2f92085ec83d23a4176b6a59d5fb114f7';
+String _$userConverterHash() => r'05056918d5d6b4a787195303fc1c498be432c2d5';
 
 /// A reference to the user document with a conversion to [FirestoreUser]
 /// Your custom [User] model in the app should implement all the variables
 /// of [FirestoreUser] to ensure everything will work well.
 ///
-/// Copied from [userRef].
-@ProviderFor(userRef)
-final userRefProvider = Provider<CollectionReference<Object?>>.internal(
-  userRef,
-  name: r'userRefProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$userRefHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef UserRefRef = ProviderRef<CollectionReference<Object?>>;
-String _$userConverterHash() => r'05056918d5d6b4a787195303fc1c498be432c2d5';
-
-/// See also [userConverter].
+/// Copied from [userConverter].
 @ProviderFor(userConverter)
 final userConverterProvider =
     AutoDisposeProvider<dynamic Function(Map<String, dynamic>)>.internal(
@@ -83,7 +69,7 @@ final userConverterProvider =
 
 typedef UserConverterRef
     = AutoDisposeProviderRef<dynamic Function(Map<String, dynamic>)>;
-String _$userStreamHash() => r'66b2200693204f1a68cd998be6c2ab4895af2ec2';
+String _$userStreamHash() => r'16f983b2e905d3bf620c7b5774d4e1fb2a0dc913';
 
 /// A provider for listening changed to the Firestore user object
 /// Only intended to return a correct [AuthState], not to get custom properties
