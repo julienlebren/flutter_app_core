@@ -22,13 +22,15 @@ List<GoRoute> routes(RoutesRef ref) {
   return [];
 }
 
-CustomTransitionPage modalTransition({
+@riverpod
+CustomTransitionPage modalTransition(
+  ModalTransitionRef ref, {
   LocalKey? key,
   required Widget child,
 }) {
   return CustomTransitionPage<void>(
     key: key,
-    child: const SignInEmailLoginPage(),
+    child: child,
     barrierDismissible: true,
     barrierColor: Colors.black38,
     opaque: false,
@@ -65,9 +67,11 @@ GoRouter goRouter(GoRouterRef ref) {
             path: 'login',
             name: SignInRoute.emailLogin.name,
             pageBuilder: (context, state) {
-              return modalTransition(
-                key: state.pageKey,
-                child: const SignInEmailLoginPage(),
+              return ref.read(
+                modalTransitionProvider(
+                  key: state.pageKey,
+                  child: const SignInEmailLoginPage(),
+                ),
               );
             },
           ),
@@ -75,9 +79,11 @@ GoRouter goRouter(GoRouterRef ref) {
             path: 'register',
             name: SignInRoute.emailRegister.name,
             pageBuilder: (context, state) {
-              return modalTransition(
-                key: state.pageKey,
-                child: const SignInEmailRegisterPage(),
+              return ref.read(
+                modalTransitionProvider(
+                  key: state.pageKey,
+                  child: const SignInEmailRegisterPage(),
+                ),
               );
             },
           ),
@@ -85,9 +91,11 @@ GoRouter goRouter(GoRouterRef ref) {
             path: 'reset',
             name: SignInRoute.emailReset.name,
             pageBuilder: (context, state) {
-              return modalTransition(
-                key: state.pageKey,
-                child: const SignInEmailResetPage(),
+              return ref.read(
+                modalTransitionProvider(
+                  key: state.pageKey,
+                  child: const SignInEmailResetPage(),
+                ),
               );
             },
           ),
@@ -95,9 +103,11 @@ GoRouter goRouter(GoRouterRef ref) {
             path: 'phone',
             name: SignInRoute.phoneLogin.name,
             pageBuilder: (context, state) {
-              return modalTransition(
-                key: state.pageKey,
-                child: const SignInPhonePage(),
+              return ref.read(
+                modalTransitionProvider(
+                  key: state.pageKey,
+                  child: const SignInPhonePage(),
+                ),
               );
             },
           ),
@@ -105,9 +115,11 @@ GoRouter goRouter(GoRouterRef ref) {
             path: 'verification',
             name: SignInRoute.phoneVerification.name,
             pageBuilder: (context, state) {
-              return modalTransition(
-                key: state.pageKey,
-                child: const SignInPhoneVerificationPage(),
+              return ref.read(
+                modalTransitionProvider(
+                  key: state.pageKey,
+                  child: const SignInPhoneVerificationPage(),
+                ),
               );
             },
           ),
@@ -115,9 +127,11 @@ GoRouter goRouter(GoRouterRef ref) {
             path: 'countries',
             name: SignInRoute.countries.name,
             pageBuilder: (context, state) {
-              return modalTransition(
-                key: state.pageKey,
-                child: const CountriesPage(),
+              return ref.read(
+                modalTransitionProvider(
+                  key: state.pageKey,
+                  child: const CountriesPage(),
+                ),
               );
             },
           ),

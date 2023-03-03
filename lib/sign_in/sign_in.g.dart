@@ -66,6 +66,23 @@ final userRefProvider = Provider<CollectionReference<Object?>>.internal(
 );
 
 typedef UserRefRef = ProviderRef<CollectionReference<Object?>>;
+String _$userConverterHash() => r'05056918d5d6b4a787195303fc1c498be432c2d5';
+
+/// See also [userConverter].
+@ProviderFor(userConverter)
+final userConverterProvider =
+    AutoDisposeProvider<dynamic Function(Map<String, dynamic>)>.internal(
+  userConverter,
+  name: r'userConverterProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$userConverterHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef UserConverterRef
+    = AutoDisposeProviderRef<dynamic Function(Map<String, dynamic>)>;
 String _$userStreamHash() => r'66b2200693204f1a68cd998be6c2ab4895af2ec2';
 
 /// A provider for listening changed to the Firestore user object
