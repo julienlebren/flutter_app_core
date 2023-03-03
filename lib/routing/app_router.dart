@@ -35,7 +35,13 @@ Page modalTransition(
   if (screenWidth > Breakpoints.modal) {
     return CustomTransitionPage<void>(
       key: key,
-      child: child,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: (screenWidth - Breakpoints.modal) / 2,
+          vertical: 100,
+        ),
+        child: child,
+      ),
       barrierDismissible: true,
       barrierColor: Colors.black38,
       opaque: false,

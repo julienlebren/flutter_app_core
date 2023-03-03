@@ -25,52 +25,48 @@ class SignInPageBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: context.modalPadding(),
-      child: SignInScaffold(
-        appBar: PlatformNavigationBar(
-          leading: leadingButton,
-          trailing:
-              (isLoading ? const FormLoader(delayBeforeDisplay: 0) : null),
-          hasBorder: false,
-        ),
-        child: Stack(
-          children: [
-            SingleChildScrollView(
-              //physics: const AlwaysScrollableScrollPhysics(),
-              child: Column(
-                children: [
-                  SignInHeader(
-                    title: title,
-                    subtitle: subtitle,
-                  ),
-                  SignInAbsorberPointer(
-                    isLoading: isLoading,
-                    child: child,
-                  ),
-                  if (errorText != null) SignInError(errorText!),
-                  if (submitButton != null)
-                    Opacity(
-                      opacity: 0,
-                      child: submitButton!,
-                    ),
-                ],
-              ),
-            ),
-            if (submitButton != null)
-              SignInAbsorberPointer(
-                isLoading: isLoading,
-                child: LayoutBuilder(builder: (context, constraints) {
-                  return Container(
-                    alignment: Alignment.bottomCenter,
-                    width: constraints.maxWidth,
-                    height: constraints.maxHeight,
+    return SignInScaffold(
+      appBar: PlatformNavigationBar(
+        leading: leadingButton,
+        trailing: (isLoading ? const FormLoader(delayBeforeDisplay: 0) : null),
+        hasBorder: false,
+      ),
+      child: Stack(
+        children: [
+          SingleChildScrollView(
+            //physics: const AlwaysScrollableScrollPhysics(),
+            child: Column(
+              children: [
+                SignInHeader(
+                  title: title,
+                  subtitle: subtitle,
+                ),
+                SignInAbsorberPointer(
+                  isLoading: isLoading,
+                  child: child,
+                ),
+                if (errorText != null) SignInError(errorText!),
+                if (submitButton != null)
+                  Opacity(
+                    opacity: 0,
                     child: submitButton!,
-                  );
-                }),
-              ),
-          ],
-        ),
+                  ),
+              ],
+            ),
+          ),
+          if (submitButton != null)
+            SignInAbsorberPointer(
+              isLoading: isLoading,
+              child: LayoutBuilder(builder: (context, constraints) {
+                return Container(
+                  alignment: Alignment.bottomCenter,
+                  width: constraints.maxWidth,
+                  height: constraints.maxHeight,
+                  child: submitButton!,
+                );
+              }),
+            ),
+        ],
       ),
     );
   }
