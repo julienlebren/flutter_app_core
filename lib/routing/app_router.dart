@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_app_core/layout_builder/constants/breakpoints.dart';
 import 'package:flutter_app_core/layout_builder/layout_builder.dart';
 import 'package:flutter_app_core/sign_in/sign_in.dart';
 import 'package:go_router/go_router.dart';
@@ -23,20 +26,29 @@ List<GoRoute> routes(RoutesRef ref) {
 }
 
 @riverpod
-CustomTransitionPage modalTransition(
+Page modalTransition(
   ModalTransitionRef ref, {
   LocalKey? key,
   required Widget child,
 }) {
-  return CustomTransitionPage<void>(
-    key: key,
-    child: child,
-    barrierDismissible: true,
-    barrierColor: Colors.black38,
-    opaque: false,
-    transitionDuration: Duration.zero,
-    transitionsBuilder: (_, __, ___, child) => child,
-  );
+  final screenWidth = window.physicalSize.width;
+  if (screenWidth > Breakpoints.modal) {
+    return CustomTransitionPage<void>(
+      key: key,
+      child: child,
+      barrierDismissible: true,
+      barrierColor: Colors.black38,
+      opaque: false,
+      transitionDuration: Duration.zero,
+      transitionsBuilder: (_, __, ___, child) => child,
+    );
+  } else {
+    return platformPage(
+      key: key,
+      fullscreenDialog: true,
+      child: child,
+    );
+  }
 }
 
 @Riverpod(keepAlive: true)
@@ -64,76 +76,84 @@ GoRouter goRouter(GoRouterRef ref) {
         routes: [
           ...otherRoutes,
           GoRoute(
-            path: 'login',
-            name: SignInRoute.emailLogin.name,
+            path: 'auth',
+            name: 'auth',
             pageBuilder: (context, state) {
               return ref.read(
                 modalTransitionProvider(
                   key: state.pageKey,
-                  child: const SignInEmailLoginPage(),
+                  child: const SizedBox.shrink(),
                 ),
               );
             },
-          ),
-          GoRoute(
-            path: 'register',
-            name: SignInRoute.emailRegister.name,
-            pageBuilder: (context, state) {
-              return ref.read(
-                modalTransitionProvider(
-                  key: state.pageKey,
-                  child: const SignInEmailRegisterPage(),
-                ),
-              );
-            },
-          ),
-          GoRoute(
-            path: 'reset',
-            name: SignInRoute.emailReset.name,
-            pageBuilder: (context, state) {
-              return ref.read(
-                modalTransitionProvider(
-                  key: state.pageKey,
-                  child: const SignInEmailResetPage(),
-                ),
-              );
-            },
-          ),
-          GoRoute(
-            path: 'phone',
-            name: SignInRoute.phoneLogin.name,
-            pageBuilder: (context, state) {
-              return ref.read(
-                modalTransitionProvider(
-                  key: state.pageKey,
-                  child: const SignInPhonePage(),
-                ),
-              );
-            },
-          ),
-          GoRoute(
-            path: 'verification',
-            name: SignInRoute.phoneVerification.name,
-            pageBuilder: (context, state) {
-              return ref.read(
-                modalTransitionProvider(
-                  key: state.pageKey,
-                  child: const SignInPhoneVerificationPage(),
-                ),
-              );
-            },
-          ),
-          GoRoute(
-            path: 'countries',
-            name: SignInRoute.countries.name,
-            pageBuilder: (context, state) {
-              return ref.read(
-                modalTransitionProvider(
-                  key: state.pageKey,
-                  child: const CountriesPage(),
-                ),
-              );
-            },
+            routes: [
+              GoRoute(
+                path: 'login',
+                name: SignInRoute.emailLogin.name,
+                pageBuilder: (context, state) {
+                  return platformPage(
+                    key: state.pageKey,
+                    child: const SignInEmailLoginPage(),
+                  );
+                },
+              ),
+              GoRoute(
+                path: 'register',
+                name: SignInRoute.emailRegister.name,
+                pageBuilder: (context, state) {
+                  return platformPage(
+                    key: state.pageKey,
+                    child: const SignInEmailRegisterPage(),
+                  );
+                },
+              ),
+              GoRoute(
+                path: 'reset',
+                name: SignInRoute.emailReset.name,
+                pageBuilder: (context, state) {
+                  return platformPage(
+                    key: state.pageKey,
+                    child: const SignInEmailResetPage(),
+                  );
+                },
+              ),
+              GoRoute(
+                path: 'phone',
+                name: SignInRoute.phoneLogin.name,
+                pageBuilder: (context, state) {
+                  return ref.read(
+                    modalTransitionProvider(
+                      key: state.pageKey,
+                      child: const SignInPhonePage(),
+                    ),
+                  );
+                },
+              ),
+              GoRoute(
+                path: 'verification',
+                name: SignInRoute.phoneVerification.name,
+                pageBuilder: (context, state) {
+                  return ref.read(
+                    modalTransitionProvider(
+                      key: state.pageKey,
+                      child: const SignInPhoneVerificationPage(),
+                    ),
+                  );
+                },
+              ),
+              GoRoute(
+                path: 'countries',
+                name: SignInRoute.countries.name,
+                pageBuilder: (context, state) {
+                  return ref.read(
+                    modalTransitionProvider(
+                      key: state.pageKey,
+                      child: const CountriesPage(),
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
         ],
       ),
