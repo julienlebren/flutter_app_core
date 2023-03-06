@@ -121,36 +121,17 @@ GoRouter goRouter(GoRouterRef ref) {
               GoRoute(
                 path: 'reset',
                 name: SignInRoute.emailReset.name,
-                pageBuilder: (context, state) {
-                  return platformPage(
-                    key: state.pageKey,
-                    child: const SignInEmailResetPage(),
-                  );
-                },
+                builder: (_, __) => const SignInEmailResetPage(),
               ),
               GoRoute(
                 path: 'phone',
                 name: SignInRoute.phoneLogin.name,
-                pageBuilder: (context, state) {
-                  return ref.read(
-                    modalTransitionProvider(
-                      key: state.pageKey,
-                      child: const SignInPhonePage(),
-                    ),
-                  );
-                },
+                builder: (_, __) => const SignInPhonePage(),
               ),
               GoRoute(
                 path: 'verification',
                 name: SignInRoute.phoneVerification.name,
-                pageBuilder: (context, state) {
-                  return ref.read(
-                    modalTransitionProvider(
-                      key: state.pageKey,
-                      child: const SignInPhoneVerificationPage(),
-                    ),
-                  );
-                },
+                builder: (_, __) => const SignInPhoneVerificationPage(),
               ),
               GoRoute(
                 path: 'countries',
