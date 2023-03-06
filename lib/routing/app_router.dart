@@ -109,14 +109,14 @@ GoRouter goRouter(GoRouterRef ref) {
             },
             routes: [
               GoRoute(
-                path: 'login',
-                name: SignInRoute.emailLogin.name,
-                builder: (_, __) => const SignInEmailLoginPage(),
-              ),
-              GoRoute(
                 path: 'register',
                 name: SignInRoute.emailRegister.name,
                 builder: (_, __) => const SignInEmailRegisterPage(),
+              ),
+              GoRoute(
+                path: 'login',
+                name: SignInRoute.emailLogin.name,
+                builder: (_, __) => const SignInEmailLoginPage(),
               ),
               GoRoute(
                 path: 'reset',
