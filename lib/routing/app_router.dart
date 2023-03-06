@@ -95,6 +95,12 @@ GoRouter goRouter(GoRouterRef ref) {
           ShellRoute(
             navigatorKey: _NavigatorKeys.signIn,
             pageBuilder: (context, state, child) {
+              return platformPage(
+                key: state.pageKey,
+                fullscreenDialog: true,
+                child:
+                    Scaffold(appBar: AppBar(title: Text("Test")), body: child),
+              );
               return ref.read(
                 modalTransitionProvider(
                   key: state.pageKey,
