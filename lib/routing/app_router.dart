@@ -137,16 +137,19 @@ GoRouter goRouter(GoRouterRef ref) {
                 path: 'register',
                 name: SignInRoute.emailRegister.name,
                 builder: (_, __) => const SignInEmailRegisterPage(),
+                parentNavigatorKey: _NavigatorKeys.signIn,
               ),
               GoRoute(
                 path: 'login',
                 name: SignInRoute.emailLogin.name,
                 builder: (_, __) => const SignInEmailLoginPage(),
+                parentNavigatorKey: _NavigatorKeys.signIn,
               ),
               GoRoute(
                 path: 'reset',
                 name: SignInRoute.emailReset.name,
                 builder: (_, __) => const SignInEmailResetPage(),
+                parentNavigatorKey: _NavigatorKeys.signIn,
               ),
               GoRoute(
                 path: 'phone',
