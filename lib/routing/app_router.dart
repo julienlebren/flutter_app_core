@@ -98,33 +98,20 @@ GoRouter goRouter(GoRouterRef ref) {
               return ref.read(
                 modalTransitionProvider(
                   key: state.pageKey,
-                  child: const SizedBox.shrink(),
+                  child: child,
                 ),
               );
-            },
-            builder: (context, state, child) {
-              return child;
             },
             routes: [
               GoRoute(
                 path: 'login',
                 name: SignInRoute.emailLogin.name,
-                pageBuilder: (context, state) {
-                  return platformPage(
-                    key: state.pageKey,
-                    child: const SignInEmailLoginPage(),
-                  );
-                },
+                builder: (_, __) => const SignInEmailLoginPage(),
               ),
               GoRoute(
                 path: 'register',
                 name: SignInRoute.emailRegister.name,
-                pageBuilder: (context, state) {
-                  return platformPage(
-                    key: state.pageKey,
-                    child: const SignInEmailRegisterPage(),
-                  );
-                },
+                builder: (_, __) => const SignInEmailRegisterPage(),
               ),
               GoRoute(
                 path: 'reset',
