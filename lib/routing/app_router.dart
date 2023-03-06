@@ -100,7 +100,7 @@ GoRouter goRouter(GoRouterRef ref) {
                 key: state.pageKey,
                 child: Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: (screenWidth - Breakpoints.modal) / 2,
+                    horizontal: 100,
                     vertical: 100,
                   ),
                   child: child,
