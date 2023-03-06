@@ -95,6 +95,22 @@ GoRouter goRouter(GoRouterRef ref) {
           ShellRoute(
             navigatorKey: _NavigatorKeys.signIn,
             pageBuilder: (context, state, child) {
+              final screenWidth = window.physicalSize.width;
+              return CustomTransitionPage<void>(
+                key: state.pageKey,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: (screenWidth - Breakpoints.modal) / 2,
+                    vertical: 100,
+                  ),
+                  child: child,
+                ),
+                barrierDismissible: true,
+                barrierColor: Colors.black38,
+                opaque: false,
+                transitionDuration: Duration.zero,
+                transitionsBuilder: (_, __, ___, child) => child,
+              );
               return platformPage(
                 key: state.pageKey,
                 fullscreenDialog: true,
