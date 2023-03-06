@@ -133,7 +133,7 @@ class ModalTransitionProvider extends AutoDisposeProvider<Page<dynamic>> {
   }
 }
 
-String _$goRouterHash() => r'29818a9f646606ad96096cce403c9b39f5ade2c2';
+String _$goRouterHash() => r'9a6230c9792e816b6d79e5d09c7544494dcc6d25';
 
 /// See also [goRouter].
 @ProviderFor(goRouter)

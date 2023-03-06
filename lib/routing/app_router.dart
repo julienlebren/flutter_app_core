@@ -9,6 +9,10 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_router.g.dart';
 
+class NavigatorKeys {
+  static final signIn = GlobalKey<NavigatorState>();
+}
+
 enum SignInRoute {
   landing,
   emailLogin,
@@ -57,6 +61,13 @@ Page modalTransition(
   }
 }
 
+/*ref.read(
+                modalTransitionProvider(
+                  key: state.pageKey,
+                  child: const SizedBox.shrink(),
+                ),
+              );*/
+
 @Riverpod(keepAlive: true)
 // ignore: unsupported_provider_value
 GoRouter goRouter(GoRouterRef ref) {
@@ -81,14 +92,13 @@ GoRouter goRouter(GoRouterRef ref) {
         pageBuilder: mainRoute.pageBuilder,
         routes: [
           ...otherRoutes,
-          GoRoute(
-            path: 'auth',
-            name: 'auth',
-            pageBuilder: (context, state) {
-              return ref.read(
-                modalTransitionProvider(
-                  key: state.pageKey,
-                  child: const SizedBox.shrink(),
+          ShellRoute(
+            navigatorKey: NavigatorKeys.signIn,
+            builder: (context, state, child) {
+              return Scaffold(
+                body: child,
+                appBar: AppBar(
+                  title: Text("Test"),
                 ),
               );
             },
