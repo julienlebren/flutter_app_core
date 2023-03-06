@@ -94,13 +94,22 @@ GoRouter goRouter(GoRouterRef ref) {
           ...otherRoutes,
           ShellRoute(
             navigatorKey: _NavigatorKeys.signIn,
+            builder: (context, state, child) {
+              return Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 100,
+                  vertical: 100,
+                ),
+                child: child,
+              );
+            },
             pageBuilder: (context, state, child) {
-              final screenWidth = window.physicalSize.width;
+              final screenWidth = MediaQuery.of(context).size.width;
               return CustomTransitionPage<void>(
                 key: state.pageKey,
                 child: Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: 100,
+                    horizontal: (screenWidth - Breakpoints.modal) / 2,
                     vertical: 100,
                   ),
                   child: child,
