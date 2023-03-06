@@ -103,7 +103,7 @@ GoRouter goRouter(GoRouterRef ref) {
                 child: child,
               );
             },
-            pageBuilder: (context, state, child) {
+            /*pageBuilder: (context, state, child) {
               final screenWidth = MediaQuery.of(context).size.width;
               return CustomTransitionPage<void>(
                 key: state.pageKey,
@@ -131,7 +131,7 @@ GoRouter goRouter(GoRouterRef ref) {
                   child: child,
                 ),
               );
-            },
+            },*/
             routes: [
               GoRoute(
                 path: 'register',
