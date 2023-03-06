@@ -9,7 +9,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_router.g.dart';
 
-class NavigatorKeys {
+class _NavigatorKeys {
   static final signIn = GlobalKey<NavigatorState>();
 }
 
@@ -93,7 +93,7 @@ GoRouter goRouter(GoRouterRef ref) {
         routes: [
           ...otherRoutes,
           ShellRoute(
-            navigatorKey: NavigatorKeys.signIn,
+            navigatorKey: _NavigatorKeys.signIn,
             builder: (context, state, child) {
               return Scaffold(
                 body: child,
