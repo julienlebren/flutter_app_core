@@ -102,6 +102,9 @@ GoRouter goRouter(GoRouterRef ref) {
                 ),
               );
             },
+            builder: (context, state, child) {
+              return child;
+            },
             routes: [
               GoRoute(
                 path: 'login',
