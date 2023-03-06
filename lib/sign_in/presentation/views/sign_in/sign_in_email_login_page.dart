@@ -100,7 +100,7 @@ class _SignInEmailLoginFormState extends ConsumerState<SignInEmailLoginForm> {
           onPressed: () {
             //final navigator = SignInNavigatorKeys.modal.currentState!;
             //navigator.pushNamed(SignInRoutes.signInEmailResetPage);
-            context.goNamed(SignInRoute.emailReset.name);
+            context.pushNamed(SignInRoute.emailReset.name);
           },
         ),
         SignInSubmitButton(
