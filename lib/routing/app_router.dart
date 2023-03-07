@@ -123,11 +123,11 @@ GoRouter goRouter(GoRouterRef ref) {
           ShellRoute(
             navigatorKey: _NavigatorKeys.signIn,
             builder: (context, state, child) {
-              final isVisible = ref.watch(keyboardVisibilityProvider).maybeWhen(
+              /*final isVisible = ref.watch(keyboardVisibilityProvider).maybeWhen(
                     data: (isVisible) => isVisible,
                     orElse: () => false,
                   );
-              print("Keyboard: $isVisible");
+              print("Keyboard: $isVisible");*/
               return Scaffold(
                   body: child, appBar: AppBar(title: Text("njldsnjsdnjksdc")));
             },
