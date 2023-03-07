@@ -97,15 +97,15 @@ GoRouter goRouter(GoRouterRef ref) {
           ...otherRoutes,
           ShellRoute(
             navigatorKey: _NavigatorKeys.signIn,
-            builder: (BuildContext context, GoRouterState state, Widget child) {
+            /*builder: (BuildContext context, GoRouterState state, Widget child) {
               return Scaffold(
                 appBar: AppBar(title: Text('App Shell')),
                 body: Center(
                   child: child,
                 ),
               );
-            },
-            /*pageBuilder: (context, state, child) {
+            },*/
+            pageBuilder: (context, state, child) {
               final screenWidth =
                   window.physicalSize.width / window.devicePixelRatio;
               return CustomTransitionPage<void>(
@@ -134,7 +134,7 @@ GoRouter goRouter(GoRouterRef ref) {
                   child: child,
                 ),
               );
-            },*/
+            },
             routes: [
               GoRoute(
                 path: 'register',
