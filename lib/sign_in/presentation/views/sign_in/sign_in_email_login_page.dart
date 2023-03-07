@@ -117,7 +117,7 @@ class _SignInEmailLoginFormState extends ConsumerState<SignInEmailLoginForm> {
           onPressed: () {
             //final navigator = SignInNavigatorKeys.modal.currentState!;
             //navigator.pushReplacementNamed(SignInRoutes.signInEmailRegisterPage);
-            context.pushReplacementNamed(SignInRoute.emailRegister.name);
+            context.goNamed(SignInRoute.emailRegister.name);
           },
         ),
       ],

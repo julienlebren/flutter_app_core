@@ -110,12 +110,14 @@ GoRouter goRouter(GoRouterRef ref) {
                   window.physicalSize.width / window.devicePixelRatio;
               return CustomTransitionPage<void>(
                 key: state.pageKey,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: (screenWidth - Breakpoints.modal) / 2,
-                    vertical: 100,
+                child: ClipRect(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: (screenWidth - Breakpoints.modal) / 2,
+                      vertical: 100,
+                    ),
+                    child: child,
                   ),
-                  child: child,
                 ),
                 barrierDismissible: true,
                 barrierColor: Colors.black38,
