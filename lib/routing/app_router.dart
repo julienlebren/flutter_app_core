@@ -10,6 +10,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'app_router.g.dart';
 
 class _NavigatorKeys {
+  static final root = GlobalKey<NavigatorState>();
   static final signIn = GlobalKey<NavigatorState>();
 }
 
@@ -82,6 +83,7 @@ GoRouter goRouter(GoRouterRef ref) {
   final otherRoutes = routes.where((route) => route.path != '/');
 
   return GoRouter(
+    navigatorKey: _NavigatorKeys.root,
     initialLocation: '/',
     debugLogDiagnostics: false,
     //refreshListenable: ref.watch(authStateChangesProvider),
@@ -95,15 +97,12 @@ GoRouter goRouter(GoRouterRef ref) {
           ShellRoute(
             navigatorKey: _NavigatorKeys.signIn,
             builder: (context, state, child) {
-              return Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 100,
-                  vertical: 100,
-                ),
-                child: child,
+              return Scaffold(
+                body: child,
+                appBar: AppBar(title: Text("TEST")),
               );
             },
-            /*pageBuilder: (context, state, child) {
+            pageBuilder: (context, state, child) {
               final screenWidth = MediaQuery.of(context).size.width;
               return CustomTransitionPage<void>(
                 key: state.pageKey,
@@ -131,25 +130,22 @@ GoRouter goRouter(GoRouterRef ref) {
                   child: child,
                 ),
               );
-            },*/
+            },
             routes: [
               GoRoute(
                 path: 'register',
                 name: SignInRoute.emailRegister.name,
                 builder: (_, __) => const SignInEmailRegisterPage(),
-                parentNavigatorKey: _NavigatorKeys.signIn,
               ),
               GoRoute(
                 path: 'login',
                 name: SignInRoute.emailLogin.name,
                 builder: (_, __) => const SignInEmailLoginPage(),
-                parentNavigatorKey: _NavigatorKeys.signIn,
               ),
               GoRoute(
                 path: 'reset',
                 name: SignInRoute.emailReset.name,
                 builder: (_, __) => const SignInEmailResetPage(),
-                parentNavigatorKey: _NavigatorKeys.signIn,
               ),
               GoRoute(
                 path: 'phone',
