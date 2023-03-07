@@ -45,20 +45,33 @@ Page modalTransition(
     print("Keyboard: $isVisible");
     return CustomTransitionPage<void>(
       key: key,
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: (screenWidth - Breakpoints.modal) / 2,
-          vertical: (screenHeight - 650) / 2,
-        ),
-        child: ClipRect(
-          child: Container(
-            transform: Matrix4.translationValues(0.0, -20.0, 0.0),
-            child: child,
+      child: Stack(
+        children: [
+          SizedBox(
+            width: screenWidth,
+            height: screenHeight,
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+              child: Container(
+                color: Colors.black.withOpacity(0.5),
+              ),
+            ),
           ),
-        ),
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: (screenWidth - Breakpoints.modal) / 2,
+              vertical: (screenHeight - 650) / 2,
+            ),
+            child: ClipRect(
+              child: Container(
+                transform: Matrix4.translationValues(0.0, -20.0, 0.0),
+                child: child,
+              ),
+            ),
+          ),
+        ],
       ),
       barrierDismissible: true,
-      barrierColor: Colors.black38,
       opaque: false,
       transitionDuration: const Duration(milliseconds: 200),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
