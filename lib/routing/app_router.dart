@@ -88,7 +88,9 @@ GoRouter goRouter(GoRouterRef ref) {
         path: '/',
         name: SignInRoute.landing.name,
         parentNavigatorKey: _NavigatorKeys.root,
-        builder: mainRoute.builder,
+        pageBuilder: (context, state) {
+          return NoTransitionPage(child: mainRoute.builder!(context, state));
+        },
         routes: [
           ...otherRoutes,
           ShellRoute(

@@ -118,10 +118,12 @@ class SignInScaffold extends StatelessWidget {
           ),
           child: LayoutBuilder(
             builder: (context, constraints) {
-              print("available height: ${constraints.maxHeight}");
+              final screenWidth = MediaQuery.of(context).size.width;
+              final height = constraints.maxHeight +
+                  (screenWidth > Breakpoints.modal ? 100 : 0);
               return SizedBox(
                 width: constraints.maxWidth,
-                height: constraints.maxHeight,
+                height: height,
                 child: child,
               );
             },
