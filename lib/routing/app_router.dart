@@ -52,9 +52,6 @@ Page modalTransition(
             height: screenHeight,
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-              child: Container(
-                color: Colors.black.withOpacity(0.5),
-              ),
             ),
           ),
           Padding(
@@ -72,6 +69,7 @@ Page modalTransition(
         ],
       ),
       barrierDismissible: true,
+      barrierColor: Colors.transparent,
       opaque: false,
       transitionDuration: const Duration(milliseconds: 200),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
