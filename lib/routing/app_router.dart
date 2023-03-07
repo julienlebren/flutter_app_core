@@ -38,6 +38,8 @@ Page modalTransition(
   final screenWidth = window.physicalSize.width / window.devicePixelRatio;
   final screenHeight = window.physicalSize.height / window.devicePixelRatio;
   if (screenWidth > Breakpoints.modal) {
+    final isVisible = ref.watch(keyboardVisibilityProvider);
+    print("Keyboard: $isVisible");
     return CustomTransitionPage<void>(
       key: key,
       child: Padding(

@@ -20,7 +20,7 @@ final routesProvider = Provider<List<GoRoute>>.internal(
 );
 
 typedef RoutesRef = ProviderRef<List<GoRoute>>;
-String _$modalTransitionHash() => r'eecb7fef83d6cb8de22766b00a45356c53a8944e';
+String _$modalTransitionHash() => r'4745f4d8b2ff96143c434e08da6238a27d74674c';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -133,7 +133,7 @@ class ModalTransitionProvider extends AutoDisposeProvider<Page<dynamic>> {
   }
 }
 
-String _$goRouterHash() => r'9a6230c9792e816b6d79e5d09c7544494dcc6d25';
+String _$goRouterHash() => r'8d5262a9a085e5465f35bef531bf6341505cb627';
 
 /// See also [goRouter].
 @ProviderFor(goRouter)

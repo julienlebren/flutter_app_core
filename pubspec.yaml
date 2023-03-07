@@ -1,6 +1,6 @@
 name: flutter_app_core
 description: Reusable methods and widgets for building apps 
-version: 1.2.0+6
+version: 1.2.0+7
 homepage:
 
 environment:
@@ -25,6 +25,7 @@ dependencies:
   firebase_messaging: ^14.2.2
   firebase_storage: ^11.0.11
   flutter_app_badger: ^1.5.0
+  flutter_keyboard_visibility: ^5.4.0
   flutter_libphonenumber: 1.1.0
   flutter_riverpod: ^2.2.0
   freezed_annotation: ^2.2.0

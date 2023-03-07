@@ -15,6 +15,7 @@ import 'package:flutter_app_core/layout_builder/layout_builder.dart';
 import 'package:flutter_app_core/localization/flutter_app_core_l10n.dart';
 import 'package:flutter_app_core/localization/localization.dart';
 import 'package:flutter_app_core/routing/app_router.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_libphonenumber/flutter_libphonenumber.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -71,6 +72,12 @@ const firestoreUserPath = "users";
 @riverpod
 Function(Map<String, dynamic> json) userConverter(UserConverterRef ref) {
   return FirestoreUser.fromJson;
+}
+
+@riverpod
+Stream<bool> keyboardVisibility(KeyboardVisibilityRef ref) {
+  var keyboardVisibilityController = KeyboardVisibilityController();
+  return keyboardVisibilityController.onChange;
 }
 
 /// A provider for listening changed to the Firestore user object
