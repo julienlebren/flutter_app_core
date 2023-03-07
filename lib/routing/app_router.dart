@@ -103,7 +103,8 @@ GoRouter goRouter(GoRouterRef ref) {
               );
             },
             pageBuilder: (context, state, child) {
-              final screenWidth = MediaQuery.of(context).size.width;
+              final screenWidth = window.physicalSize.width;
+              print("screenWidth: $screenWidth");
               return CustomTransitionPage<void>(
                 key: state.pageKey,
                 child: Padding(
