@@ -36,6 +36,7 @@ class SignInPageBuilder extends StatelessWidget {
           SingleChildScrollView(
             //physics: const AlwaysScrollableScrollPhysics(),
             child: Column(
+              mainAxisSize: MainAxisSize.max,
               children: [
                 SignInHeader(
                   title: title,
