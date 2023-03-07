@@ -112,7 +112,6 @@ class SignInScaffold extends StatelessWidget {
       child: PlatformScaffold(
         appBar: appBar,
         body: Container(
-          color: Colors.yellow,
           padding: const EdgeInsets.only(
             left: 25,
             right: 25,
@@ -125,7 +124,6 @@ class SignInScaffold extends StatelessWidget {
               final height = constraints.maxHeight +
                   (screenWidth > Breakpoints.modal ? 100 : 0);*/
               return Container(
-                color: Colors.orange,
                 width: constraints.maxWidth,
                 height: constraints.maxHeight,
                 child: child,
