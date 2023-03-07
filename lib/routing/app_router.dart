@@ -127,6 +127,10 @@ GoRouter goRouter(GoRouterRef ref) {
           ...otherRoutes,
           ShellRoute(
             navigatorKey: _NavigatorKeys.signIn,
+            builder: (context, state, child) {
+              return Scaffold(
+                  body: child, appBar: AppBar(title: Text("njldsnjsdnjksdc")));
+            },
             pageBuilder: (context, state, child) {
               return ref.read(
                 modalTransitionProvider(
