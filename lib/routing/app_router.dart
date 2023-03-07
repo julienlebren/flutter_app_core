@@ -103,8 +103,9 @@ GoRouter goRouter(GoRouterRef ref) {
               );
             },
             pageBuilder: (context, state, child) {
-              final screenWidth = window.physicalSize.width;
-              print("screenWidth: $screenWidth");
+              final screenWidth =
+                  window.physicalSize.width / window.devicePixelRatio;
+              print("padding: ${(screenWidth - Breakpoints.modal) / 2}");
               return CustomTransitionPage<void>(
                 key: state.pageKey,
                 child: Padding(
