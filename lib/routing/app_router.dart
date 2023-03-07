@@ -105,11 +105,6 @@ GoRouter goRouter(GoRouterRef ref) {
     },
   );
   final otherRoutes = routes.where((route) => route.path != '/');
-  final isVisible = ref.watch(keyboardVisibilityProvider).maybeWhen(
-        data: (isVisible) => isVisible,
-        orElse: () => false,
-      );
-  print("Keyboard: $isVisible");
 
   return GoRouter(
     navigatorKey: _NavigatorKeys.root,
@@ -128,6 +123,11 @@ GoRouter goRouter(GoRouterRef ref) {
           ShellRoute(
             navigatorKey: _NavigatorKeys.signIn,
             builder: (context, state, child) {
+              final isVisible = ref.watch(keyboardVisibilityProvider).maybeWhen(
+                    data: (isVisible) => isVisible,
+                    orElse: () => false,
+                  );
+              print("Keyboard: $isVisible");
               return Scaffold(
                   body: child, appBar: AppBar(title: Text("njldsnjsdnjksdc")));
             },
