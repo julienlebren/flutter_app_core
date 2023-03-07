@@ -97,16 +97,17 @@ GoRouter goRouter(GoRouterRef ref) {
           ...otherRoutes,
           ShellRoute(
             navigatorKey: _NavigatorKeys.signIn,
-            builder: (context, state, child) {
+            builder: (BuildContext context, GoRouterState state, Widget child) {
               return Scaffold(
-                body: child,
-                appBar: AppBar(title: Text("TEST")),
+                appBar: AppBar(title: Text('App Shell')),
+                body: Center(
+                  child: child,
+                ),
               );
             },
-            pageBuilder: (context, state, child) {
+            /*pageBuilder: (context, state, child) {
               final screenWidth =
                   window.physicalSize.width / window.devicePixelRatio;
-              print("padding: ${(screenWidth - Breakpoints.modal) / 2}");
               return CustomTransitionPage<void>(
                 key: state.pageKey,
                 child: Padding(
@@ -133,37 +134,32 @@ GoRouter goRouter(GoRouterRef ref) {
                   child: child,
                 ),
               );
-            },
+            },*/
             routes: [
               GoRoute(
                 path: 'register',
                 name: SignInRoute.emailRegister.name,
                 builder: (_, __) => const SignInEmailRegisterPage(),
-                parentNavigatorKey: _NavigatorKeys.signIn,
               ),
               GoRoute(
                 path: 'login',
                 name: SignInRoute.emailLogin.name,
                 builder: (_, __) => const SignInEmailLoginPage(),
-                parentNavigatorKey: _NavigatorKeys.signIn,
               ),
               GoRoute(
                 path: 'reset',
                 name: SignInRoute.emailReset.name,
                 builder: (_, __) => const SignInEmailResetPage(),
-                parentNavigatorKey: _NavigatorKeys.signIn,
               ),
               GoRoute(
                 path: 'phone',
                 name: SignInRoute.phoneLogin.name,
                 builder: (_, __) => const SignInPhonePage(),
-                parentNavigatorKey: _NavigatorKeys.signIn,
               ),
               GoRoute(
                 path: 'verification',
                 name: SignInRoute.phoneVerification.name,
                 builder: (_, __) => const SignInPhoneVerificationPage(),
-                parentNavigatorKey: _NavigatorKeys.signIn,
               ),
               GoRoute(
                 path: 'countries',
