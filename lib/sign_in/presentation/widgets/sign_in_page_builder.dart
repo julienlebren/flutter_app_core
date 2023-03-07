@@ -118,21 +118,20 @@ class SignInScaffold extends StatelessWidget {
             right: 25,
             bottom: 20,
           ),
-          child:
-              child, /*LayoutBuilder(
+          child: LayoutBuilder(
             builder: (context, constraints) {
-              final screenWidth =
+              /*final screenWidth =
                   window.physicalSize.width / window.devicePixelRatio;
               final height = constraints.maxHeight +
-                  (screenWidth > Breakpoints.modal ? 100 : 0);
+                  (screenWidth > Breakpoints.modal ? 100 : 0);*/
               return Container(
                 color: Colors.orange,
                 width: constraints.maxWidth,
-                height: height,
+                height: constraints.maxHeight,
                 child: child,
               );
             },
-          ),*/
+          ),
         ),
       ),
     );
