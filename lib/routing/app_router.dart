@@ -54,7 +54,7 @@ Page modalTransition(
       barrierDismissible: true,
       barrierColor: Colors.black38,
       opaque: false,
-      transitionDuration: Duration(seconds: 2),
+      transitionDuration: const Duration(milliseconds: 200),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         const begin = Offset(0.0, 1.0);
         const end = Offset.zero;

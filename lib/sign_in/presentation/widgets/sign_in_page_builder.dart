@@ -117,7 +117,8 @@ class SignInScaffold extends StatelessWidget {
             right: 25,
             bottom: 20,
           ),
-          child: LayoutBuilder(
+          child:
+              child, /*LayoutBuilder(
             builder: (context, constraints) {
               final screenWidth =
                   window.physicalSize.width / window.devicePixelRatio;
@@ -130,7 +131,7 @@ class SignInScaffold extends StatelessWidget {
                 child: child,
               );
             },
-          ),
+          ),*/
         ),
       ),
     );
