@@ -74,7 +74,7 @@ Function(Map<String, dynamic> json) userConverter(UserConverterRef ref) {
   return FirestoreUser.fromJson;
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 Stream<bool> keyboardVisibility(KeyboardVisibilityRef ref) {
   var keyboardVisibilityController = KeyboardVisibilityController();
   return keyboardVisibilityController.onChange;

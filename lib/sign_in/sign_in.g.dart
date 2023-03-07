@@ -70,11 +70,11 @@ final userConverterProvider =
 typedef UserConverterRef
     = AutoDisposeProviderRef<dynamic Function(Map<String, dynamic>)>;
 String _$keyboardVisibilityHash() =>
-    r'f5ecf22373da386f4fa9b5bb45a4fe4a86871aba';
+    r'9cdbb1fb45e34b206fe972e6e3b5836b280c8576';
 
 /// See also [keyboardVisibility].
 @ProviderFor(keyboardVisibility)
-final keyboardVisibilityProvider = AutoDisposeStreamProvider<bool>.internal(
+final keyboardVisibilityProvider = StreamProvider<bool>.internal(
   keyboardVisibility,
   name: r'keyboardVisibilityProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -84,7 +84,7 @@ final keyboardVisibilityProvider = AutoDisposeStreamProvider<bool>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef KeyboardVisibilityRef = AutoDisposeStreamProviderRef<bool>;
+typedef KeyboardVisibilityRef = StreamProviderRef<bool>;
 String _$userStreamHash() => r'16f983b2e905d3bf620c7b5774d4e1fb2a0dc913';
 
 /// A provider for listening changed to the Firestore user object

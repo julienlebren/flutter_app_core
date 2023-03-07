@@ -20,7 +20,7 @@ final routesProvider = Provider<List<GoRoute>>.internal(
 );
 
 typedef RoutesRef = ProviderRef<List<GoRoute>>;
-String _$modalTransitionHash() => r'4745f4d8b2ff96143c434e08da6238a27d74674c';
+String _$modalTransitionHash() => r'a58bc3847729a8721c894b8a941f424147e49731';
 
 /// Copied from Dart SDK
 class _SystemHash {
