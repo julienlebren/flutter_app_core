@@ -110,7 +110,8 @@ class SignInScaffold extends StatelessWidget {
       onWillPop: () async => (appBar?.leading == null),
       child: PlatformScaffold(
         appBar: appBar,
-        body: Padding(
+        body: Container(
+          color: Colors.yellow,
           padding: const EdgeInsets.only(
             left: 25,
             right: 25,
@@ -122,7 +123,8 @@ class SignInScaffold extends StatelessWidget {
                   window.physicalSize.width / window.devicePixelRatio;
               final height = constraints.maxHeight +
                   (screenWidth > Breakpoints.modal ? 100 : 0);
-              return SizedBox(
+              return Container(
+                color: Colors.orange,
                 width: constraints.maxWidth,
                 height: height,
                 child: child,
