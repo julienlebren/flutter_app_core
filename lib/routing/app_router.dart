@@ -38,11 +38,6 @@ Page modalTransition(
   final screenWidth = window.physicalSize.width / window.devicePixelRatio;
   final screenHeight = window.physicalSize.height / window.devicePixelRatio;
   if (screenWidth > Breakpoints.modal) {
-    final isVisible = ref.watch(keyboardVisibilityProvider).maybeWhen(
-          data: (isVisible) => isVisible,
-          orElse: () => false,
-        );
-    print("Keyboard: $isVisible");
     return CustomTransitionPage<void>(
       key: key,
       child: Stack(
@@ -110,6 +105,11 @@ GoRouter goRouter(GoRouterRef ref) {
     },
   );
   final otherRoutes = routes.where((route) => route.path != '/');
+  final isVisible = ref.watch(keyboardVisibilityProvider).maybeWhen(
+        data: (isVisible) => isVisible,
+        orElse: () => false,
+      );
+  print("Keyboard: $isVisible");
 
   return GoRouter(
     navigatorKey: _NavigatorKeys.root,
