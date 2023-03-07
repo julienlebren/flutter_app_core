@@ -25,7 +25,6 @@ class PlatformScaffold
         appBar: appBar?.createMaterialWidget(context, ref),
         body: body,
         floatingActionButton: floatingActionButton,
-        resizeToAvoidBottomInset: false,
       ),
     );
   }
@@ -42,7 +41,6 @@ class PlatformScaffold
     return CupertinoPageScaffold(
       backgroundColor: backgroundColor,
       navigationBar: appBar?.createCupertinoWidget(context, ref),
-      resizeToAvoidBottomInset: false,
       child: SafeArea(
         bottom: !isModal,
         child: body,
