@@ -36,13 +36,14 @@ Page modalTransition(
   required Widget child,
 }) {
   final screenWidth = window.physicalSize.width / window.devicePixelRatio;
+  final screenHeight = window.physicalSize.height / window.devicePixelRatio;
   if (screenWidth > Breakpoints.modal) {
     return CustomTransitionPage<void>(
       key: key,
       child: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: (screenWidth - Breakpoints.modal) / 2,
-          //vertical: 100,
+          vertical: (screenHeight - 500) / 2,
         ),
         child: ClipRect(
           child: Container(
