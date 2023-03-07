@@ -110,7 +110,7 @@ class _SignInEmailRegisterPageFormState
             onPressed: () {
               //final navigator = SignInNavigatorKeys.modal.currentState!;
               //navigator.pushReplacementNamed(SignInRoutes.signInEmailLoginPage);
-              context.pushReplacementNamed(SignInRoute.emailLogin.name);
+              context.go(SignInRoute.emailLogin.name);
             },
           ),
       ],
