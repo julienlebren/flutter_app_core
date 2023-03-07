@@ -72,7 +72,7 @@ Page modalTransition(
         ],
       ),
       barrierDismissible: true,
-      barrierColor: Colors.transparent,
+      barrierColor: Colors.black38,
       opaque: false,
       transitionDuration: const Duration(milliseconds: 200),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
