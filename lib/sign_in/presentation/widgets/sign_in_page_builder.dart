@@ -118,6 +118,7 @@ class SignInScaffold extends StatelessWidget {
           ),
           child: LayoutBuilder(
             builder: (context, constraints) {
+              print("available height: ${constraints.maxHeight}");
               return SizedBox(
                 width: constraints.maxWidth,
                 height: constraints.maxHeight,

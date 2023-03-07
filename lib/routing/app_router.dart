@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app_core/layout_builder/constants/breakpoints.dart';
 import 'package:flutter_app_core/layout_builder/layout_builder.dart';
 import 'package:flutter_app_core/sign_in/sign_in.dart';
 import 'package:go_router/go_router.dart';
@@ -36,7 +35,7 @@ Page modalTransition(
   LocalKey? key,
   required Widget child,
 }) {
-  final screenWidth = window.physicalSize.width;
+  final screenWidth = window.physicalSize.width / window.devicePixelRatio;
   if (screenWidth > Breakpoints.modal) {
     return CustomTransitionPage<void>(
       key: key,
@@ -45,7 +44,12 @@ Page modalTransition(
           horizontal: (screenWidth - Breakpoints.modal) / 2,
           vertical: 100,
         ),
-        child: child,
+        child: ClipRect(
+          child: Container(
+            transform: Matrix4.translationValues(0.0, -20.0, 0.0),
+            child: child,
+          ),
+        ),
       ),
       barrierDismissible: true,
       barrierColor: Colors.black38,
@@ -61,13 +65,6 @@ Page modalTransition(
     );
   }
 }
-
-/*ref.read(
-                modalTransitionProvider(
-                  key: state.pageKey,
-                  child: const SizedBox.shrink(),
-                ),
-              );*/
 
 @Riverpod(keepAlive: true)
 // ignore: unsupported_provider_value
@@ -86,47 +83,22 @@ GoRouter goRouter(GoRouterRef ref) {
     navigatorKey: _NavigatorKeys.root,
     initialLocation: '/',
     debugLogDiagnostics: false,
-    //refreshListenable: ref.watch(authStateChangesProvider),
     routes: [
       GoRoute(
         path: '/',
         name: SignInRoute.landing.name,
         parentNavigatorKey: _NavigatorKeys.root,
-        pageBuilder: mainRoute.pageBuilder,
+        builder: mainRoute.builder,
         routes: [
           ...otherRoutes,
           ShellRoute(
             navigatorKey: _NavigatorKeys.signIn,
-            /*builder: (BuildContext context, GoRouterState state, Widget child) {
-              return Scaffold(
-                appBar: AppBar(title: Text('App Shell')),
-                body: Center(
+            pageBuilder: (context, state, child) {
+              return ref.read(
+                modalTransitionProvider(
+                  key: state.pageKey,
                   child: child,
                 ),
-              );
-            },*/
-            pageBuilder: (context, state, child) {
-              final screenWidth =
-                  window.physicalSize.width / window.devicePixelRatio;
-              return CustomTransitionPage<void>(
-                key: state.pageKey,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: (screenWidth - Breakpoints.modal) / 2,
-                    vertical: 100,
-                  ),
-                  child: ClipRect(
-                    child: Container(
-                      transform: Matrix4.translationValues(0.0, -20.0, 0.0),
-                      child: child,
-                    ),
-                  ),
-                ),
-                barrierDismissible: true,
-                barrierColor: Colors.black38,
-                opaque: false,
-                transitionDuration: Duration.zero,
-                transitionsBuilder: (_, __, ___, child) => child,
               );
             },
             routes: [
