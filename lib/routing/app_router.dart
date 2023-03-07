@@ -91,6 +91,7 @@ GoRouter goRouter(GoRouterRef ref) {
       GoRoute(
         path: '/',
         name: SignInRoute.landing.name,
+        parentNavigatorKey: _NavigatorKeys.root,
         pageBuilder: mainRoute.pageBuilder,
         routes: [
           ...otherRoutes,
@@ -138,26 +139,31 @@ GoRouter goRouter(GoRouterRef ref) {
                 path: 'register',
                 name: SignInRoute.emailRegister.name,
                 builder: (_, __) => const SignInEmailRegisterPage(),
+                parentNavigatorKey: _NavigatorKeys.signIn,
               ),
               GoRoute(
                 path: 'login',
                 name: SignInRoute.emailLogin.name,
                 builder: (_, __) => const SignInEmailLoginPage(),
+                parentNavigatorKey: _NavigatorKeys.signIn,
               ),
               GoRoute(
                 path: 'reset',
                 name: SignInRoute.emailReset.name,
                 builder: (_, __) => const SignInEmailResetPage(),
+                parentNavigatorKey: _NavigatorKeys.signIn,
               ),
               GoRoute(
                 path: 'phone',
                 name: SignInRoute.phoneLogin.name,
                 builder: (_, __) => const SignInPhonePage(),
+                parentNavigatorKey: _NavigatorKeys.signIn,
               ),
               GoRoute(
                 path: 'verification',
                 name: SignInRoute.phoneVerification.name,
                 builder: (_, __) => const SignInPhoneVerificationPage(),
+                parentNavigatorKey: _NavigatorKeys.signIn,
               ),
               GoRoute(
                 path: 'countries',
