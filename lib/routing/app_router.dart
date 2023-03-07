@@ -111,12 +111,15 @@ GoRouter goRouter(GoRouterRef ref) {
               return CustomTransitionPage<void>(
                 key: state.pageKey,
                 child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: (screenWidth - Breakpoints.modal) / 2,
-                      vertical: 100,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: (screenWidth - Breakpoints.modal) / 2,
+                    vertical: 100,
+                  ),
+                  child: ClipRect(
+                    child: Container(
+                      transform: Matrix4.translationValues(0.0, -20.0, 0.0),
+                      child: child,
                     ),
-                    child: ClipRect(
-                  child: child,
                   ),
                 ),
                 barrierDismissible: true,
@@ -124,17 +127,6 @@ GoRouter goRouter(GoRouterRef ref) {
                 opaque: false,
                 transitionDuration: Duration.zero,
                 transitionsBuilder: (_, __, ___, child) => child,
-              );
-              return platformPage(
-                key: state.pageKey,
-                fullscreenDialog: true,
-                child: child,
-              );
-              return ref.read(
-                modalTransitionProvider(
-                  key: state.pageKey,
-                  child: child,
-                ),
               );
             },
             routes: [
