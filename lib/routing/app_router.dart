@@ -43,7 +43,7 @@ Page modalTransition(
       child: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: (screenWidth - Breakpoints.modal) / 2,
-          vertical: (screenHeight - 500) / 2,
+          vertical: (screenHeight - 650) / 2,
         ),
         child: ClipRect(
           child: Container(
