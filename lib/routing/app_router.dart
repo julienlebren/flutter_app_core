@@ -68,6 +68,9 @@ Page modalTransition(
   }
 }
 
+const minPaddingTop = 20.0;
+const minModalHeight = 650.0;
+
 class ModalStack extends ConsumerWidget {
   const ModalStack({
     required this.child,
@@ -85,7 +88,17 @@ class ModalStack extends ConsumerWidget {
           orElse: () => false,
         );
     final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
-    print("Keyboard: $isVisible / keyboardHeight: $keyboardHeight");
+    final availableHeight = screenHeight - keyboardHeight;
+    /*final modalHeight = availableHeight > (minModalHeight + minPaddingTop)
+        ? minModalHeight
+        : (availableHeight - minPaddingTop);*/
+
+    final verticalPadding = (screenHeight - 650) / 2;
+    double topPadding = isVisible ? minPaddingTop : verticalPadding;
+    double bottomPadding = isVisible ? 0 : verticalPadding;
+
+    print(
+        "Keyboard: $isVisible / availableHeight: $availableHeight / keyboardHeight: $keyboardHeight");
 
     return Stack(
       children: [
@@ -100,9 +113,11 @@ class ModalStack extends ConsumerWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: (screenWidth - Breakpoints.modal) / 2,
-            vertical: (screenHeight - 650) / 2,
+          padding: EdgeInsets.only(
+            left: (screenWidth - Breakpoints.modal) / 2,
+            right: (screenWidth - Breakpoints.modal) / 2,
+            top: topPadding,
+            bottom: bottomPadding,
           ),
           child: ClipRect(
             child: Container(
