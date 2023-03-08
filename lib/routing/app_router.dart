@@ -68,8 +68,8 @@ Page modalTransition(
   }
 }
 
-const minPaddingTop = 20.0;
-const minModalHeight = 650.0;
+const minPaddingTop = 40.0;
+const maxModalHeight = 650.0;
 
 class ModalStack extends ConsumerWidget {
   const ModalStack({
@@ -89,13 +89,14 @@ class ModalStack extends ConsumerWidget {
         );
     final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
     final availableHeight = screenHeight - keyboardHeight;
-    /*final modalHeight = availableHeight > (minModalHeight + minPaddingTop)
-        ? minModalHeight
-        : (availableHeight - minPaddingTop);*/
+    final modalHeight = availableHeight > (maxModalHeight + minPaddingTop)
+        ? maxModalHeight
+        : (availableHeight - minPaddingTop);
 
-    final verticalPadding = (screenHeight - 650) / 2;
-    double topPadding = isVisible ? minPaddingTop : verticalPadding;
-    double bottomPadding = isVisible ? 0 : verticalPadding;
+    final verticalPadding = (screenHeight - modalHeight) / 2;
+    double topPadding =
+        modalHeight < maxModalHeight ? minPaddingTop : verticalPadding;
+    double bottomPadding = modalHeight < maxModalHeight ? 0 : verticalPadding;
 
     print(
         "Keyboard: $isVisible / availableHeight: $availableHeight / keyboardHeight: $keyboardHeight");
