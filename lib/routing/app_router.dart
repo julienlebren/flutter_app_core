@@ -83,10 +83,12 @@ class ModalStack extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final screenWidth = window.physicalSize.width / window.devicePixelRatio;
     final screenHeight = window.physicalSize.height / window.devicePixelRatio;
-    final isVisible = ref.watch(keyboardVisibilityProvider).maybeWhen(
+
+    ref.watch(keyboardVisibilityProvider).maybeWhen(
           data: (isVisible) => isVisible,
           orElse: () => false,
         );
+
     final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
     final availableHeight = screenHeight - keyboardHeight;
     final modalHeight = availableHeight > (maxModalHeight + minPaddingTop)
@@ -98,9 +100,6 @@ class ModalStack extends ConsumerWidget {
         modalHeight < maxModalHeight ? minPaddingTop : verticalPadding;
     double bottomPadding =
         modalHeight < maxModalHeight ? keyboardHeight : verticalPadding;
-
-    print(
-        "Keyboard: $isVisible / availableHeight: $availableHeight / keyboardHeight: $keyboardHeight");
 
     return Stack(
       children: [
@@ -115,7 +114,7 @@ class ModalStack extends ConsumerWidget {
           ),
         ),
         AnimatedPadding(
-          duration: const Duration(seconds: 2),
+          duration: const Duration(milliseconds: 200),
           curve: Curves.easeInOut,
           padding: EdgeInsets.only(
             left: (screenWidth - Breakpoints.modal) / 2,
