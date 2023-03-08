@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_core/layout_builder/layout_builder.dart';
 import 'package:flutter_app_core/sign_in/sign_in.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -36,36 +37,10 @@ Page modalTransition(
   required Widget child,
 }) {
   final screenWidth = window.physicalSize.width / window.devicePixelRatio;
-  final screenHeight = window.physicalSize.height / window.devicePixelRatio;
   if (screenWidth > Breakpoints.modal) {
     return CustomTransitionPage<void>(
       key: key,
-      child: Stack(
-        children: [
-          SizedBox(
-            width: screenWidth,
-            height: screenHeight,
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-              child: Container(
-                color: Colors.black.withOpacity(0.01),
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: (screenWidth - Breakpoints.modal) / 2,
-              vertical: (screenHeight - 650) / 2,
-            ),
-            child: ClipRect(
-              child: Container(
-                transform: Matrix4.translationValues(0.0, -20.0, 0.0),
-                child: child,
-              ),
-            ),
-          ),
-        ],
-      ),
+      child: ModalStack(child: child),
       barrierDismissible: true,
       barrierColor: Colors.black38,
       opaque: false,
@@ -89,6 +64,53 @@ Page modalTransition(
       key: key,
       fullscreenDialog: true,
       child: child,
+    );
+  }
+}
+
+class ModalStack extends ConsumerWidget {
+  const ModalStack({
+    required this.child,
+    super.key,
+  });
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final screenWidth = window.physicalSize.width / window.devicePixelRatio;
+    final screenHeight = window.physicalSize.height / window.devicePixelRatio;
+    final isVisible = ref.watch(keyboardVisibilityProvider).maybeWhen(
+          data: (isVisible) => isVisible,
+          orElse: () => false,
+        );
+    print("Keyboard: $isVisible");
+
+    return Stack(
+      children: [
+        SizedBox(
+          width: screenWidth,
+          height: screenHeight,
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+            child: Container(
+              color: Colors.black.withOpacity(0.01),
+            ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: (screenWidth - Breakpoints.modal) / 2,
+            vertical: (screenHeight - 650) / 2,
+          ),
+          child: ClipRect(
+            child: Container(
+              transform: Matrix4.translationValues(0.0, -20.0, 0.0),
+              child: child,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -122,15 +144,6 @@ GoRouter goRouter(GoRouterRef ref) {
           ...otherRoutes,
           ShellRoute(
             navigatorKey: _NavigatorKeys.signIn,
-            builder: (context, state, child) {
-              /*final isVisible = ref.watch(keyboardVisibilityProvider).maybeWhen(
-                    data: (isVisible) => isVisible,
-                    orElse: () => false,
-                  );
-              print("Keyboard: $isVisible");*/
-              return Scaffold(
-                  body: child, appBar: AppBar(title: Text("njldsnjsdnjksdc")));
-            },
             pageBuilder: (context, state, child) {
               return ref.read(
                 modalTransitionProvider(
