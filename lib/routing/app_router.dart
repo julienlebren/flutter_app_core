@@ -96,7 +96,8 @@ class ModalStack extends ConsumerWidget {
     final verticalPadding = (screenHeight - modalHeight) / 2;
     double topPadding =
         modalHeight < maxModalHeight ? minPaddingTop : verticalPadding;
-    double bottomPadding = modalHeight < maxModalHeight ? 0 : verticalPadding;
+    double bottomPadding =
+        modalHeight < maxModalHeight ? keyboardHeight : verticalPadding;
 
     print(
         "Keyboard: $isVisible / availableHeight: $availableHeight / keyboardHeight: $keyboardHeight");
