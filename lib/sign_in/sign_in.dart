@@ -92,7 +92,7 @@ Stream<dynamic> userStream(UserStreamRef ref) {
       if (user != null) {
         final userRef = FirebaseFirestore.instance
             .collection(firestoreUserPath)
-            .withConverter<FirestoreUser>(
+            .withConverter<dynamic>(
               fromFirestore: (snapshot, _) {
                 final converter = ref.read(userConverterProvider);
                 final userFromJson = converter(snapshot.data()!);
