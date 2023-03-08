@@ -131,14 +131,14 @@ GoRouter goRouter(GoRouterRef ref) {
               return Scaffold(
                   body: child, appBar: AppBar(title: Text("njldsnjsdnjksdc")));
             },
-            /*pageBuilder: (context, state, child) {
+            pageBuilder: (context, state, child) {
               return ref.read(
                 modalTransitionProvider(
                   key: state.pageKey,
                   child: child,
                 ),
               );
-            },*/
+            },
             routes: [
               GoRoute(
                 path: 'register',
