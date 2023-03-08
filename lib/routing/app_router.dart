@@ -113,7 +113,9 @@ class ModalStack extends ConsumerWidget {
             ),
           ),
         ),
-        Padding(
+        AnimatedPadding(
+          duration: const Duration(seconds: 2),
+          curve: Curves.easeInOut,
           padding: EdgeInsets.only(
             left: (screenWidth - Breakpoints.modal) / 2,
             right: (screenWidth - Breakpoints.modal) / 2,
