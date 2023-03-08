@@ -84,7 +84,8 @@ class ModalStack extends ConsumerWidget {
           data: (isVisible) => isVisible,
           orElse: () => false,
         );
-    print("Keyboard: $isVisible");
+    final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+    print("Keyboard: $isVisible / keyboardHeight: $keyboardHeight");
 
     return Stack(
       children: [
