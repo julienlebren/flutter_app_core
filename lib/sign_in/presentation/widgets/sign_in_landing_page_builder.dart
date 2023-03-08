@@ -8,9 +8,52 @@ class SignInLandingPageBuilder extends ConsumerWidget {
 
   final Widget? child;
 
+  void _pop(BuildContext context) {
+    final navigator = Navigator.of(context, rootNavigator: true);
+    Future.delayed(const Duration(milliseconds: 300), () {
+      navigator.pop();
+    });
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final signInTheme = ref.watch(signInThemeProvider);
+
+    ref.listen<AuthState>(authStateProvider, (
+      previousState,
+      authState,
+    ) {
+      authState.maybeWhen(
+        authed: (_) {
+          previousState?.maybeWhen(
+            needUserInformation: () => _pop(context),
+            orElse: () {
+              final supplier = ref.watch(signInSupplierProvider);
+              if (supplier != null &&
+                  supplier != SignInSupplier.anonymous &&
+                  !supplier.isThirdParty) {
+                _pop(context);
+              }
+            },
+          );
+        },
+        needUserInformation: () {
+          final supplier = ref.watch(signInSupplierProvider);
+          if (supplier != null && !supplier.isThirdParty) {
+            //final navigator = SignInNavigatorKeys.modal.currentState!;
+            //navigator.pushReplacementNamed(SignInRoutes.signInUserInfoPage);
+            context.goNamed(SignInRoute.info.name);
+          } else {
+            Future.delayed(const Duration(milliseconds: 300), () {
+              //final navigator = Navigator.of(context, rootNavigator: true);
+              //navigator.pushNamed(SignInRoutes.signInUserInfoPage, arguments: true);
+              context.pushNamed(SignInRoute.info.name);
+            });
+          }
+        },
+        orElse: () => null,
+      );
+    });
 
     return AnnotatedRegion<SystemUiMode>(
       value: SystemUiMode.edgeToEdge,
