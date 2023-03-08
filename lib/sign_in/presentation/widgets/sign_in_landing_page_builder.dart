@@ -23,6 +23,7 @@ class SignInLandingPageBuilder extends ConsumerWidget {
       previousState,
       authState,
     ) {
+      print("authState: $authState");
       authState.maybeWhen(
         authed: (_) {
           previousState?.maybeWhen(
