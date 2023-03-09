@@ -152,7 +152,6 @@ GoRouter goRouter(GoRouterRef ref) {
           return NoTransitionPage(child: mainRoute.builder!(context, state));
         },
         routes: [
-          ...mainRoute.routes,
           ShellRoute(
             navigatorKey: _NavigatorKeys.signIn,
             pageBuilder: (context, state, child) {
