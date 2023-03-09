@@ -6,21 +6,21 @@ part of 'app_router.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$routesHash() => r'bf0790dc2ca3525e75ebbad0ddd87bce9dc85ca0';
+String _$mainRouteHash() => r'6b207e53d51e8998a9f43747e1ac94cc0a3335e2';
 
-/// See also [routes].
-@ProviderFor(routes)
-final routesProvider = Provider<List<GoRoute>>.internal(
-  routes,
-  name: r'routesProvider',
+/// See also [mainRoute].
+@ProviderFor(mainRoute)
+final mainRouteProvider = Provider<GoRoute>.internal(
+  mainRoute,
+  name: r'mainRouteProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$routesHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$mainRouteHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef RoutesRef = ProviderRef<List<GoRoute>>;
-String _$modalTransitionHash() => r'a58bc3847729a8721c894b8a941f424147e49731';
+typedef MainRouteRef = ProviderRef<GoRoute>;
+String _$modalTransitionHash() => r'ab125e02268f7ffbea254bf13378a55605e023e8';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -133,7 +133,7 @@ class ModalTransitionProvider extends AutoDisposeProvider<Page<dynamic>> {
   }
 }
 
-String _$goRouterHash() => r'8d5262a9a085e5465f35bef531bf6341505cb627';
+String _$goRouterHash() => r'5822f07593ef416e1fe299f40e1a217ad1e3e2c3';
 
 /// See also [goRouter].
 @ProviderFor(goRouter)

@@ -85,7 +85,7 @@ final keyboardVisibilityProvider = StreamProvider<bool>.internal(
 );
 
 typedef KeyboardVisibilityRef = StreamProviderRef<bool>;
-String _$userStreamHash() => r'16f983b2e905d3bf620c7b5774d4e1fb2a0dc913';
+String _$userStreamHash() => r'9e592484a813f468d9080fce4eebc66c61a0ce3b';
 
 /// A provider for listening changed to the Firestore user object
 /// Only intended to return a correct [AuthState], not to get custom properties
@@ -103,7 +103,7 @@ final userStreamProvider = StreamProvider<dynamic>.internal(
 );
 
 typedef UserStreamRef = StreamProviderRef<dynamic>;
-String _$authStateHash() => r'5c23d931f0299e4cfa6031cf1e036fb40e36d91f';
+String _$authStateHash() => r'c94990f0e9ecfd226717912eb59ace4c15a242d8';
 
 /// The provider for the [AuthState] of the app
 /// Watches the authStateChanges of the Firebase auth stream,

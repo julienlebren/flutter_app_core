@@ -26,9 +26,8 @@ enum SignInRoute {
 }
 
 @Riverpod(keepAlive: true)
-List<GoRoute> routes(RoutesRef ref) {
-  return [];
-}
+GoRoute mainRoute(MainRouteRef ref) => throw Exception(
+    "Unable to find a route with path '/', did you override goRouterProvider in the root ProviderScope?");
 
 @riverpod
 Page modalTransition(
@@ -137,15 +136,8 @@ class ModalStack extends ConsumerWidget {
 @Riverpod(keepAlive: true)
 // ignore: unsupported_provider_value
 GoRouter goRouter(GoRouterRef ref) {
-  final routes = ref.watch(routesProvider);
-  final mainRoute = routes.firstWhere(
-    (route) => route.path == '/',
-    orElse: () {
-      throw Exception(
-          "Unable to find a route with path '/', did you override goRouterProvider in the root ProviderScope?");
-    },
-  );
-  final otherRoutes = routes.where((route) => route.path != '/');
+  final mainRoute = ref.watch(mainRouteProvider);
+  final authSplashState = ref.watch(authSplashProvider);
 
   return GoRouter(
     navigatorKey: _NavigatorKeys.root,
@@ -159,59 +151,62 @@ GoRouter goRouter(GoRouterRef ref) {
         pageBuilder: (context, state) {
           return NoTransitionPage(child: mainRoute.builder!(context, state));
         },
-        routes: [
-          ...otherRoutes,
-          ShellRoute(
-            navigatorKey: _NavigatorKeys.signIn,
-            pageBuilder: (context, state, child) {
-              return ref.read(
-                modalTransitionProvider(
-                  key: state.pageKey,
-                  child: child,
+        routes: authSplashState.maybeWhen(
+          authed: () => mainRoute.routes,
+          orElse: () => [
+            ShellRoute(
+              navigatorKey: _NavigatorKeys.signIn,
+              pageBuilder: (context, state, child) {
+                return ref.read(
+                  modalTransitionProvider(
+                    key: state.pageKey,
+                    child: child,
+                  ),
+                );
+              },
+              routes: [
+                GoRoute(
+                  path: 'register',
+                  name: SignInRoute.emailRegister.name,
+                  builder: (_, __) => const SignInEmailRegisterPage(),
                 ),
-              );
-            },
-            routes: [
-              GoRoute(
-                path: 'register',
-                name: SignInRoute.emailRegister.name,
-                builder: (_, __) => const SignInEmailRegisterPage(),
-              ),
-              GoRoute(
-                path: 'login',
-                name: SignInRoute.emailLogin.name,
-                builder: (_, __) => const SignInEmailLoginPage(),
-              ),
-              GoRoute(
-                path: 'reset',
-                name: SignInRoute.emailReset.name,
-                builder: (_, __) => const SignInEmailResetPage(),
-              ),
-              GoRoute(
-                path: 'phone',
-                name: SignInRoute.phoneLogin.name,
-                builder: (_, __) => const SignInPhonePage(),
-              ),
-              GoRoute(
-                path: 'verification',
-                name: SignInRoute.phoneVerification.name,
-                builder: (_, __) => const SignInPhoneVerificationPage(),
-              ),
-              GoRoute(
-                path: 'countries',
-                name: SignInRoute.countries.name,
-                pageBuilder: (context, state) {
-                  return ref.read(
-                    modalTransitionProvider(
-                      key: state.pageKey,
-                      child: const CountriesPage(),
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
-        ],
+                GoRoute(
+                  path: 'login',
+                  name: SignInRoute.emailLogin.name,
+                  builder: (_, __) => const SignInEmailLoginPage(),
+                ),
+                GoRoute(
+                  path: 'reset',
+                  name: SignInRoute.emailReset.name,
+                  builder: (_, __) => const SignInEmailResetPage(),
+                ),
+                GoRoute(
+                  path: 'phone',
+                  name: SignInRoute.phoneLogin.name,
+                  builder: (_, __) => const SignInPhonePage(),
+                ),
+                GoRoute(
+                  path: 'verification',
+                  name: SignInRoute.phoneVerification.name,
+                  builder: (_, __) => const SignInPhoneVerificationPage(),
+                ),
+                GoRoute(
+                  path: 'countries',
+                  name: SignInRoute.countries.name,
+                  pageBuilder: (context, state) {
+                    return ref.read(
+                      modalTransitionProvider(
+                        key: state.pageKey,
+                        child: const CountriesPage(),
+                      ),
+                    );
+                  },
+                ),
+                ...mainRoute.routes,
+              ],
+            ),
+          ],
+        ),
       ),
     ],
     //errorBuilder: (context, state) => const NotFoundScreen(),
