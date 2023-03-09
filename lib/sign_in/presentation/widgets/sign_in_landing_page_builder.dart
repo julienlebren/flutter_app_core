@@ -41,10 +41,12 @@ class SignInLandingPageBuilder extends ConsumerWidget {
         needUserInformation: () {
           final supplier = ref.watch(signInSupplierProvider);
           if (supplier != null && !supplier.isThirdParty) {
+            print("here");
             //final navigator = SignInNavigatorKeys.modal.currentState!;
             //navigator.pushReplacementNamed(SignInRoutes.signInUserInfoPage);
             context.goNamed(SignInRoute.info.name);
           } else {
+            print("or here");
             Future.delayed(const Duration(milliseconds: 300), () {
               //final navigator = Navigator.of(context, rootNavigator: true);
               //navigator.pushNamed(SignInRoutes.signInUserInfoPage, arguments: true);
