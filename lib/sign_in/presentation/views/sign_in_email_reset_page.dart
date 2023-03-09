@@ -30,10 +30,7 @@ class SignInEmailResetPage extends ConsumerWidget {
           actions: [
             PlatformDialogAction(
               buttonText: MaterialLocalizations.of(context).okButtonLabel,
-              onPressed: () {
-                final navigator = SignInNavigatorKeys.modal.currentState!;
-                navigator.pop();
-              },
+              onPressed: () => context.pop(),
             ),
           ],
           displayCancelButton: false,
