@@ -130,13 +130,11 @@ AuthState authState(AuthStateRef ref) {
     loading: () => const AuthState.initializing(),
     error: (error, _) => AuthState.error(error.toString()),
     data: (firebaseUser) {
-      print("firebaseUser: $firebaseUser");
       if (firebaseUser == null) {
         return const AuthState.notAuthed();
       } else {
         final isSigninIn = ref.watch(signInSupplierProvider) != null;
         final user = ref.watch(userStreamProvider);
-        print("user: $user");
         return user.when(
           loading: () {
             if (isSigninIn) {
