@@ -13,7 +13,7 @@ class ModalNavigator extends ConsumerWidget {
     return Navigator(
       key: key,
       initialRoute: routeName,
-      onGenerateRoute: ref.read(routeProvider),
+      //onGenerateRoute: ref.read(routeProvider),
     );
   }
 }

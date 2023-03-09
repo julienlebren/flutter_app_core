@@ -111,11 +111,11 @@ bool isTablet() {
 class UnsupportedPlatformException implements Exception {
   UnsupportedPlatformException();
 }
-
+/*
 final routeProvider = Provider<RouteFactory>((_) {
   throw UnimplementedError();
 });
-
+*/
 mixin FormElement {}
 
 /// The provider of the [AppTheme]
