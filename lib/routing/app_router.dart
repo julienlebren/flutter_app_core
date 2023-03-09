@@ -137,7 +137,7 @@ class ModalStack extends ConsumerWidget {
 // ignore: unsupported_provider_value
 GoRouter goRouter(GoRouterRef ref) {
   final mainRoute = ref.watch(routeProvider);
-  final authSplashState = ref.watch(authSplashProvider);
+  //final authSplashState = ref.watch(authSplashProvider);
 
   return GoRouter(
     navigatorKey: _NavigatorKeys.root,
@@ -151,62 +151,60 @@ GoRouter goRouter(GoRouterRef ref) {
         pageBuilder: (context, state) {
           return NoTransitionPage(child: mainRoute.builder!(context, state));
         },
-        routes: authSplashState.maybeWhen(
-          authed: () => mainRoute.routes,
-          orElse: () => [
-            ShellRoute(
-              navigatorKey: _NavigatorKeys.signIn,
-              pageBuilder: (context, state, child) {
-                return ref.read(
-                  modalTransitionProvider(
-                    key: state.pageKey,
-                    child: child,
-                  ),
-                );
-              },
-              routes: [
-                GoRoute(
-                  path: 'register',
-                  name: SignInRoute.emailRegister.name,
-                  builder: (_, __) => const SignInEmailRegisterPage(),
+        routes: [
+          ...mainRoute.routes,
+          ShellRoute(
+            navigatorKey: _NavigatorKeys.signIn,
+            pageBuilder: (context, state, child) {
+              return ref.read(
+                modalTransitionProvider(
+                  key: state.pageKey,
+                  child: child,
                 ),
-                GoRoute(
-                  path: 'login',
-                  name: SignInRoute.emailLogin.name,
-                  builder: (_, __) => const SignInEmailLoginPage(),
-                ),
-                GoRoute(
-                  path: 'reset',
-                  name: SignInRoute.emailReset.name,
-                  builder: (_, __) => const SignInEmailResetPage(),
-                ),
-                GoRoute(
-                  path: 'phone',
-                  name: SignInRoute.phoneLogin.name,
-                  builder: (_, __) => const SignInPhonePage(),
-                ),
-                GoRoute(
-                  path: 'verification',
-                  name: SignInRoute.phoneVerification.name,
-                  builder: (_, __) => const SignInPhoneVerificationPage(),
-                ),
-                GoRoute(
-                  path: 'countries',
-                  name: SignInRoute.countries.name,
-                  pageBuilder: (context, state) {
-                    return ref.read(
-                      modalTransitionProvider(
-                        key: state.pageKey,
-                        child: const CountriesPage(),
-                      ),
-                    );
-                  },
-                ),
-                ...mainRoute.routes,
-              ],
-            ),
-          ],
-        ),
+              );
+            },
+            routes: [
+              GoRoute(
+                path: 'register',
+                name: SignInRoute.emailRegister.name,
+                builder: (_, __) => const SignInEmailRegisterPage(),
+              ),
+              GoRoute(
+                path: 'login',
+                name: SignInRoute.emailLogin.name,
+                builder: (_, __) => const SignInEmailLoginPage(),
+              ),
+              GoRoute(
+                path: 'reset',
+                name: SignInRoute.emailReset.name,
+                builder: (_, __) => const SignInEmailResetPage(),
+              ),
+              GoRoute(
+                path: 'phone',
+                name: SignInRoute.phoneLogin.name,
+                builder: (_, __) => const SignInPhonePage(),
+              ),
+              GoRoute(
+                path: 'verification',
+                name: SignInRoute.phoneVerification.name,
+                builder: (_, __) => const SignInPhoneVerificationPage(),
+              ),
+              GoRoute(
+                path: 'countries',
+                name: SignInRoute.countries.name,
+                pageBuilder: (context, state) {
+                  return ref.read(
+                    modalTransitionProvider(
+                      key: state.pageKey,
+                      child: const CountriesPage(),
+                    ),
+                  );
+                },
+              ),
+              ...mainRoute.routes,
+            ],
+          ),
+        ],
       ),
     ],
     //errorBuilder: (context, state) => const NotFoundScreen(),
