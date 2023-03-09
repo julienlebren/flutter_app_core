@@ -16,7 +16,6 @@ class SignInLandingPageBuilder extends ConsumerWidget {
       previousState,
       authState,
     ) {
-      print("authState: $authState");
       authState.maybeWhen(
         needUserInformation: () {
           Future.delayed(const Duration(milliseconds: 300), () {
@@ -27,57 +26,50 @@ class SignInLandingPageBuilder extends ConsumerWidget {
       );
     });
 
-    return AnnotatedRegion<SystemUiMode>(
-      value: SystemUiMode.edgeToEdge,
-      child: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle(
-          statusBarBrightness: signInTheme.scaffoldBackgroundColor.brightness,
-          statusBarColor: Colors.transparent,
-          statusBarIconBrightness:
-              signInTheme.scaffoldBackgroundColor.invertedBrightness,
-          systemNavigationBarColor: signInTheme.scaffoldBackgroundColor,
-          systemNavigationBarIconBrightness:
-              signInTheme.scaffoldBackgroundColor.invertedBrightness,
-        ),
-        child: SafeArea(
-          top: false,
-          bottom: false,
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: signInTheme.scaffoldBackgroundColor,
-              image: signInTheme.backgroundImage != null
-                  ? DecorationImage(
-                      image: AssetImage(signInTheme.backgroundImage!),
-                      fit: BoxFit.cover,
-                    )
-                  : null,
-            ),
-            child: Scaffold(
-              backgroundColor: Colors.transparent,
-              body: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                  child: child,
+    final authSplashState = ref.watch(authSplashProvider);
+
+    return authSplashState.maybeWhen(
+        initializing: () => const ScaffoldLoader(),
+        orElse: () {
+          return AnnotatedRegion<SystemUiMode>(
+            value: SystemUiMode.edgeToEdge,
+            child: AnnotatedRegion<SystemUiOverlayStyle>(
+              value: SystemUiOverlayStyle(
+                statusBarBrightness:
+                    signInTheme.scaffoldBackgroundColor.brightness,
+                statusBarColor: Colors.transparent,
+                statusBarIconBrightness:
+                    signInTheme.scaffoldBackgroundColor.invertedBrightness,
+                systemNavigationBarColor: signInTheme.scaffoldBackgroundColor,
+                systemNavigationBarIconBrightness:
+                    signInTheme.scaffoldBackgroundColor.invertedBrightness,
+              ),
+              child: SafeArea(
+                top: false,
+                bottom: false,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: signInTheme.scaffoldBackgroundColor,
+                    image: signInTheme.backgroundImage != null
+                        ? DecorationImage(
+                            image: AssetImage(signInTheme.backgroundImage!),
+                            fit: BoxFit.cover,
+                          )
+                        : null,
+                  ),
+                  child: Scaffold(
+                    backgroundColor: Colors.transparent,
+                    body: SafeArea(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                        child: child,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class SignInDivider extends ConsumerWidget {
-  const SignInDivider({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(signInThemeProvider);
-
-    return Container(
-      color: theme.dividerColor,
-      height: 0.5,
-    );
+          );
+        });
   }
 }
