@@ -3,7 +3,7 @@ part of sign_in;
 /// The main Scaffold of a page displayed within the sign)in journey
 /// It uses a [PlatformScaffold] which returns the right Scaffold
 /// depending on the platform.
-class SignInPageBuilder extends StatelessWidget {
+class SignInPageBuilder extends ConsumerWidget {
   const SignInPageBuilder({
     Key? key,
     required this.title,
@@ -24,7 +24,7 @@ class SignInPageBuilder extends StatelessWidget {
   final String? errorText;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SignInScaffold(
       appBar: PlatformNavigationBar(
         leading: leadingButton,

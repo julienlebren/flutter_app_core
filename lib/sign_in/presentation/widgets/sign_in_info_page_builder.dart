@@ -1,12 +1,25 @@
 part of sign_in;
 
-class SignInInfoPageBuilder extends ConsumerWidget {
+class SignInInfoPageBuilder extends SignInPageBuilder {
   const SignInInfoPageBuilder({
     Key? key,
-    required this.child,
-  }) : super(key: key);
-
-  final Widget child;
+    required String title,
+    String? subtitle,
+    Widget? leadingButton,
+    required Widget child,
+    Widget? submitButton,
+    bool isLoading = false,
+    String? errorText,
+  }) : super(
+          key: key,
+          title: title,
+          subtitle: subtitle,
+          leadingButton: leadingButton,
+          child: child,
+          submitButton: submitButton,
+          isLoading: isLoading,
+          errorText: errorText,
+        );
 
   void _pop(BuildContext context) {
     final navigator = Navigator.of(context, rootNavigator: true);
@@ -15,7 +28,7 @@ class SignInInfoPageBuilder extends ConsumerWidget {
     });
   }
 
-  @override
+@override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen<AuthState>(authStateProvider, (
       previousState,
@@ -39,6 +52,6 @@ class SignInInfoPageBuilder extends ConsumerWidget {
       );
     });
 
-    return child;
+    return super.build(context, ref);
   }
 }
