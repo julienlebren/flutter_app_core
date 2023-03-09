@@ -8,13 +8,6 @@ class SignInLandingPageBuilder extends ConsumerWidget {
 
   final Widget? child;
 
-  void _pop(BuildContext context) {
-    final navigator = Navigator.of(context, rootNavigator: true);
-    Future.delayed(const Duration(milliseconds: 300), () {
-      navigator.pop();
-    });
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final signInTheme = ref.watch(signInThemeProvider);
@@ -25,19 +18,6 @@ class SignInLandingPageBuilder extends ConsumerWidget {
     ) {
       print("authState: $authState");
       authState.maybeWhen(
-        authed: (_) {
-          previousState?.maybeWhen(
-            needUserInformation: () => _pop(context),
-            orElse: () {
-              final supplier = ref.watch(signInSupplierProvider);
-              if (supplier != null &&
-                  supplier != SignInSupplier.anonymous &&
-                  !supplier.isThirdParty) {
-                _pop(context);
-              }
-            },
-          );
-        },
         needUserInformation: () {
           Future.delayed(const Duration(milliseconds: 300), () {
             context.goNamed(SignInRoute.info.name);
