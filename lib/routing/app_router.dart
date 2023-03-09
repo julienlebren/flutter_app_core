@@ -26,7 +26,7 @@ enum SignInRoute {
 }
 
 @Riverpod(keepAlive: true)
-GoRoute mainRoute(MainRouteRef ref) => throw Exception(
+GoRoute route(RouteRef ref) => throw Exception(
     "Unable to find a route with path '/', did you override goRouterProvider in the root ProviderScope?");
 
 @riverpod
@@ -136,7 +136,7 @@ class ModalStack extends ConsumerWidget {
 @Riverpod(keepAlive: true)
 // ignore: unsupported_provider_value
 GoRouter goRouter(GoRouterRef ref) {
-  final mainRoute = ref.watch(mainRouteProvider);
+  final mainRoute = ref.watch(routeProvider);
   final authSplashState = ref.watch(authSplashProvider);
 
   return GoRouter(
