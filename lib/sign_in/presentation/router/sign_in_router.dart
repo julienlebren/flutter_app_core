@@ -24,7 +24,6 @@ class SignInRoutes {
   static const signInPhoneVerificationPage = 'sign-in/phone/verification';
   static const signInCountriesPage = 'sign-in/countries';
   static const signInUserInfoPage = 'sign-in/info';
-  static const signInUnknownPage = 'sign-in/unknown';
 }
 
 class SignInRouter {
