@@ -16,6 +16,7 @@ class SignInLandingPageBuilder extends ConsumerWidget {
       previousState,
       authState,
     ) {
+      print("authState: $authState");
       authState.maybeWhen(
         needUserInformation: () {
           Future.delayed(const Duration(milliseconds: 300), () {
