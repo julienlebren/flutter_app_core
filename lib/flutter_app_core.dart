@@ -30,6 +30,7 @@ export 'package:google_fonts/google_fonts.dart';
 export 'package:go_router/go_router.dart';
 export 'package:intl/intl.dart';
 export 'package:json_annotation/json_annotation.dart';
+export 'package:path_provider/path_provider.dart';
 export 'package:riverpod_annotation/riverpod_annotation.dart';
 export 'package:stack_trace/stack_trace.dart';
 export 'package:url_launcher/url_launcher.dart';
