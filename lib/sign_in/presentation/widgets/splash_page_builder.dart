@@ -38,7 +38,7 @@ class SplashPageBuilder extends ConsumerWidget {
           );
         },
         needUserInformation: () {
-          Future.delayed(const Duration(milliseconds: 3000), () {
+          Future.delayed(const Duration(milliseconds: 300), () {
             context.goNamed(SignInRoute.info.name);
           });
         },
