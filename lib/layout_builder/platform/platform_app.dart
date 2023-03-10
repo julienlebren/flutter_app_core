@@ -26,7 +26,7 @@ class PlatformApp
   @override
   MaterialApp createMaterialWidget(BuildContext context, WidgetRef ref) {
     final materialTheme = ref.watch(materialThemeProvider);
-    final goRouter = ref.watch(goRouterProvider);
+    final goRouter = ref.watch(goRouterProvider());
     return MaterialApp.router(
       routerConfig: goRouter,
       locale: locale,
@@ -59,7 +59,7 @@ class PlatformApp
   @override
   CupertinoApp createCupertinoWidget(BuildContext context, WidgetRef ref) {
     final cupertinoTheme = ref.watch(cupertinoThemeProvider);
-    final goRouter = ref.watch(goRouterProvider);
+    final goRouter = ref.watch(goRouterProvider());
     return CupertinoApp.router(
       routerConfig: goRouter,
       locale: locale,
