@@ -103,7 +103,7 @@ final userStreamProvider = StreamProvider<dynamic>.internal(
 );
 
 typedef UserStreamRef = StreamProviderRef<dynamic>;
-String _$authStateHash() => r'c94990f0e9ecfd226717912eb59ace4c15a242d8';
+String _$authStateHash() => r'5c23d931f0299e4cfa6031cf1e036fb40e36d91f';
 
 /// The provider for the [AuthState] of the app
 /// Watches the authStateChanges of the Firebase auth stream,

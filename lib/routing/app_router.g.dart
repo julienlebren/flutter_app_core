@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'app_router.dart';
+part of app_router;
 
 // **************************************************************************
 // RiverpodGenerator
@@ -133,18 +133,85 @@ class ModalTransitionProvider extends AutoDisposeProvider<Page<dynamic>> {
   }
 }
 
-String _$goRouterHash() => r'217cfaf41d3ff2944e63ae66c4f77796d572e9f1';
+String _$goRouterHash() => r'6f59baef29e902bf675668dcdde860ebece93541';
+typedef GoRouterRef = ProviderRef<GoRouter>;
 
 /// See also [goRouter].
 @ProviderFor(goRouter)
-final goRouterProvider = Provider<GoRouter>.internal(
-  goRouter,
-  name: r'goRouterProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$goRouterHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const goRouterProvider = GoRouterFamily();
 
-typedef GoRouterRef = ProviderRef<GoRouter>;
+/// See also [goRouter].
+class GoRouterFamily extends Family<GoRouter> {
+  /// See also [goRouter].
+  const GoRouterFamily();
+
+  /// See also [goRouter].
+  GoRouterProvider call({
+    String initialLocation = '/',
+  }) {
+    return GoRouterProvider(
+      initialLocation: initialLocation,
+    );
+  }
+
+  @override
+  GoRouterProvider getProviderOverride(
+    covariant GoRouterProvider provider,
+  ) {
+    return call(
+      initialLocation: provider.initialLocation,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'goRouterProvider';
+}
+
+/// See also [goRouter].
+class GoRouterProvider extends Provider<GoRouter> {
+  /// See also [goRouter].
+  GoRouterProvider({
+    this.initialLocation = '/',
+  }) : super.internal(
+          (ref) => goRouter(
+            ref,
+            initialLocation: initialLocation,
+          ),
+          from: goRouterProvider,
+          name: r'goRouterProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$goRouterHash,
+          dependencies: GoRouterFamily._dependencies,
+          allTransitiveDependencies: GoRouterFamily._allTransitiveDependencies,
+        );
+
+  final String initialLocation;
+
+  @override
+  bool operator ==(Object other) {
+    return other is GoRouterProvider &&
+        other.initialLocation == initialLocation;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, initialLocation.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
