@@ -110,16 +110,15 @@ GoRouter goRouter(
                 builder: (_, __) => const SignInEmailRegisterPage(),
               ),
               GoRoute(
-                  path: 'login',
-                  name: SignInRoute.emailLogin.name,
-                  builder: (_, __) => const SignInEmailLoginPage(),
-                  routes: [
-                    GoRoute(
-                      path: 'reset',
-                      name: SignInRoute.emailReset.name,
-                      builder: (_, __) => const SignInEmailResetPage(),
-                    ),
-                  ]),
+                path: 'login',
+                name: SignInRoute.emailLogin.name,
+                builder: (_, __) => const SignInEmailLoginPage(),
+              ),
+              GoRoute(
+                path: 'reset',
+                name: SignInRoute.emailReset.name,
+                builder: (_, __) => const SignInEmailResetPage(),
+              ),
               GoRoute(
                 path: 'phone',
                 name: SignInRoute.phoneLogin.name,
