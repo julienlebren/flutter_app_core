@@ -123,7 +123,9 @@ class ModalStack extends ConsumerWidget {
           ),
           child: ClipRect(
             child: Container(
-              transform: Matrix4.translationValues(0.0, -20.0, 0.0),
+              transform: isCupertino()
+                  ? Matrix4.translationValues(0.0, -20.0, 0.0)
+                  : null,
               child: child,
             ),
           ),

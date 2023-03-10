@@ -1,6 +1,6 @@
 name: flutter_app_core
 description: Reusable methods and widgets for building apps 
-version: 1.4.0+2
+version: 1.5.0
 homepage:
 
 environment:
@@ -12,15 +12,15 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  cloud_firestore: ^4.3.2
-  cloud_functions: ^4.0.8
+  cloud_firestore: ^4.4.3
+  cloud_functions: ^4.0.12
   cupertino_icons: ^1.0.5
   dio: ^4.0.6
   firebase_analytics: ^10.1.0
-  firebase_auth: ^4.2.6
-  firebase_core: ^2.4.1
-  firebase_core_web: ^2.1.0
-  firebase_crashlytics: ^3.0.10
+  firebase_auth: ^4.2.10
+  firebase_core: ^2.7.1
+  firebase_core_web: ^2.2.2
+  firebase_crashlytics: ^3.0.16
   firebase_dynamic_links: ^5.0.11 
   firebase_messaging: ^14.2.2
   firebase_storage: ^11.0.11
