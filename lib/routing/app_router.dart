@@ -9,7 +9,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_router.g.dart';
 
-class _NavigatorKeys {
+class NavigatorKeys {
   static final root = GlobalKey<NavigatorState>();
   static final signIn = GlobalKey<NavigatorState>();
 }
@@ -140,20 +140,20 @@ GoRouter goRouter(GoRouterRef ref) {
   //final authSplashState = ref.watch(authSplashProvider);
 
   return GoRouter(
-    navigatorKey: _NavigatorKeys.root,
+    navigatorKey: NavigatorKeys.root,
     initialLocation: '/',
     debugLogDiagnostics: false,
     routes: [
       GoRoute(
         path: '/',
         name: SignInRoute.landing.name,
-        parentNavigatorKey: _NavigatorKeys.root,
+        parentNavigatorKey: NavigatorKeys.root,
         pageBuilder: (context, state) {
           return NoTransitionPage(child: mainRoute.builder!(context, state));
         },
         routes: [
           ShellRoute(
-            navigatorKey: _NavigatorKeys.signIn,
+            navigatorKey: NavigatorKeys.signIn,
             pageBuilder: (context, state, child) {
               return ref.read(
                 modalTransitionProvider(
