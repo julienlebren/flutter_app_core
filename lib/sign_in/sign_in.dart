@@ -52,6 +52,7 @@ part 'presentation/widgets/sign_in_divider.dart';
 part 'presentation/widgets/sign_in_landing_page_builder.dart';
 part 'presentation/widgets/sign_in_page_builder.dart';
 part 'presentation/widgets/sign_in_tappable_field.dart';
+part 'presentation/widgets/splash_page_builder.dart';
 
 part 'sign_in.freezed.dart';
 part 'sign_in.g.dart';

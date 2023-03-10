@@ -1,6 +1,6 @@
 name: flutter_app_core
 description: Reusable methods and widgets for building apps 
-version: 1.3.0+4
+version: 1.4.0
 homepage:
 
 environment:
