@@ -25,7 +25,6 @@ class SplashPageBuilder extends ConsumerWidget {
       previousState,
       authState,
     ) {
-      print("authState: $authState");
       authState.maybeWhen(
         authed: (_) {
           previousState?.maybeWhen(
@@ -39,7 +38,7 @@ class SplashPageBuilder extends ConsumerWidget {
           );
         },
         needUserInformation: () {
-          Future.delayed(const Duration(milliseconds: 300), () {
+          Future.delayed(const Duration(milliseconds: 3000), () {
             context.goNamed(SignInRoute.info.name);
           });
         },
