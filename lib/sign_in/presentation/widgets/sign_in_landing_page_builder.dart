@@ -12,8 +12,6 @@ class SignInLandingPageBuilder extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final signInTheme = ref.watch(signInThemeProvider);
 
-    final authSplashState = ref.watch(authSplashProvider);
-
     return AnnotatedRegion<SystemUiMode>(
       value: SystemUiMode.edgeToEdge,
       child: AnnotatedRegion<SystemUiOverlayStyle>(
