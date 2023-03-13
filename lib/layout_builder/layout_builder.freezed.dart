@@ -19,7 +19,8 @@ mixin _$TabItem {
   String get title => throw _privateConstructorUsedError;
   Widget get icon => throw _privateConstructorUsedError;
   Widget? get selectedIcon => throw _privateConstructorUsedError;
-  PlatformTabNavigator get router => throw _privateConstructorUsedError;
+  PlatformTabNavigator? get router => throw _privateConstructorUsedError;
+  String? get initialLocation => throw _privateConstructorUsedError;
   bool? get popToFirstRoute => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -35,7 +36,8 @@ abstract class $TabItemCopyWith<$Res> {
       {String title,
       Widget icon,
       Widget? selectedIcon,
-      PlatformTabNavigator router,
+      PlatformTabNavigator? router,
+      String? initialLocation,
       bool? popToFirstRoute});
 }
 
@@ -55,7 +57,8 @@ class _$TabItemCopyWithImpl<$Res, $Val extends TabItem>
     Object? title = null,
     Object? icon = null,
     Object? selectedIcon = freezed,
-    Object? router = null,
+    Object? router = freezed,
+    Object? initialLocation = freezed,
     Object? popToFirstRoute = freezed,
   }) {
     return _then(_value.copyWith(
@@ -71,10 +74,14 @@ class _$TabItemCopyWithImpl<$Res, $Val extends TabItem>
           ? _value.selectedIcon
           : selectedIcon // ignore: cast_nullable_to_non_nullable
               as Widget?,
-      router: null == router
+      router: freezed == router
           ? _value.router
           : router // ignore: cast_nullable_to_non_nullable
-              as PlatformTabNavigator,
+              as PlatformTabNavigator?,
+      initialLocation: freezed == initialLocation
+          ? _value.initialLocation
+          : initialLocation // ignore: cast_nullable_to_non_nullable
+              as String?,
       popToFirstRoute: freezed == popToFirstRoute
           ? _value.popToFirstRoute
           : popToFirstRoute // ignore: cast_nullable_to_non_nullable
@@ -94,7 +101,8 @@ abstract class _$$_TabItemCopyWith<$Res> implements $TabItemCopyWith<$Res> {
       {String title,
       Widget icon,
       Widget? selectedIcon,
-      PlatformTabNavigator router,
+      PlatformTabNavigator? router,
+      String? initialLocation,
       bool? popToFirstRoute});
 }
 
@@ -111,7 +119,8 @@ class __$$_TabItemCopyWithImpl<$Res>
     Object? title = null,
     Object? icon = null,
     Object? selectedIcon = freezed,
-    Object? router = null,
+    Object? router = freezed,
+    Object? initialLocation = freezed,
     Object? popToFirstRoute = freezed,
   }) {
     return _then(_$_TabItem(
@@ -127,10 +136,14 @@ class __$$_TabItemCopyWithImpl<$Res>
           ? _value.selectedIcon
           : selectedIcon // ignore: cast_nullable_to_non_nullable
               as Widget?,
-      router: null == router
+      router: freezed == router
           ? _value.router
           : router // ignore: cast_nullable_to_non_nullable
-              as PlatformTabNavigator,
+              as PlatformTabNavigator?,
+      initialLocation: freezed == initialLocation
+          ? _value.initialLocation
+          : initialLocation // ignore: cast_nullable_to_non_nullable
+              as String?,
       popToFirstRoute: freezed == popToFirstRoute
           ? _value.popToFirstRoute
           : popToFirstRoute // ignore: cast_nullable_to_non_nullable
@@ -146,7 +159,8 @@ class _$_TabItem implements _TabItem {
       {required this.title,
       required this.icon,
       this.selectedIcon,
-      required this.router,
+      this.router,
+      this.initialLocation,
       this.popToFirstRoute = false});
 
   @override
@@ -156,14 +170,16 @@ class _$_TabItem implements _TabItem {
   @override
   final Widget? selectedIcon;
   @override
-  final PlatformTabNavigator router;
+  final PlatformTabNavigator? router;
+  @override
+  final String? initialLocation;
   @override
   @JsonKey()
   final bool? popToFirstRoute;
 
   @override
   String toString() {
-    return 'TabItem(title: $title, icon: $icon, selectedIcon: $selectedIcon, router: $router, popToFirstRoute: $popToFirstRoute)';
+    return 'TabItem(title: $title, icon: $icon, selectedIcon: $selectedIcon, router: $router, initialLocation: $initialLocation, popToFirstRoute: $popToFirstRoute)';
   }
 
   @override
@@ -176,13 +192,15 @@ class _$_TabItem implements _TabItem {
             (identical(other.selectedIcon, selectedIcon) ||
                 other.selectedIcon == selectedIcon) &&
             (identical(other.router, router) || other.router == router) &&
+            (identical(other.initialLocation, initialLocation) ||
+                other.initialLocation == initialLocation) &&
             (identical(other.popToFirstRoute, popToFirstRoute) ||
                 other.popToFirstRoute == popToFirstRoute));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, title, icon, selectedIcon, router, popToFirstRoute);
+  int get hashCode => Object.hash(runtimeType, title, icon, selectedIcon,
+      router, initialLocation, popToFirstRoute);
 
   @JsonKey(ignore: true)
   @override
@@ -196,7 +214,8 @@ abstract class _TabItem implements TabItem {
       {required final String title,
       required final Widget icon,
       final Widget? selectedIcon,
-      required final PlatformTabNavigator router,
+      final PlatformTabNavigator? router,
+      final String? initialLocation,
       final bool? popToFirstRoute}) = _$_TabItem;
 
   @override
@@ -206,7 +225,9 @@ abstract class _TabItem implements TabItem {
   @override
   Widget? get selectedIcon;
   @override
-  PlatformTabNavigator get router;
+  PlatformTabNavigator? get router;
+  @override
+  String? get initialLocation;
   @override
   bool? get popToFirstRoute;
   @override

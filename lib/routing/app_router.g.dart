@@ -133,7 +133,7 @@ class ModalTransitionProvider extends AutoDisposeProvider<Page<dynamic>> {
   }
 }
 
-String _$goRouterHash() => r'6f59baef29e902bf675668dcdde860ebece93541';
+String _$goRouterHash() => r'1749a7088b2be00822826bf1fc2fa1af97119c48';
 typedef GoRouterRef = ProviderRef<GoRouter>;
 
 /// See also [goRouter].
