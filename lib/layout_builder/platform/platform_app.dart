@@ -59,7 +59,9 @@ class PlatformApp
   @override
   CupertinoApp createCupertinoWidget(BuildContext context, WidgetRef ref) {
     final cupertinoTheme = ref.watch(cupertinoThemeProvider);
-    final goRouter = ref.watch(goRouterProvider());
+    final currentTabIndex = ref.watch(currentTabIndexProvider);
+    final currentTab = ref.watch(tabsProvider)[currentTabIndex];
+    final goRouter = ref.watch(goRouterProvider(tabItem: currentTab));
     return CupertinoApp.router(
       routerConfig: goRouter,
       locale: locale,

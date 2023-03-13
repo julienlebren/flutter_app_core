@@ -72,34 +72,21 @@ Page modalTransition(
   }
 }
 
-// Plusieurs GoRouter, un par tab ?
-
 @Riverpod(keepAlive: true)
 // ignore: unsupported_provider_value
 GoRouter goRouter(
   GoRouterRef ref, {
-  String initialLocation = '/',
+  TabItem? tabItem,
 }) {
   final mainRoute = ref.watch(routeProvider);
   final tabs = ref.read(tabsProvider);
-  print("Found ${tabs.length} tabs.");
 
   return GoRouter(
     navigatorKey: NavigatorKeys.root,
-    initialLocation: initialLocation,
+    initialLocation: tabItem?.initialLocation ?? "/",
     debugLogDiagnostics: false,
     routes: [
-      // If we have tabs, it means that we display the app in a
-      //Scaffold with BottomNavigationBar (or CupertinoTabScaffold on iOS)
-      if (tabs.isNotEmpty)
-        ShellRoute(
-          navigatorKey: NavigatorKeys.tab,
-          builder: (BuildContext context, GoRouterState state, Widget child) {
-            return PlatformTabScaffold2(child: child);
-          },
-          routes: mainRoute.routes,
-        ),
-      /*GoRoute(
+      GoRoute(
         path: '/',
         name: SignInRoute.landing.name,
         parentNavigatorKey: NavigatorKeys.root,
@@ -107,6 +94,17 @@ GoRouter goRouter(
           return NoTransitionPage(child: mainRoute.builder!(context, state));
         },
         routes: [
+          // If we have tabs, it means that we display the app in a
+          //Scaffold with BottomNavigationBar (or CupertinoTabScaffold on iOS)
+          if (tabs.isNotEmpty)
+            ShellRoute(
+              navigatorKey: NavigatorKeys.tab,
+              builder: (_, __, child) {
+                return PlatformTabScaffold2(child: child);
+              },
+              routes: mainRoute.routes,
+            ),
+          // This is the container for all the sign-in routes
           ShellRoute(
             navigatorKey: NavigatorKeys.signIn,
             pageBuilder: (context, state, child) {
@@ -159,7 +157,7 @@ GoRouter goRouter(
             ],
           ),
         ],
-      ),*/
+      ),
     ],
     //errorBuilder: (context, state) => const NotFoundScreen(),
   );

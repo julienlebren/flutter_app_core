@@ -133,7 +133,7 @@ class ModalTransitionProvider extends AutoDisposeProvider<Page<dynamic>> {
   }
 }
 
-String _$goRouterHash() => r'1749a7088b2be00822826bf1fc2fa1af97119c48';
+String _$goRouterHash() => r'78a743d24875b7dd29d7ba020db439cac9dc5c0b';
 typedef GoRouterRef = ProviderRef<GoRouter>;
 
 /// See also [goRouter].
@@ -147,10 +147,10 @@ class GoRouterFamily extends Family<GoRouter> {
 
   /// See also [goRouter].
   GoRouterProvider call({
-    String initialLocation = '/',
+    TabItem? tabItem,
   }) {
     return GoRouterProvider(
-      initialLocation: initialLocation,
+      tabItem: tabItem,
     );
   }
 
@@ -159,7 +159,7 @@ class GoRouterFamily extends Family<GoRouter> {
     covariant GoRouterProvider provider,
   ) {
     return call(
-      initialLocation: provider.initialLocation,
+      tabItem: provider.tabItem,
     );
   }
 
@@ -182,11 +182,11 @@ class GoRouterFamily extends Family<GoRouter> {
 class GoRouterProvider extends Provider<GoRouter> {
   /// See also [goRouter].
   GoRouterProvider({
-    this.initialLocation = '/',
+    this.tabItem,
   }) : super.internal(
           (ref) => goRouter(
             ref,
-            initialLocation: initialLocation,
+            tabItem: tabItem,
           ),
           from: goRouterProvider,
           name: r'goRouterProvider',
@@ -198,18 +198,17 @@ class GoRouterProvider extends Provider<GoRouter> {
           allTransitiveDependencies: GoRouterFamily._allTransitiveDependencies,
         );
 
-  final String initialLocation;
+  final TabItem? tabItem;
 
   @override
   bool operator ==(Object other) {
-    return other is GoRouterProvider &&
-        other.initialLocation == initialLocation;
+    return other is GoRouterProvider && other.tabItem == tabItem;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, initialLocation.hashCode);
+    hash = _SystemHash.combine(hash, tabItem.hashCode);
 
     return _SystemHash.finish(hash);
   }
