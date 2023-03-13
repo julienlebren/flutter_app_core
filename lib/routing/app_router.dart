@@ -95,7 +95,7 @@ GoRouter goRouter(
         },
         routes: [
           // If we have tabs, it means that we display the app in a
-          //Scaffold with BottomNavigationBar (or CupertinoTabScaffold on iOS)
+          // Scaffold with BottomNavigationBar (or CupertinoTabScaffold on iOS)
           if (tabs.isNotEmpty)
             ShellRoute(
               navigatorKey: NavigatorKeys.tab,
@@ -153,7 +153,7 @@ GoRouter goRouter(
                   );
                 },
               ),
-              ...mainRoute.routes,
+              //...mainRoute.routes,
             ],
           ),
         ],
