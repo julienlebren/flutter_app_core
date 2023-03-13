@@ -8,7 +8,8 @@ class TabItem with _$TabItem {
     required String title,
     required Widget icon,
     Widget? selectedIcon,
-    required PlatformTabNavigator router,
+    PlatformTabNavigator? router,
+    String? initialLocation,
     @Default(false) bool? popToFirstRoute,
   }) = _TabItem;
 }
@@ -33,7 +34,7 @@ class PlatformTabScaffold
     if (ref.read(currentTabIndexProvider) == index) {
       final tabs = ref.watch(tabsProvider);
       final router = tabs[index].router;
-      final navigator = router.navigatorKey.currentState!;
+      final navigator = router!.navigatorKey.currentState!;
 
       final tab = tabs[index];
       final scrollController = ref.read(scrollControllerProvider);
@@ -121,7 +122,7 @@ class PlatformTabScaffold
           top: BorderSide(color: appTheme.navigationBarBorderColor),
         ),
       ),
-      tabBuilder: (_, index) => tabs[index].router,
+      tabBuilder: (_, index) => tabs[index].router!,
     );
   }
 
@@ -184,7 +185,7 @@ class PlatformTabScaffold2
     if (ref.read(currentTabIndexProvider) == index) {
       final tabs = ref.watch(tabsProvider);
       final router = tabs[index].router;
-      final navigator = router.navigatorKey.currentState!;
+      final navigator = router!.navigatorKey.currentState!;
 
       final tab = tabs[index];
       final scrollController = ref.read(scrollControllerProvider);
