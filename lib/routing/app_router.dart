@@ -2,6 +2,7 @@ library app_router;
 
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_core/layout_builder/layout_builder.dart';
 import 'package:flutter_app_core/sign_in/sign_in.dart';
@@ -14,6 +15,7 @@ part 'app_router.g.dart';
 
 class NavigatorKeys {
   static final root = GlobalKey<NavigatorState>();
+  static final tab = GlobalKey<NavigatorState>();
   static final signIn = GlobalKey<NavigatorState>();
 }
 
@@ -94,6 +96,70 @@ GoRouter goRouter(
         },
         routes: [
           ShellRoute(
+            navigatorKey: NavigatorKeys.tab,
+            builder: (BuildContext context, GoRouterState state, Widget child) {
+              return ScaffoldWithNavBar(child: child);
+            },
+            routes: [
+              /// The first screen to display in the bottom navigation bar.
+              GoRoute(
+                path: '/a',
+                builder: (BuildContext context, GoRouterState state) {
+                  return const ScreenA();
+                },
+                routes: <RouteBase>[
+                  // The details screen to display stacked on the inner Navigator.
+                  // This will cover screen A but not the application shell.
+                  GoRoute(
+                    path: 'details',
+                    builder: (BuildContext context, GoRouterState state) {
+                      return const DetailsScreen(label: 'A');
+                    },
+                  ),
+                ],
+              ),
+
+              /// Displayed when the second item in the the bottom navigation bar is
+              /// selected.
+              GoRoute(
+                path: '/b',
+                builder: (BuildContext context, GoRouterState state) {
+                  return const ScreenB();
+                },
+                routes: <RouteBase>[
+                  /// Same as "/a/details", but displayed on the root Navigator by
+                  /// specifying [parentNavigatorKey]. This will cover both screen B
+                  /// and the application shell.
+                  GoRoute(
+                    path: 'details',
+                    parentNavigatorKey: NavigatorKeys.root,
+                    builder: (BuildContext context, GoRouterState state) {
+                      return const DetailsScreen(label: 'B');
+                    },
+                  ),
+                ],
+              ),
+
+              /// The third screen to display in the bottom navigation bar.
+              GoRoute(
+                path: '/c',
+                builder: (BuildContext context, GoRouterState state) {
+                  return const ScreenC();
+                },
+                routes: <RouteBase>[
+                  // The details screen to display stacked on the inner Navigator.
+                  // This will cover screen A but not the application shell.
+                  GoRoute(
+                    path: 'details',
+                    builder: (BuildContext context, GoRouterState state) {
+                      return const DetailsScreen(label: 'C');
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
+          ShellRoute(
             navigatorKey: NavigatorKeys.signIn,
             pageBuilder: (context, state, child) {
               return ref.read(
@@ -149,4 +215,166 @@ GoRouter goRouter(
     ],
     //errorBuilder: (context, state) => const NotFoundScreen(),
   );
+}
+
+class ScaffoldWithNavBar extends StatelessWidget {
+  const ScaffoldWithNavBar({required this.child, Key? key}) : super(key: key);
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoTabScaffold(
+      tabBar: CupertinoTabBar(
+        currentIndex: _calculateSelectedIndex(context),
+        onTap: (int index) => _onItemTapped(index, context),
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'A Screen',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.business),
+            label: 'B Screen',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notification_important_rounded),
+            label: 'C Screen',
+          ),
+        ],
+      ),
+      tabBuilder: (BuildContext context, int index) => child,
+    );
+  }
+
+  int _calculateSelectedIndex(BuildContext context) {
+    final GoRouter route = GoRouter.of(context);
+    final String location = route.location;
+    if (location.startsWith('/a')) {
+      return 0;
+    }
+    if (location.startsWith('/b')) {
+      return 1;
+    }
+    if (location.startsWith('/c')) {
+      return 2;
+    }
+    return 0;
+  }
+
+  void _onItemTapped(int index, BuildContext context) {
+    switch (index) {
+      case 0:
+        GoRouter.of(context).go('/a');
+        break;
+      case 1:
+        GoRouter.of(context).go('/b');
+        break;
+      case 2:
+        GoRouter.of(context).go('/c');
+        break;
+    }
+  }
+}
+
+/// The first screen in the bottom navigation bar.
+class ScreenA extends StatelessWidget {
+  /// Constructs a [ScreenA] widget.
+  const ScreenA({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+      navigationBar: const CupertinoNavigationBar(),
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const Text('Screen A'),
+            TextButton(
+              onPressed: () {
+                GoRouter.of(context).go('/a/details');
+              },
+              child: const Text('View A details'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// The second screen in the bottom navigation bar.
+class ScreenB extends StatelessWidget {
+  /// Constructs a [ScreenB] widget.
+  const ScreenB({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+      navigationBar: const CupertinoNavigationBar(),
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const Text('Screen B'),
+            TextButton(
+              onPressed: () {
+                GoRouter.of(context).go('/b/details');
+              },
+              child: const Text('View B details'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// The third screen in the bottom navigation bar.
+class ScreenC extends StatelessWidget {
+  /// Constructs a [ScreenC] widget.
+  const ScreenC({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+      navigationBar: const CupertinoNavigationBar(),
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const Text('Screen C'),
+            TextButton(
+              onPressed: () {
+                GoRouter.of(context).go('/c/details');
+              },
+              child: const Text('View C details'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class DetailsScreen extends StatelessWidget {
+  const DetailsScreen({required this.label, Key? key}) : super(key: key);
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+      navigationBar: const CupertinoNavigationBar(
+        middle: Text('Details Screen'),
+      ),
+      child: Center(
+        child: Text(
+          'Details for $label',
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+      ),
+    );
+  }
 }
