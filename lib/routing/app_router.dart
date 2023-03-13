@@ -78,10 +78,11 @@ Page modalTransition(
 // ignore: unsupported_provider_value
 GoRouter goRouter(
   GoRouterRef ref, {
-  String initialLocation = '/a',
+  String initialLocation = '/',
 }) {
   final mainRoute = ref.watch(routeProvider);
   final tabs = ref.read(tabsProvider);
+  print("Found ${tabs.length} tabs.");
 
   return GoRouter(
     navigatorKey: NavigatorKeys.root,
