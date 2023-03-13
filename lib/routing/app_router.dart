@@ -80,7 +80,7 @@ GoRouter goRouter(
   GoRouterRef ref, {
   String initialLocation = '/a',
 }) {
-  final mainRoute = ref.watch(routeProvider);
+  //final mainRoute = ref.watch(routeProvider);
 
   return GoRouter(
     navigatorKey: NavigatorKeys.root,
@@ -151,7 +151,7 @@ GoRouter goRouter(
           ),
         ],
       ),
-      GoRoute(
+      /*GoRoute(
         path: '/',
         name: SignInRoute.landing.name,
         parentNavigatorKey: NavigatorKeys.root,
@@ -211,7 +211,7 @@ GoRouter goRouter(
             ],
           ),
         ],
-      ),
+      ),*/
     ],
     //errorBuilder: (context, state) => const NotFoundScreen(),
   );
