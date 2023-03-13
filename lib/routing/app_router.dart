@@ -94,7 +94,7 @@ GoRouter goRouter(
         ShellRoute(
           navigatorKey: NavigatorKeys.tab,
           builder: (BuildContext context, GoRouterState state, Widget child) {
-            return ScaffoldWithNavBar(child: child);
+            return PlatformTabScaffold2(child: child);
           },
           routes: mainRoute.routes,
         ),
