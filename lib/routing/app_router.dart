@@ -2,7 +2,6 @@ library app_router;
 
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_core/layout_builder/layout_builder.dart';
 import 'package:flutter_app_core/sign_in/sign_in.dart';
@@ -79,6 +78,7 @@ GoRouter goRouter(
   TabItem? tabItem,
 }) {
   final mainRoute = ref.watch(routeProvider);
+  final authSplashState = ref.watch(authSplashProvider);
 
   return GoRouter(
     navigatorKey: NavigatorKeys.root,
@@ -92,75 +92,79 @@ GoRouter goRouter(
         pageBuilder: (context, state) {
           return NoTransitionPage(child: mainRoute.builder!(context, state));
         },
-        routes: [
-          // If we have tabs, it means that we display the app in a
-          // Scaffold with BottomNavigationBar (or CupertinoTabScaffold on iOS)
-          if (tabItem != null)
+        routes: authSplashState.maybeWhen(
+          authed: () => [
+            // If we have tabs, it means that we display the app in a
+            // Scaffold with BottomNavigationBar (or CupertinoTabScaffold on iOS)
+            if (tabItem != null)
+              ShellRoute(
+                navigatorKey: tabItem.navigatorKey,
+                pageBuilder: (_, __, child) {
+                  return NoTransitionPage(
+                    child: PlatformTabScaffold2(
+                      key: GlobalKey(),
+                      child: child,
+                    ),
+                  );
+                },
+                routes: mainRoute.routes,
+              ),
+          ],
+          orElse: () => [
+            // This is the container for all the sign-in routes
             ShellRoute(
-              navigatorKey: tabItem.navigatorKey,
-              pageBuilder: (_, __, child) {
-                return NoTransitionPage(
-                  child: PlatformTabScaffold2(
-                    key: GlobalKey(debugLabel: "HomeScreen"),
+              navigatorKey: NavigatorKeys.signIn,
+              pageBuilder: (context, state, child) {
+                return ref.read(
+                  modalTransitionProvider(
+                    key: state.pageKey,
                     child: child,
                   ),
                 );
               },
-              routes: mainRoute.routes,
-            ),
-          // This is the container for all the sign-in routes
-          /*ShellRoute(
-            navigatorKey: NavigatorKeys.signIn,
-            pageBuilder: (context, state, child) {
-              return ref.read(
-                modalTransitionProvider(
-                  key: state.pageKey,
-                  child: child,
+              routes: [
+                GoRoute(
+                  path: 'register',
+                  name: SignInRoute.emailRegister.name,
+                  builder: (_, __) => const SignInEmailRegisterPage(),
                 ),
-              );
-            },
-            routes: [
-              GoRoute(
-                path: 'register',
-                name: SignInRoute.emailRegister.name,
-                builder: (_, __) => const SignInEmailRegisterPage(),
-              ),
-              GoRoute(
-                path: 'login',
-                name: SignInRoute.emailLogin.name,
-                builder: (_, __) => const SignInEmailLoginPage(),
-              ),
-              GoRoute(
-                path: 'reset',
-                name: SignInRoute.emailReset.name,
-                builder: (_, __) => const SignInEmailResetPage(),
-              ),
-              GoRoute(
-                path: 'phone',
-                name: SignInRoute.phoneLogin.name,
-                builder: (_, __) => const SignInPhonePage(),
-              ),
-              GoRoute(
-                path: 'verification',
-                name: SignInRoute.phoneVerification.name,
-                builder: (_, __) => const SignInPhoneVerificationPage(),
-              ),
-              GoRoute(
-                path: 'countries',
-                name: SignInRoute.countries.name,
-                pageBuilder: (context, state) {
-                  return ref.read(
-                    modalTransitionProvider(
-                      key: state.pageKey,
-                      child: const CountriesPage(),
-                    ),
-                  );
-                },
-              ),
-              //...mainRoute.routes,
-            ],
-          ),*/
-        ],
+                GoRoute(
+                  path: 'login',
+                  name: SignInRoute.emailLogin.name,
+                  builder: (_, __) => const SignInEmailLoginPage(),
+                ),
+                GoRoute(
+                  path: 'reset',
+                  name: SignInRoute.emailReset.name,
+                  builder: (_, __) => const SignInEmailResetPage(),
+                ),
+                GoRoute(
+                  path: 'phone',
+                  name: SignInRoute.phoneLogin.name,
+                  builder: (_, __) => const SignInPhonePage(),
+                ),
+                GoRoute(
+                  path: 'verification',
+                  name: SignInRoute.phoneVerification.name,
+                  builder: (_, __) => const SignInPhoneVerificationPage(),
+                ),
+                GoRoute(
+                  path: 'countries',
+                  name: SignInRoute.countries.name,
+                  pageBuilder: (context, state) {
+                    return ref.read(
+                      modalTransitionProvider(
+                        key: state.pageKey,
+                        child: const CountriesPage(),
+                      ),
+                    );
+                  },
+                ),
+                ...mainRoute.routes,
+              ],
+            ),
+          ],
+        ),
       ),
     ],
     //errorBuilder: (context, state) => const NotFoundScreen(),
