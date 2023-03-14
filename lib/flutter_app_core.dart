@@ -11,6 +11,7 @@ export 'layout_builder/layout_builder.dart';
 export 'localization/localization.dart';
 export 'notifications/notifications.dart';
 export 'purchases/purchases.dart';
+export 'routing/app_router.dart';
 export 'settings/settings.dart';
 export 'sign_in/sign_in.dart';
 
