@@ -104,7 +104,8 @@ GoRouter goRouter(
         },
         routes: authSplashState.maybeWhen(
           authed: () {
-            final routes = (mainRoute.routes as List<GoRoute>);
+            final routes = mainRoute.routes.cast<GoRoute>();
+
             final settingsRoute =
                 routes.firstWhere((r) => r.name == SettingsRoute.overview.name);
             final otherRoutes =
