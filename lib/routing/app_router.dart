@@ -98,8 +98,10 @@ GoRouter goRouter(
           if (tabItem != null)
             ShellRoute(
               navigatorKey: tabItem.navigatorKey,
-              builder: (_, __, child) {
-                return PlatformTabScaffold2(child: child);
+              pageBuilder: (_, __, child) {
+                return NoTransitionPage(
+                  child: PlatformTabScaffold2(child: child),
+                );
               },
               routes: mainRoute.routes,
             ),
