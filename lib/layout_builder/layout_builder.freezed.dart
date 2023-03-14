@@ -18,6 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TabItem {
   String get title => throw _privateConstructorUsedError;
   Widget get icon => throw _privateConstructorUsedError;
+  GlobalKey<NavigatorState> get navigatorKey =>
+      throw _privateConstructorUsedError;
   Widget? get selectedIcon => throw _privateConstructorUsedError;
   PlatformTabNavigator? get router => throw _privateConstructorUsedError;
   String? get initialLocation => throw _privateConstructorUsedError;
@@ -35,6 +37,7 @@ abstract class $TabItemCopyWith<$Res> {
   $Res call(
       {String title,
       Widget icon,
+      GlobalKey<NavigatorState> navigatorKey,
       Widget? selectedIcon,
       PlatformTabNavigator? router,
       String? initialLocation,
@@ -56,6 +59,7 @@ class _$TabItemCopyWithImpl<$Res, $Val extends TabItem>
   $Res call({
     Object? title = null,
     Object? icon = null,
+    Object? navigatorKey = null,
     Object? selectedIcon = freezed,
     Object? router = freezed,
     Object? initialLocation = freezed,
@@ -70,6 +74,10 @@ class _$TabItemCopyWithImpl<$Res, $Val extends TabItem>
           ? _value.icon
           : icon // ignore: cast_nullable_to_non_nullable
               as Widget,
+      navigatorKey: null == navigatorKey
+          ? _value.navigatorKey
+          : navigatorKey // ignore: cast_nullable_to_non_nullable
+              as GlobalKey<NavigatorState>,
       selectedIcon: freezed == selectedIcon
           ? _value.selectedIcon
           : selectedIcon // ignore: cast_nullable_to_non_nullable
@@ -100,6 +108,7 @@ abstract class _$$_TabItemCopyWith<$Res> implements $TabItemCopyWith<$Res> {
   $Res call(
       {String title,
       Widget icon,
+      GlobalKey<NavigatorState> navigatorKey,
       Widget? selectedIcon,
       PlatformTabNavigator? router,
       String? initialLocation,
@@ -118,6 +127,7 @@ class __$$_TabItemCopyWithImpl<$Res>
   $Res call({
     Object? title = null,
     Object? icon = null,
+    Object? navigatorKey = null,
     Object? selectedIcon = freezed,
     Object? router = freezed,
     Object? initialLocation = freezed,
@@ -132,6 +142,10 @@ class __$$_TabItemCopyWithImpl<$Res>
           ? _value.icon
           : icon // ignore: cast_nullable_to_non_nullable
               as Widget,
+      navigatorKey: null == navigatorKey
+          ? _value.navigatorKey
+          : navigatorKey // ignore: cast_nullable_to_non_nullable
+              as GlobalKey<NavigatorState>,
       selectedIcon: freezed == selectedIcon
           ? _value.selectedIcon
           : selectedIcon // ignore: cast_nullable_to_non_nullable
@@ -158,6 +172,7 @@ class _$_TabItem implements _TabItem {
   const _$_TabItem(
       {required this.title,
       required this.icon,
+      required this.navigatorKey,
       this.selectedIcon,
       this.router,
       this.initialLocation,
@@ -167,6 +182,8 @@ class _$_TabItem implements _TabItem {
   final String title;
   @override
   final Widget icon;
+  @override
+  final GlobalKey<NavigatorState> navigatorKey;
   @override
   final Widget? selectedIcon;
   @override
@@ -179,7 +196,7 @@ class _$_TabItem implements _TabItem {
 
   @override
   String toString() {
-    return 'TabItem(title: $title, icon: $icon, selectedIcon: $selectedIcon, router: $router, initialLocation: $initialLocation, popToFirstRoute: $popToFirstRoute)';
+    return 'TabItem(title: $title, icon: $icon, navigatorKey: $navigatorKey, selectedIcon: $selectedIcon, router: $router, initialLocation: $initialLocation, popToFirstRoute: $popToFirstRoute)';
   }
 
   @override
@@ -189,6 +206,8 @@ class _$_TabItem implements _TabItem {
             other is _$_TabItem &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.icon, icon) || other.icon == icon) &&
+            (identical(other.navigatorKey, navigatorKey) ||
+                other.navigatorKey == navigatorKey) &&
             (identical(other.selectedIcon, selectedIcon) ||
                 other.selectedIcon == selectedIcon) &&
             (identical(other.router, router) || other.router == router) &&
@@ -199,8 +218,8 @@ class _$_TabItem implements _TabItem {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, title, icon, selectedIcon,
-      router, initialLocation, popToFirstRoute);
+  int get hashCode => Object.hash(runtimeType, title, icon, navigatorKey,
+      selectedIcon, router, initialLocation, popToFirstRoute);
 
   @JsonKey(ignore: true)
   @override
@@ -213,6 +232,7 @@ abstract class _TabItem implements TabItem {
   const factory _TabItem(
       {required final String title,
       required final Widget icon,
+      required final GlobalKey<NavigatorState> navigatorKey,
       final Widget? selectedIcon,
       final PlatformTabNavigator? router,
       final String? initialLocation,
@@ -222,6 +242,8 @@ abstract class _TabItem implements TabItem {
   String get title;
   @override
   Widget get icon;
+  @override
+  GlobalKey<NavigatorState> get navigatorKey;
   @override
   Widget? get selectedIcon;
   @override
