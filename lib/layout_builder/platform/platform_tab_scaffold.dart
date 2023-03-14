@@ -7,7 +7,7 @@ class TabItem with _$TabItem {
   const factory TabItem({
     required String title,
     required Widget icon,
-    required GlobalKey<NavigatorState> navigatorKey,
+    GlobalKey<NavigatorState>? navigatorKey,
     Widget? selectedIcon,
     PlatformTabNavigator? router,
     String? initialLocation,
