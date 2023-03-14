@@ -100,7 +100,10 @@ GoRouter goRouter(
               navigatorKey: tabItem.navigatorKey,
               pageBuilder: (_, __, child) {
                 return NoTransitionPage(
-                  child: PlatformTabScaffold2(child: child),
+                  child: PlatformTabScaffold2(
+                    key: GlobalKey(debugLabel: "HomeScreen"),
+                    child: child,
+                  ),
                 );
               },
               routes: mainRoute.routes,
