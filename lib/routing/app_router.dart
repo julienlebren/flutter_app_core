@@ -4,17 +4,19 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app_core/layout_builder/layout_builder.dart';
+import 'package:flutter_app_core/settings/settings.dart';
 import 'package:flutter_app_core/sign_in/sign_in.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'modal_stack.dart';
+part 'sign_in_router.dart';
+part 'settings_router.dart';
 part 'app_router.g.dart';
 
 class NavigatorKeys {
   static final root = GlobalKey<NavigatorState>();
-  static final tab = GlobalKey<NavigatorState>();
   static final signIn = GlobalKey<NavigatorState>();
 }
 
@@ -27,6 +29,14 @@ enum SignInRoute {
   phoneVerification,
   countries,
   info,
+}
+
+enum SettingsRoute {
+  overview,
+  account,
+  email,
+  password,
+  delete,
 }
 
 @Riverpod(keepAlive: true)
@@ -93,23 +103,62 @@ GoRouter goRouter(
           return NoTransitionPage(child: mainRoute.builder!(context, state));
         },
         routes: authSplashState.maybeWhen(
-          authed: () => [
-            // If we have tabs, it means that we display the app in a
-            // Scaffold with BottomNavigationBar (or CupertinoTabScaffold on iOS)
-            if (tabItem != null)
-              ShellRoute(
-                navigatorKey: tabItem.navigatorKey,
-                pageBuilder: (_, __, child) {
-                  return NoTransitionPage(
-                    child: PlatformTabScaffold2(
-                      key: GlobalKey(),
-                      child: child,
+          authed: () {
+            final routes = (mainRoute.routes as List<GoRoute>);
+            final settingsRoute =
+                routes.firstWhere((r) => r.name == SettingsRoute.overview.name);
+            final otherRoutes =
+                routes.where((r) => r.name != SettingsRoute.overview.name);
+
+            return [
+              // If we have tabs, it means that we display the app in a
+              // Scaffold with BottomNavigationBar (or CupertinoTabScaffold on iOS)
+              if (tabItem != null)
+                ShellRoute(
+                  navigatorKey: tabItem.navigatorKey,
+                  pageBuilder: (_, __, child) {
+                    return NoTransitionPage(
+                      child: PlatformTabScaffold2(
+                        key: GlobalKey(),
+                        child: child,
+                      ),
+                    );
+                  },
+                  routes: [
+                    GoRoute(
+                      path: settingsRoute.path,
+                      name: settingsRoute.name,
+                      builder: (context, state) {
+                        return settingsRoute.builder!(context, state);
+                      },
+                      routes: [
+                        GoRoute(
+                          path: 'account',
+                          name: SettingsRoute.account.name,
+                          builder: (_, __) => const SettingsAccountPage(),
+                        ),
+                        GoRoute(
+                          path: 'email',
+                          name: SettingsRoute.email.name,
+                          builder: (_, __) => const SettingsEmailPage(),
+                        ),
+                        GoRoute(
+                          path: 'password',
+                          name: SettingsRoute.password.name,
+                          builder: (_, __) => const SettingsPasswordPage(),
+                        ),
+                        GoRoute(
+                          path: 'delete',
+                          name: SettingsRoute.delete.name,
+                          builder: (_, __) => const SettingsDeletePage(),
+                        ),
+                      ],
                     ),
-                  );
-                },
-                routes: mainRoute.routes,
-              ),
-          ],
+                    ...otherRoutes,
+                  ],
+                ),
+            ];
+          },
           orElse: () => [
             // This is the container for all the sign-in routes
             ShellRoute(
