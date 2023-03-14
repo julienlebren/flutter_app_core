@@ -79,7 +79,6 @@ GoRouter goRouter(
   TabItem? tabItem,
 }) {
   final mainRoute = ref.watch(routeProvider);
-  final tabs = ref.read(tabsProvider);
 
   return GoRouter(
     navigatorKey: NavigatorKeys.root,
@@ -96,9 +95,9 @@ GoRouter goRouter(
         routes: [
           // If we have tabs, it means that we display the app in a
           // Scaffold with BottomNavigationBar (or CupertinoTabScaffold on iOS)
-          if (tabs.isNotEmpty)
+          if (tabItem != null)
             ShellRoute(
-              navigatorKey: NavigatorKeys.tab,
+              navigatorKey: tabItem.navigatorKey,
               builder: (_, __, child) {
                 return PlatformTabScaffold2(child: child);
               },
