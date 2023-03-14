@@ -17,6 +17,7 @@ part 'app_router.g.dart';
 
 class NavigatorKeys {
   static final root = GlobalKey<NavigatorState>();
+  static final tabs = GlobalKey<NavigatorState>();
   static final signIn = GlobalKey<NavigatorState>();
 }
 
@@ -83,17 +84,13 @@ Page modalTransition(
 
 @Riverpod(keepAlive: true)
 // ignore: unsupported_provider_value
-GoRouter goRouter(
-  GoRouterRef ref, {
-  TabItem? tabItem,
-}) {
+GoRouter goRouter(GoRouterRef ref) {
   final mainRoute = ref.watch(routeProvider);
   final authSplashState = ref.watch(authSplashProvider);
 
   return GoRouter(
     navigatorKey: NavigatorKeys.root,
-    initialLocation: tabItem?.initialLocation ?? "/",
-    debugLogDiagnostics: false,
+    initialLocation: '/',
     routes: [
       GoRoute(
         path: '/',
@@ -112,52 +109,46 @@ GoRouter goRouter(
                 routes.where((r) => r.name != SettingsRoute.overview.name);
 
             return [
-              // If we have tabs, it means that we display the app in a
-              // Scaffold with BottomNavigationBar (or CupertinoTabScaffold on iOS)
-              if (tabItem != null)
-                ShellRoute(
-                  navigatorKey: tabItem.navigatorKey,
-                  pageBuilder: (_, __, child) {
-                    return NoTransitionPage(
-                      child: PlatformTabScaffold2(
-                        key: GlobalKey(),
-                        child: child,
+              ShellRoute(
+                navigatorKey: NavigatorKeys.tabs,
+                pageBuilder: (_, __, child) {
+                  return const NoTransitionPage(
+                    child: PlatformTabScaffold(),
+                  );
+                },
+                routes: [
+                  GoRoute(
+                    path: settingsRoute.path,
+                    name: settingsRoute.name,
+                    builder: (context, state) {
+                      return settingsRoute.builder!(context, state);
+                    },
+                    routes: [
+                      GoRoute(
+                        path: 'account',
+                        name: SettingsRoute.account.name,
+                        builder: (_, __) => const SettingsAccountPage(),
                       ),
-                    );
-                  },
-                  routes: [
-                    GoRoute(
-                      path: settingsRoute.path,
-                      name: settingsRoute.name,
-                      builder: (context, state) {
-                        return settingsRoute.builder!(context, state);
-                      },
-                      routes: [
-                        GoRoute(
-                          path: 'account',
-                          name: SettingsRoute.account.name,
-                          builder: (_, __) => const SettingsAccountPage(),
-                        ),
-                        GoRoute(
-                          path: 'email',
-                          name: SettingsRoute.email.name,
-                          builder: (_, __) => const SettingsEmailPage(),
-                        ),
-                        GoRoute(
-                          path: 'password',
-                          name: SettingsRoute.password.name,
-                          builder: (_, __) => const SettingsPasswordPage(),
-                        ),
-                        GoRoute(
-                          path: 'delete',
-                          name: SettingsRoute.delete.name,
-                          builder: (_, __) => const SettingsDeletePage(),
-                        ),
-                      ],
-                    ),
-                    ...otherRoutes,
-                  ],
-                ),
+                      GoRoute(
+                        path: 'email',
+                        name: SettingsRoute.email.name,
+                        builder: (_, __) => const SettingsEmailPage(),
+                      ),
+                      GoRoute(
+                        path: 'password',
+                        name: SettingsRoute.password.name,
+                        builder: (_, __) => const SettingsPasswordPage(),
+                      ),
+                      GoRoute(
+                        path: 'delete',
+                        name: SettingsRoute.delete.name,
+                        builder: (_, __) => const SettingsDeletePage(),
+                      ),
+                    ],
+                  ),
+                  ...otherRoutes,
+                ],
+              ),
             ];
           },
           orElse: () => [
