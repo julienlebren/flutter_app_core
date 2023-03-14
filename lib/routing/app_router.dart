@@ -106,7 +106,7 @@ GoRouter goRouter(
               routes: mainRoute.routes,
             ),
           // This is the container for all the sign-in routes
-          ShellRoute(
+          /*ShellRoute(
             navigatorKey: NavigatorKeys.signIn,
             pageBuilder: (context, state, child) {
               return ref.read(
@@ -156,7 +156,7 @@ GoRouter goRouter(
               ),
               //...mainRoute.routes,
             ],
-          ),
+          ),*/
         ],
       ),
     ],
