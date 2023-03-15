@@ -1,7 +1,6 @@
 library notifications;
 
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -15,26 +14,10 @@ Function(String) fcmTokenHandler(FcmTokenHandlerRef ref) =>
 Function(RemoteMessage) messageHandler(MessageHandlerRef ref) =>
     throw UnimplementedError();
 
-final notificationsServiceProvider = Provider.autoDispose<NotificationsService>(
-  (ref) {
-    final fcmTokenHandler = ref.watch(fcmTokenHandlerProvider);
-    final messageHandler = ref.watch(messageHandlerProvider);
-    return NotificationsService(fcmTokenHandler, messageHandler);
-  },
-  dependencies: [
-    fcmTokenHandlerProvider,
-    messageHandlerProvider,
-  ],
-);
-
-class NotificationsService extends StateNotifier<bool> {
-  NotificationsService(
-    this._fcmTokenHandler,
-    this._messageHandler,
-  ) : super(false);
-
-  final Function(String token) _fcmTokenHandler;
-  final Function(RemoteMessage initialMessage) _messageHandler;
+@riverpod
+class NotificationsService extends _$NotificationsService {
+  @override
+  bool build() => false;
 
   void register() async {
     try {
@@ -49,7 +32,8 @@ class NotificationsService extends StateNotifier<bool> {
       if (settings.authorizationStatus == AuthorizationStatus.authorized) {
         final fcmToken = await FirebaseMessaging.instance.getToken();
         if (fcmToken != null) {
-          _fcmTokenHandler(fcmToken);
+          final fcmTokenHandler = ref.read(fcmTokenHandlerProvider);
+          fcmTokenHandler(fcmToken);
         }
         state = true;
       } else {
@@ -65,13 +49,14 @@ class NotificationsService extends StateNotifier<bool> {
   }
 
   Future<void> setupInteractedMessage() async {
+    final messageHandler = ref.read(messageHandlerProvider);
     RemoteMessage? initialMessage =
         await FirebaseMessaging.instance.getInitialMessage();
 
     if (initialMessage != null) {
-      _messageHandler(initialMessage);
+      messageHandler(initialMessage);
     }
 
-    FirebaseMessaging.onMessageOpenedApp.listen(_messageHandler);
+    FirebaseMessaging.onMessageOpenedApp.listen(messageHandler);
   }
 }

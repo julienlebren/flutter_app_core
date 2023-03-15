@@ -39,4 +39,21 @@ final messageHandlerProvider =
 
 typedef MessageHandlerRef
     = AutoDisposeProviderRef<dynamic Function(RemoteMessage)>;
+String _$notificationsServiceHash() =>
+    r'12fed92c73f1b46e0bcb9df5733a582b94b97720';
+
+/// See also [NotificationsService].
+@ProviderFor(NotificationsService)
+final notificationsServiceProvider =
+    AutoDisposeNotifierProvider<NotificationsService, bool>.internal(
+  NotificationsService.new,
+  name: r'notificationsServiceProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$notificationsServiceHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$NotificationsService = AutoDisposeNotifier<bool>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

@@ -7,7 +7,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_core/flutter_app_core.dart';
-import 'package:flutter_app_core/routing/app_router.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:numberpicker/numberpicker.dart';
@@ -111,6 +110,7 @@ bool isTablet() {
 class UnsupportedPlatformException implements Exception {
   UnsupportedPlatformException();
 }
+
 /*
 final routeProvider = Provider<RouteFactory>((_) {
   throw UnimplementedError();
