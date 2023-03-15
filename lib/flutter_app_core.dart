@@ -9,7 +9,7 @@ export 'firebase_storage_service/firebase_storage_service.dart';
 export 'firestore_service/firestore_service.dart';
 export 'layout_builder/layout_builder.dart';
 export 'localization/localization.dart';
-export 'notifications/notifications.dart';
+export 'notifications_service/notifications_service.dart';
 export 'purchases/purchases.dart';
 export 'routing/app_router.dart';
 export 'settings/settings.dart';
