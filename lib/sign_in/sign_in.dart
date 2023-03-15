@@ -10,7 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_core/extensions/extensions.dart';
-import 'package:flutter_app_core/firebase_auth_service/firebase_auth_service.dart';
+import 'package:flutter_app_core/firebase_auth/firebase_auth_service.dart';
 import 'package:flutter_app_core/layout_builder/layout_builder.dart';
 import 'package:flutter_app_core/localization/flutter_app_core_l10n.dart';
 import 'package:flutter_app_core/localization/localization.dart';
