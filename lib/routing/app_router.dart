@@ -89,6 +89,7 @@ class AlertDialog2 extends Page {
         pageBuilder: (BuildContext context, Animation<double> animation,
             Animation<double> secondaryAnimation) {
           return Dialog(
+            insetPadding: EdgeInsets.all(60),
             child: child,
           );
         },
