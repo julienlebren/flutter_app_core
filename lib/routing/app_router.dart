@@ -85,16 +85,24 @@ class AlertDialog2 extends Page {
   final Widget child;
 
   @override
-  Route createRoute(BuildContext context) => RawDialogRoute(
-        pageBuilder: (BuildContext context, Animation<double> animation,
-            Animation<double> secondaryAnimation) {
-          return Dialog(
-            insetPadding: EdgeInsets.all(60),
-            child: child,
-          );
-        },
-        settings: this,
-      );
+  Route createRoute(BuildContext context) {
+    final screenWidth = window.physicalSize.width / window.devicePixelRatio;
+    final screenHeight = window.physicalSize.height / window.devicePixelRatio;
+
+    return RawDialogRoute(
+      pageBuilder: (BuildContext context, Animation<double> animation,
+          Animation<double> secondaryAnimation) {
+        return Dialog(
+          insetPadding: EdgeInsets.symmetric(
+            horizontal: (screenWidth - Breakpoints.modal) / 2,
+            vertical: (screenHeight - maxModalHeight) / 2,
+          ),
+          child: child,
+        );
+      },
+      settings: this,
+    );
+  }
 }
 
 @Riverpod(keepAlive: true)
