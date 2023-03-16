@@ -11,6 +11,7 @@ class SignInLandingPageBuilder extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final signInTheme = ref.watch(signInThemeProvider);
+    print("SignInLandingPageBuilder build");
 
     return AnnotatedRegion<SystemUiMode>(
       value: SystemUiMode.edgeToEdge,
