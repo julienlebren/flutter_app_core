@@ -94,13 +94,6 @@ GoRouter goRouter(GoRouterRef ref) {
         orElse: () => null,
       );
 
-/*
-            final settingsRoute =
-                routes.firstWhere((r) => r.name == SettingsRoute.overview.name);
-            final otherRoutes =
-                routes.where((r) => r.name != SettingsRoute.overview.name);
-*/
-
   return GoRouter(
     navigatorKey: NavigatorKeys.root,
     initialLocation: '/',
