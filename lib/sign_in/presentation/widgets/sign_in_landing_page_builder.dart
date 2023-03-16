@@ -38,6 +38,7 @@ class SignInLandingPageBuilder extends ConsumerWidget {
                   : null,
             ),
             child: Scaffold(
+              resizeToAvoidBottomInset: false,
               backgroundColor: Colors.transparent,
               body: SafeArea(
                 child: Padding(

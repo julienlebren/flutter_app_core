@@ -6,6 +6,7 @@ class PlatformScaffold
     super.key,
     this.appBar,
     this.isModal = false,
+    this.resizeToAvoidBottomInset = true,
     this.floatingActionButton,
     required this.body,
   });
@@ -14,6 +15,7 @@ class PlatformScaffold
   final PlatformNavigationBar? appBar;
   final Widget? floatingActionButton;
   final Widget body;
+  final bool resizeToAvoidBottomInset;
 
   @override
   AnnotatedRegion createMaterialWidget(BuildContext context, WidgetRef ref) {
@@ -42,7 +44,7 @@ class PlatformScaffold
     return CupertinoPageScaffold(
       backgroundColor: backgroundColor,
       navigationBar: appBar?.createCupertinoWidget(context, ref),
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: resizeToAvoidBottomInset,
       child: SafeArea(
         bottom: !isModal,
         child: body,
@@ -84,6 +86,7 @@ class PlatformModalScaffold extends PlatformScaffold {
           ref,
           isCupertinoModal: true,
         ),
+        resizeToAvoidBottomInset: resizeToAvoidBottomInset,
         child: SafeArea(
           top: false,
           bottom: false,
