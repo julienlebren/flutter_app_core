@@ -87,8 +87,11 @@ class AlertDialog2 extends Page {
   @override
   Route createRoute(BuildContext context) => RawDialogRoute(
         pageBuilder: (BuildContext context, Animation<double> animation,
-                Animation<double> secondaryAnimation) =>
-            child,
+            Animation<double> secondaryAnimation) {
+          return Dialog(
+            child: child,
+          );
+        },
         settings: this,
       );
 }
