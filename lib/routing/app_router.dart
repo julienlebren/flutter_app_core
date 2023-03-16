@@ -80,12 +80,15 @@ Page modalTransition(
 }
 
 class AlertDialog2 extends Page {
+  const AlertDialog2({required this.child});
+
+  final Widget child;
+
   @override
   Route createRoute(BuildContext context) => RawDialogRoute(
         pageBuilder: (BuildContext context, Animation<double> animation,
-            Animation<double> secondaryAnimation) {
-          return Text('TEST');
-        },
+                Animation<double> secondaryAnimation) =>
+            child,
         settings: this,
       );
 }
@@ -121,7 +124,7 @@ GoRouter goRouter(GoRouterRef ref) {
           ShellRoute(
             navigatorKey: NavigatorKeys.signIn,
             pageBuilder: (context, state, child) {
-              return AlertDialog2();
+              return AlertDialog2(child: child);
               return ref.read(
                 modalTransitionProvider(
                   key: state.pageKey,
