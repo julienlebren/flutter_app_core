@@ -27,9 +27,20 @@ class SignInLandingPageBuilder extends ConsumerWidget {
         child: SafeArea(
           top: false,
           bottom: false,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40.0),
-            child: child,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: signInTheme.scaffoldBackgroundColor,
+              image: signInTheme.backgroundImage != null
+                  ? DecorationImage(
+                      image: AssetImage(signInTheme.backgroundImage!),
+                      fit: BoxFit.cover,
+                    )
+                  : null,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40.0),
+              child: child,
+            ),
           ),
 
           /*child: DecoratedBox(
