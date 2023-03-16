@@ -79,6 +79,17 @@ Page modalTransition(
   }
 }
 
+class AlertDialog2 extends Page {
+  @override
+  Route createRoute(BuildContext context) => RawDialogRoute(
+        pageBuilder: (BuildContext context, Animation<double> animation,
+            Animation<double> secondaryAnimation) {
+          return Text('TEST');
+        },
+        settings: this,
+      );
+}
+
 @Riverpod(keepAlive: true)
 // ignore: unsupported_provider_value
 GoRouter goRouter(GoRouterRef ref) {
@@ -110,6 +121,7 @@ GoRouter goRouter(GoRouterRef ref) {
           ShellRoute(
             navigatorKey: NavigatorKeys.signIn,
             pageBuilder: (context, state, child) {
+              return AlertDialog2();
               return ref.read(
                 modalTransitionProvider(
                   key: state.pageKey,
