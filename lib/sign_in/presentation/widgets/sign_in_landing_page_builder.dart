@@ -13,35 +13,35 @@ class SignInLandingPageBuilder extends ConsumerWidget {
     final signInTheme = ref.watch(signInThemeProvider);
     print("SignInLandingPageBuilder build");
 
-    return AnnotatedRegion<SystemUiMode>(
-      value: SystemUiMode.edgeToEdge,
-      child: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle(
-          statusBarBrightness: signInTheme.scaffoldBackgroundColor.brightness,
-          statusBarColor: Colors.transparent,
-          statusBarIconBrightness:
-              signInTheme.scaffoldBackgroundColor.invertedBrightness,
-          systemNavigationBarColor: signInTheme.scaffoldBackgroundColor,
-          systemNavigationBarIconBrightness:
-              signInTheme.scaffoldBackgroundColor.invertedBrightness,
-        ),
-        child: SafeArea(
-          top: false,
-          bottom: false,
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: signInTheme.scaffoldBackgroundColor,
-              image: signInTheme.backgroundImage != null
-                  ? DecorationImage(
-                      image: AssetImage(signInTheme.backgroundImage!),
-                      fit: BoxFit.cover,
-                    )
-                  : null,
-            ),
-            child: Scaffold(
-              resizeToAvoidBottomInset: false,
-              backgroundColor: Colors.transparent,
-              body: SafeArea(
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.transparent,
+      body: AnnotatedRegion<SystemUiMode>(
+        value: SystemUiMode.edgeToEdge,
+        child: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle(
+            statusBarBrightness: signInTheme.scaffoldBackgroundColor.brightness,
+            statusBarColor: Colors.transparent,
+            statusBarIconBrightness:
+                signInTheme.scaffoldBackgroundColor.invertedBrightness,
+            systemNavigationBarColor: signInTheme.scaffoldBackgroundColor,
+            systemNavigationBarIconBrightness:
+                signInTheme.scaffoldBackgroundColor.invertedBrightness,
+          ),
+          child: SafeArea(
+            top: false,
+            bottom: false,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: signInTheme.scaffoldBackgroundColor,
+                image: signInTheme.backgroundImage != null
+                    ? DecorationImage(
+                        image: AssetImage(signInTheme.backgroundImage!),
+                        fit: BoxFit.cover,
+                      )
+                    : null,
+              ),
+              child: SafeArea(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 40.0),
                   child: child,
