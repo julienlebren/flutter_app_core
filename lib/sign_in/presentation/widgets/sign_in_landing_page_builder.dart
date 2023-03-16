@@ -11,7 +11,6 @@ class SignInLandingPageBuilder extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final signInTheme = ref.watch(signInThemeProvider);
-    print("SignInLandingPageBuilder build");
 
     return AnnotatedRegion<SystemUiMode>(
       value: SystemUiMode.edgeToEdge,
@@ -28,7 +27,10 @@ class SignInLandingPageBuilder extends ConsumerWidget {
         child: SafeArea(
           top: false,
           bottom: false,
-          child: child!,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 40.0),
+            child: child,
+          ),
 
           /*child: DecoratedBox(
             decoration: BoxDecoration(
