@@ -93,8 +93,7 @@ class AlertDialog2 extends Page {
       pageBuilder: (BuildContext context, Animation<double> animation,
           Animation<double> secondaryAnimation) {
         return Padding(
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          padding: EdgeInsets.only(bottom: 10),
           child: Dialog(
             insetPadding: EdgeInsets.symmetric(
               horizontal: (screenWidth - Breakpoints.modal) / 2,
