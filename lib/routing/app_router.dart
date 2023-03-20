@@ -87,29 +87,67 @@ class AlertDialog2 extends Page {
   @override
   Route createRoute(BuildContext context) {
     final screenWidth = window.physicalSize.width / window.devicePixelRatio;
-    final screenHeight = window.physicalSize.height / window.devicePixelRatio;
-    final isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
-    final verticalPadding =
-        isKeyboardOpen ? 0.0 : (screenHeight - maxModalHeight) / 2;
 
     return RawDialogRoute(
       pageBuilder: (context, animation, secondaryAnimation) {
-        return AnimatedPadding(
-          duration: const Duration(milliseconds: 150),
-          curve: Curves.linear,
-          padding: EdgeInsets.symmetric(
-            vertical: verticalPadding,
+        return Dialog(
+          insetPadding: EdgeInsets.symmetric(
+            horizontal: (screenWidth - Breakpoints.modal) / 2,
+            vertical: 24,
           ),
-          child: Dialog(
-            insetPadding: EdgeInsets.symmetric(
-              horizontal: (screenWidth - Breakpoints.modal) / 2,
-              vertical: 24,
-            ),
+          child: ModalStack2(
             child: child,
           ),
         );
       },
       settings: this,
+    );
+  }
+}
+
+class ModalStack2 extends ConsumerWidget {
+  const ModalStack2({
+    required this.child,
+    super.key,
+  });
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final screenHeight = window.physicalSize.height / window.devicePixelRatio;
+
+    ref.watch(keyboardVisibilityProvider).maybeWhen(
+          data: (isVisible) => isVisible,
+          orElse: () => false,
+        );
+
+    final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+    final availableHeight = screenHeight - keyboardHeight;
+    final modalHeight = availableHeight > (maxModalHeight + minPaddingTop)
+        ? maxModalHeight
+        : (availableHeight - minPaddingTop);
+
+    final verticalPadding = (screenHeight - modalHeight) / 2;
+    double topPadding =
+        modalHeight < maxModalHeight ? minPaddingTop : verticalPadding;
+    double bottomPadding =
+        modalHeight < maxModalHeight ? keyboardHeight : verticalPadding;
+
+    return AnimatedPadding(
+      duration: const Duration(milliseconds: 150),
+      curve: Curves.linear,
+      padding: EdgeInsets.only(
+        top: topPadding,
+        bottom: bottomPadding,
+      ),
+      child: ClipRect(
+        child: Container(
+          transform:
+              isCupertino() ? Matrix4.translationValues(0.0, -20.0, 0.0) : null,
+          child: child,
+        ),
+      ),
     );
   }
 }
