@@ -88,19 +88,25 @@ class AlertDialog2 extends Page {
   Route createRoute(BuildContext context) {
     final screenWidth = window.physicalSize.width / window.devicePixelRatio;
     final screenHeight = window.physicalSize.height / window.devicePixelRatio;
-    final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+    final isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
     final verticalPadding =
-        keyboardHeight > 0 ? 0.0 : (screenHeight - maxModalHeight) / 2;
+        isKeyboardOpen ? 0.0 : (screenHeight - maxModalHeight) / 2;
 
     return RawDialogRoute(
-      pageBuilder: (BuildContext context, Animation<double> animation,
-          Animation<double> secondaryAnimation) {
-        return Dialog(
-          insetPadding: EdgeInsets.symmetric(
-            horizontal: (screenWidth - Breakpoints.modal) / 2,
-            vertical: 40,
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return AnimatedPadding(
+          duration: const Duration(milliseconds: 150),
+          curve: Curves.linear,
+          padding: EdgeInsets.symmetric(
+            vertical: verticalPadding,
           ),
-          child: child,
+          child: Dialog(
+            insetPadding: EdgeInsets.symmetric(
+              horizontal: (screenWidth - Breakpoints.modal) / 2,
+              vertical: 24,
+            ),
+            child: child,
+          ),
         );
       },
       settings: this,
