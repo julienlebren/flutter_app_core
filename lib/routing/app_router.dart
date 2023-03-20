@@ -98,6 +98,7 @@ class AlertDialog2 extends Page {
         return Dialog(
           insetPadding: EdgeInsets.symmetric(
             horizontal: (screenWidth - Breakpoints.modal) / 2,
+            vertical: 40,
           ),
           child: child,
         );
