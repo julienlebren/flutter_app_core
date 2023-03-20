@@ -33,20 +33,8 @@ class ModalStack extends ConsumerWidget {
     double bottomPadding =
         modalHeight < maxModalHeight ? keyboardHeight : verticalPadding;
 
-    return /*Stack(
-      children: [
-        SizedBox(
-          width: screenWidth,
-          height: screenHeight,
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-            child: Container(
-              color: Colors.black.withOpacity(0.01),
-            ),
-          ),
-        ),*/
-        AnimatedPadding(
-      duration: const Duration(milliseconds: 150),
+    return AnimatedPadding(
+      duration: const Duration(milliseconds: 100),
       curve: Curves.linear,
       padding: EdgeInsets.only(
         left: (screenWidth - Breakpoints.modal) / 2,
@@ -61,8 +49,6 @@ class ModalStack extends ConsumerWidget {
           child: child,
         ),
       ),
-      //),
-      //],
     );
   }
 }
