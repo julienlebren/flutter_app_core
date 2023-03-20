@@ -134,12 +134,14 @@ class ModalStack2 extends ConsumerWidget {
     double bottomPadding =
         modalHeight < maxModalHeight ? keyboardHeight : verticalPadding;
 
+    final isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
+
     return AnimatedPadding(
       duration: const Duration(milliseconds: 150),
       curve: Curves.linear,
       padding: EdgeInsets.only(
-        top: topPadding,
-        bottom: bottomPadding,
+        top: isKeyboardOpen ? 20 : 0,
+        bottom: isKeyboardOpen ? 20 : 0,
       ),
       child: ClipRect(
         child: Container(
