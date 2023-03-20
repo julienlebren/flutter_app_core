@@ -90,12 +90,12 @@ class AlertDialog2 extends Page {
 
     return RawDialogRoute(
       pageBuilder: (context, animation, secondaryAnimation) {
-        return Dialog(
-          insetPadding: EdgeInsets.symmetric(
-            horizontal: (screenWidth - Breakpoints.modal) / 2,
-            vertical: 24,
-          ),
-          child: ModalStack2(
+        return ModalStack2(
+          child: Dialog(
+            insetPadding: EdgeInsets.symmetric(
+              horizontal: (screenWidth - Breakpoints.modal) / 2,
+              vertical: 24,
+            ),
             child: child,
           ),
         );
