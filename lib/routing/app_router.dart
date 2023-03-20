@@ -96,11 +96,8 @@ class AlertDialog2 extends Page {
       pageBuilder: (BuildContext context, Animation<double> animation,
           Animation<double> secondaryAnimation) {
         return Dialog(
-          insetPadding: EdgeInsets.only(
-            left: (screenWidth - Breakpoints.modal) / 2,
-            right: (screenWidth - Breakpoints.modal) / 2,
-            top: verticalPadding,
-            bottom: verticalPadding,
+          insetPadding: EdgeInsets.symmetric(
+            horizontal: (screenWidth - Breakpoints.modal) / 2,
           ),
           child: child,
         );
