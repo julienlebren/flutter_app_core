@@ -6,11 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_core/layout_builder/layout_builder.dart';
 import 'package:flutter_app_core/settings/settings.dart';
 import 'package:flutter_app_core/sign_in/sign_in.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'modal_stack.dart';
 part 'app_router.g.dart';
 
 class NavigatorKeys {
@@ -40,109 +38,6 @@ enum SettingsRoute {
 @Riverpod(keepAlive: true)
 GoRoute route(RouteRef ref) => throw Exception(
     "Unable to find a route with path '/', did you override goRouterProvider in the root ProviderScope?");
-
-@riverpod
-Page modalTransition(
-  ModalTransitionRef ref, {
-  LocalKey? key,
-  required Widget child,
-}) {
-  final screenWidth = window.physicalSize.width / window.devicePixelRatio;
-  if (screenWidth > Breakpoints.modal) {
-    return CustomTransitionPage<void>(
-      key: key,
-      child: ModalStack(child: child),
-      barrierDismissible: true,
-      barrierColor: Colors.black38,
-      opaque: false,
-      transitionDuration: const Duration(milliseconds: 200),
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        const begin = Offset(0.0, 1.0);
-        const end = Offset.zero;
-        const curve = Curves.ease;
-
-        var tween =
-            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-        return SlideTransition(
-          position: animation.drive(tween),
-          child: child,
-        );
-      },
-    );
-  } else {
-    return platformPage(
-      key: key,
-      fullscreenDialog: true,
-      child: child,
-    );
-  }
-}
-
-class AlertDialog2 extends Page {
-  const AlertDialog2({required this.child});
-
-  final Widget child;
-
-  @override
-  Route createRoute(BuildContext context) {
-    final screenWidth = window.physicalSize.width / window.devicePixelRatio;
-
-    return RawDialogRoute(
-      pageBuilder: (context, animation, secondaryAnimation) {
-        return ModalStack2(
-          child: Dialog(
-            insetPadding: EdgeInsets.symmetric(
-              horizontal: (screenWidth - Breakpoints.modal) / 2,
-              vertical: 24,
-            ),
-            child: child,
-          ),
-        );
-      },
-      settings: this,
-    );
-  }
-}
-
-class ModalStack2 extends ConsumerWidget {
-  const ModalStack2({
-    required this.child,
-    super.key,
-  });
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final screenHeight = window.physicalSize.height / window.devicePixelRatio;
-
-    ref.watch(keyboardVisibilityProvider).maybeWhen(
-          data: (isVisible) => isVisible,
-          orElse: () => false,
-        );
-
-    final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
-    final availableHeight = screenHeight - keyboardHeight;
-    final modalHeight = availableHeight > (maxModalHeight + minPaddingTop)
-        ? maxModalHeight
-        : (availableHeight - minPaddingTop);
-
-    final verticalPadding = (screenHeight - modalHeight) / 2;
-    double topPadding =
-        modalHeight < maxModalHeight ? minPaddingTop : verticalPadding;
-    double bottomPadding =
-        modalHeight < maxModalHeight ? keyboardHeight : verticalPadding;
-
-    final isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
-
-    return Container(
-      transform:
-          Matrix4.translationValues(0.0, isKeyboardOpen ? -20.0 : 0.0, 0.0),
-      child: child,
-    );
-  }
-}
 
 @Riverpod(keepAlive: true)
 // ignore: unsupported_provider_value
@@ -175,13 +70,7 @@ GoRouter goRouter(GoRouterRef ref) {
           ShellRoute(
             navigatorKey: NavigatorKeys.signIn,
             pageBuilder: (context, state, child) {
-              //return AlertDialog2(child: child);
-              return ref.read(
-                modalTransitionProvider(
-                  key: state.pageKey,
-                  child: child,
-                ),
-              );
+              return PlatformDialogPage(child: child);
             },
             routes: [
               GoRoute(
@@ -213,12 +102,7 @@ GoRouter goRouter(GoRouterRef ref) {
                 path: 'countries',
                 name: SignInRoute.countries.name,
                 pageBuilder: (context, state) {
-                  return ref.read(
-                    modalTransitionProvider(
-                      key: state.pageKey,
-                      child: const CountriesPage(),
-                    ),
-                  );
+                  return PlatformDialogPage(child: const CountriesPage());
                 },
               ),
               if (signInUserInfoRoute != null) signInUserInfoRoute,
@@ -340,12 +224,7 @@ List<RouteBase> signInRouter(SignInRouterRef ref) {
     ShellRoute(
       navigatorKey: NavigatorKeys.signIn,
       pageBuilder: (context, state, child) {
-        return ref.read(
-          modalTransitionProvider(
-            key: state.pageKey,
-            child: child,
-          ),
-        );
+        return PlatformDialogPage(child: child);
       },
       routes: [
         GoRoute(
@@ -377,12 +256,7 @@ List<RouteBase> signInRouter(SignInRouterRef ref) {
           path: 'countries',
           name: SignInRoute.countries.name,
           pageBuilder: (context, state) {
-            return ref.read(
-              modalTransitionProvider(
-                key: state.pageKey,
-                child: const CountriesPage(),
-              ),
-            );
+            return PlatformDialogPage(child: const CountriesPage());
           },
         ),
       ],
