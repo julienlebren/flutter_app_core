@@ -175,7 +175,7 @@ GoRouter goRouter(GoRouterRef ref) {
           ShellRoute(
             navigatorKey: NavigatorKeys.signIn,
             pageBuilder: (context, state, child) {
-              return AlertDialog2(child: child);
+              //return AlertDialog2(child: child);
               return ref.read(
                 modalTransitionProvider(
                   key: state.pageKey,
