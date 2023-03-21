@@ -110,6 +110,7 @@ class SignInScaffold extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async => (appBar?.leading == null),
       child: PlatformScaffold(
+        resizeToAvoidBottomInset: false,
         appBar: appBar,
         body: Container(
           padding: const EdgeInsets.only(
