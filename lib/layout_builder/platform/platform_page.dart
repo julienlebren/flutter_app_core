@@ -29,52 +29,52 @@ const minPaddingTop = 40.0;
 const maxModalHeight = 750.0;
 const maxModalWidth = 600.0;
 
-class PlatformDialogPage<T> extends NoTransitionPage<T> {
-  PlatformDialogPage({
-    required super.child,
-    super.key,
-  }) {
-    final screenWidth = window.physicalSize.width / window.devicePixelRatio;
-    if (screenWidth > maxModalWidth) {
-      CustomTransitionPage(
-        transitionsBuilder: _transitionsBuilder,
-        transitionDuration: const Duration(microseconds: 200),
-        barrierDismissible: true,
-        barrierColor: Colors.black38,
-        opaque: false,
-        child: child,
-      );
-    } else if (isMaterial()) {
-      MaterialPage(
-        key: key,
-        fullscreenDialog: true,
-        child: child,
-      );
-    } else {
-      CupertinoPage(
-        key: key,
-        fullscreenDialog: true,
-        child: child,
-      );
-    }
-  }
+CustomTransitionPage openCustomDialog<T>(
+  BuildContext context,
+  GoRouterState state,
+  Widget child,
+) {
+  final screenWidth = window.physicalSize.width / window.devicePixelRatio;
+  if (screenWidth > maxModalWidth) {
+    CustomTransitionPage(
+      key: state.pageKey,
+      transitionsBuilder: (_, animation, ___, ____) {
+        const begin = Offset(0.0, 1.0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
 
-  static Widget _transitionsBuilder(
-      BuildContext context,
-      Animation<double> animation,
-      Animation<double> secondaryAnimation,
-      Widget child) {
-    const begin = Offset(0.0, 1.0);
-    const end = Offset.zero;
-    const curve = Curves.ease;
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
-    var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-    return SlideTransition(
-      position: animation.drive(tween),
-      child: CustomDialog(child: child),
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: CustomDialog(child: child),
+        );
+      },
+      transitionDuration: const Duration(microseconds: 200),
+      barrierDismissible: true,
+      barrierColor: Colors.black38,
+      opaque: false,
+      child: child,
+    );
+  } else if (isMaterial()) {
+    MaterialPage(
+      key: state.pageKey,
+      fullscreenDialog: true,
+      child: child,
+    );
+  } else if (isCupertino()) {
+    CupertinoPage(
+      key: state.pageKey,
+      fullscreenDialog: true,
+      child: child,
     );
   }
+
+  return NoTransitionPage(
+    key: state.pageKey,
+    child: child,
+  );
 }
 
 class CustomDialog extends ConsumerWidget {

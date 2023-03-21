@@ -69,9 +69,7 @@ GoRouter goRouter(GoRouterRef ref) {
           // This is the container for all the sign-in routes
           ShellRoute(
             navigatorKey: NavigatorKeys.signIn,
-            pageBuilder: (context, state, child) {
-              return PlatformDialogPage(child: child);
-            },
+            pageBuilder: openCustomDialog,
             routes: [
               GoRoute(
                 path: 'register',
@@ -102,7 +100,8 @@ GoRouter goRouter(GoRouterRef ref) {
                 path: 'countries',
                 name: SignInRoute.countries.name,
                 pageBuilder: (context, state) {
-                  return PlatformDialogPage(child: const CountriesPage());
+                  return openCustomDialog(
+                      context, state, const CountriesPage());
                 },
               ),
               if (signInUserInfoRoute != null) signInUserInfoRoute,
@@ -216,7 +215,7 @@ GoRouter goRouter(GoRouterRef ref) {
     //errorBuilder: (context, state) => const NotFoundScreen(),
   );
 }
-
+/*
 @Riverpod(keepAlive: true)
 // ignore: unsupported_provider_value
 List<RouteBase> signInRouter(SignInRouterRef ref) {
@@ -290,3 +289,4 @@ List<RouteBase> settingsRouter(SettingsRouterRef ref) {
     ),
   ];
 }
+*/
