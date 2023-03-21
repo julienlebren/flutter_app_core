@@ -35,6 +35,7 @@ CustomTransitionPage openCustomDialog<T>(
   Widget child,
 ) {
   final screenWidth = window.physicalSize.width / window.devicePixelRatio;
+  print("screenWidth: $screenWidth");
   if (screenWidth > maxModalWidth) {
     CustomTransitionPage(
       key: state.pageKey,
