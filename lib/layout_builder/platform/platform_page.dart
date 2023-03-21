@@ -29,7 +29,7 @@ const minPaddingTop = 40.0;
 const maxModalHeight = 750.0;
 const maxModalWidth = 600.0;
 
-CustomTransitionPage openCustomDialog<T>(
+Page openCustomDialog<T>(
   BuildContext context,
   GoRouterState state,
   Widget child,
@@ -37,7 +37,7 @@ CustomTransitionPage openCustomDialog<T>(
   final screenWidth = window.physicalSize.width / window.devicePixelRatio;
   print("screenWidth: $screenWidth");
   if (screenWidth > maxModalWidth) {
-    CustomTransitionPage(
+    return CustomTransitionPage(
       key: state.pageKey,
       transitionsBuilder: (_, animation, ___, ____) {
         const begin = Offset(0.0, 1.0);
@@ -59,13 +59,13 @@ CustomTransitionPage openCustomDialog<T>(
       child: child,
     );
   } else if (isMaterial()) {
-    MaterialPage(
+    return MaterialPage(
       key: state.pageKey,
       fullscreenDialog: true,
       child: child,
     );
   } else if (isCupertino()) {
-    CupertinoPage(
+    return CupertinoPage(
       key: state.pageKey,
       fullscreenDialog: true,
       child: child,
