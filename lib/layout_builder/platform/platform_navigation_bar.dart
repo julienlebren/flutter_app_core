@@ -81,7 +81,7 @@ class PlatformNavigationBar extends PlatformWidgetBase<PreferredSizeWidget,
 
     return CupertinoNavigationBar(
       transitionBetweenRoutes: transitionBetweenRoutes,
-      backgroundColor: navigationBarBackgroundColor,
+      backgroundColor: Colors.orange, //navigationBarBackgroundColor,
       /*padding: isCupertinoModal
           ? const EdgeInsetsDirectional.only(
               start: 16, top: 0, end: 16, bottom: 10)
