@@ -35,7 +35,6 @@ Page openCustomDialog<T>(
   Widget child,
 ) {
   final screenWidth = window.physicalSize.width / window.devicePixelRatio;
-  print("screenWidth: $screenWidth");
   if (screenWidth > maxModalWidth) {
     return CustomTransitionPage(
       key: state.pageKey,
@@ -117,11 +116,11 @@ class CustomDialog extends ConsumerWidget {
         top: topPadding,
         bottom: bottomPadding,
       ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
-        child: Container(
-          transform:
-              isCupertino() ? Matrix4.translationValues(0.0, -20.0, 0.0) : null,
+      child: Container(
+        transform:
+            isCupertino() ? Matrix4.translationValues(0.0, -20.0, 0.0) : null,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
           child: child,
         ),
       ),
