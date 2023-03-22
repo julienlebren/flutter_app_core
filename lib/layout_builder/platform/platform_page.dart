@@ -25,7 +25,7 @@ Page platformPage({
   }
 }
 
-const minPaddingTop = 40.0;
+const minPaddingTop = 0.0;
 const maxModalHeight = 750.0;
 const maxModalWidth = 600.0;
 
