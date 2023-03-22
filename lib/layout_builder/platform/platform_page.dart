@@ -1,5 +1,8 @@
 part of layout_builder;
 
+bool isChildOfCustomDialog(Element elem) =>
+    elem.findAncestorWidgetOfExactType<CustomDialog>() != null;
+
 Page platformPage({
   required Widget child,
   bool fullscreenDialog = false,
@@ -116,13 +119,9 @@ class CustomDialog extends ConsumerWidget {
         top: topPadding,
         bottom: bottomPadding,
       ),
-      child: Container(
-        transform:
-            isCupertino() ? Matrix4.translationValues(0.0, -20.0, 0.0) : null,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: child,
-        ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: child,
       ),
     );
   }

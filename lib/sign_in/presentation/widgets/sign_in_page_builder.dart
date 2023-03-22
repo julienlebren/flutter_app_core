@@ -105,6 +105,7 @@ class SignInScaffold extends StatelessWidget {
 
   final PlatformNavigationBar? appBar;
   final Widget child;
+  
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
