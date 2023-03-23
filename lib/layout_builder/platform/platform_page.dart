@@ -1,7 +1,7 @@
 part of layout_builder;
 
-bool isChildOfCustomDialog(Element elem) =>
-    elem.findAncestorWidgetOfExactType<CustomDialog>() != null;
+bool isChildOfCustomDialog(BuildContext context) =>
+    context.findAncestorWidgetOfExactType<CustomDialog>() != null;
 
 Page platformPage({
   required Widget child,
@@ -28,9 +28,12 @@ Page platformPage({
   }
 }
 
-const minPaddingTop = 0.0;
-const maxModalHeight = 750.0;
-const maxModalWidth = 600.0;
+const _kDialogWidth = 600.0;
+const _kDialogHeight = 750.0;
+const _kDialogBorderRadius = 10.0;
+const _kDialogPaddingMaxGap = 50.0;
+const _kCupertinoExternalKeyboardHeight = 69.0;
+const _kCupertinoKeyboardBottomPadding = 20.0;
 
 Page openCustomDialog<T>(
   BuildContext context,
@@ -38,7 +41,7 @@ Page openCustomDialog<T>(
   Widget child,
 ) {
   final screenWidth = window.physicalSize.width / window.devicePixelRatio;
-  if (screenWidth > maxModalWidth) {
+  if (screenWidth > _kDialogWidth) {
     return CustomTransitionPage(
       key: state.pageKey,
       transitionsBuilder: (_, animation, ___, ____) {
@@ -54,7 +57,7 @@ Page openCustomDialog<T>(
           child: CustomDialog(child: child),
         );
       },
-      transitionDuration: const Duration(microseconds: 200),
+      transitionDuration: const Duration(milliseconds: 200),
       barrierDismissible: true,
       barrierColor: Colors.black38,
       opaque: false,
@@ -83,7 +86,7 @@ Page openCustomDialog<T>(
 class CustomDialog extends ConsumerWidget {
   const CustomDialog({
     required this.child,
-    this.insetAnimationDuration = const Duration(milliseconds: 100),
+    this.insetAnimationDuration = const Duration(milliseconds: 200),
     this.insetAnimationCurve = Curves.decelerate,
     super.key,
   });
@@ -99,17 +102,39 @@ class CustomDialog extends ConsumerWidget {
 
     final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
     final availableHeight = screenHeight - keyboardHeight;
-    final modalHeight = availableHeight > (maxModalHeight + minPaddingTop)
-        ? maxModalHeight
-        : (availableHeight - minPaddingTop);
+    final horizontalPadding = (screenWidth - _kDialogWidth) / 2;
+    final verticalPadding = (screenHeight - _kDialogHeight) / 2;
 
-    final verticalPadding = (screenHeight - modalHeight) / 2;
-    double topPadding =
-        modalHeight < maxModalHeight ? minPaddingTop : verticalPadding;
-    double bottomPadding =
-        modalHeight < maxModalHeight ? keyboardHeight : verticalPadding;
-    double horizontalPadding = (screenWidth - maxModalWidth) / 2;
+    // We define the keyboard as opened only if it's more than 69 pixels
+    // because when an external keyboard is connected to the iPad,
+    // a language button is displayed on the bottom right corner,
+    // which is considered in `viewInsets.bottom`.
+    final isKeyboardOpen = keyboardHeight > _kCupertinoExternalKeyboardHeight;
+    final isKeyboardHidingDialog = keyboardHeight > _kDialogHeight;
 
+    double topPadding = verticalPadding;
+    if (isKeyboardOpen) {
+      if (availableHeight >= _kDialogHeight && isKeyboardHidingDialog) {
+        topPadding = (availableHeight - _kDialogHeight);
+      } else {
+        topPadding = (verticalPadding - _kDialogPaddingMaxGap);
+      }
+    }
+
+    double bottomPadding = verticalPadding;
+    if (isKeyboardOpen) {
+      if (availableHeight >= _kDialogHeight) {
+        bottomPadding = verticalPadding + _kDialogPaddingMaxGap;
+      } else {
+        bottomPadding = (keyboardHeight -
+            _kCupertinoKeyboardBottomPadding -
+            _kDialogBorderRadius);
+      }
+    }
+
+    // We put two ClipRRect here because the first one clips the
+    // container which is moved up by the transform, and the second
+    // one clips the child view
     return AnimatedPadding(
       duration: insetAnimationDuration,
       curve: insetAnimationCurve,
@@ -120,8 +145,15 @@ class CustomDialog extends ConsumerWidget {
         bottom: bottomPadding,
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
-        child: child,
+        borderRadius: BorderRadius.circular(_kDialogBorderRadius),
+        child: Container(
+          transform: Matrix4.translationValues(
+              0.0, 3.0 - MediaQuery.of(context).padding.top, 0.0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(_kDialogBorderRadius),
+            child: child,
+          ),
+        ),
       ),
     );
   }

@@ -42,28 +42,6 @@ class SignInLandingPageBuilder extends ConsumerWidget {
               child: child,
             ),
           ),
-
-          /*child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: signInTheme.scaffoldBackgroundColor,
-              image: signInTheme.backgroundImage != null
-                  ? DecorationImage(
-                      image: AssetImage(signInTheme.backgroundImage!),
-                      fit: BoxFit.cover,
-                    )
-                  : null,
-            ),
-            child: Scaffold(
-              resizeToAvoidBottomInset: false,
-              backgroundColor: Colors.transparent,
-              body: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                  child: child,
-                ),
-              ),
-            ),
-          ),*/
         ),
       ),
     );
