@@ -45,10 +45,7 @@ class PlatformScaffold
       backgroundColor: backgroundColor,
       navigationBar: appBar?.createCupertinoWidget(context, ref),
       resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-      child: SafeArea(
-        bottom: !isModal,
-        child: body,
-      ),
+      child: body,
     );
   }
 

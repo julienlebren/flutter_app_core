@@ -81,12 +81,7 @@ class PlatformNavigationBar extends PlatformWidgetBase<PreferredSizeWidget,
 
     return CupertinoNavigationBar(
       transitionBetweenRoutes: transitionBetweenRoutes,
-      backgroundColor: Colors.orange, //navigationBarBackgroundColor,
-      padding: EdgeInsetsDirectional.zero,
-      /*padding: isCupertinoModal
-          ? const EdgeInsetsDirectional.only(
-              start: 16, top: 0, end: 16, bottom: 10)
-          : null,*/
+      backgroundColor: navigationBarBackgroundColor,
       border: hasBorder
           ? Border(bottom: BorderSide(color: navigationBarBorderColor))
           : null,
@@ -164,3 +159,43 @@ class CupertinoNavigationBarBorder extends ConsumerWidget {
     );
   }
 }
+
+/*
+/// Height of CupertinoNavigationBar whif it's in a Dialog
+const _kCupertinoNavHeightInDialog = 50.0;
+
+class CupertinoNavigationBarWithControlledHeight extends StatelessWidget
+    implements ObstructingPreferredSizeWidget {
+  const CupertinoNavigationBarWithControlledHeight({
+    super.key,
+    required this.child,
+  });
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.blue,
+      /*transform: isChildOfCustomDialog(context)
+          ? Matrix4.translationValues(
+              0.0, 3.0 - MediaQuery.of(context).padding.top, 0.0)
+          : null,*/
+      //height: _kCupertinoNavHeightInDialog,
+      child: child,
+    );
+  }
+
+  @override
+  Size get preferredSize =>
+      const Size.fromHeight(kMinInteractiveDimensionCupertino);
+
+  /// Hard copy from CupertinoNavigationBar
+  /// True if the navigation bar's background color has no transparency.
+  @override
+  bool shouldFullyObstruct(BuildContext context) {
+    final Color backgroundColor = CupertinoTheme.of(context).barBackgroundColor;
+    return backgroundColor.alpha == 0xFF;
+  }
+}
+*/

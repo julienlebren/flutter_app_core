@@ -25,6 +25,8 @@ class SignInPageBuilder extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    var safePadding = MediaQuery.of(context).padding.top;
+
     return SignInScaffold(
       appBar: PlatformNavigationBar(
         leading: leadingButton,
@@ -52,6 +54,7 @@ class SignInPageBuilder extends ConsumerWidget {
                     opacity: 0,
                     child: submitButton!,
                   ),
+                const SizedBox(height: 20),
               ],
             ),
           ),
@@ -105,7 +108,7 @@ class SignInScaffold extends StatelessWidget {
 
   final PlatformNavigationBar? appBar;
   final Widget child;
-  
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -117,7 +120,6 @@ class SignInScaffold extends StatelessWidget {
           padding: const EdgeInsets.only(
             left: 25,
             right: 25,
-            bottom: 20,
           ),
           child: LayoutBuilder(
             builder: (context, constraints) {
