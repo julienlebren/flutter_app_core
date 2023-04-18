@@ -3,7 +3,7 @@ part of sign_in;
 /// The main Scaffold of a page displayed within the sign)in journey
 /// It uses a [PlatformScaffold] which returns the right Scaffold
 /// depending on the platform.
-class SignInPageBuilder extends ConsumerWidget {
+class SignInPageBuilder extends StatelessWidget {
   const SignInPageBuilder({
     Key? key,
     required this.title,
@@ -24,9 +24,7 @@ class SignInPageBuilder extends ConsumerWidget {
   final String? errorText;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    var safePadding = MediaQuery.of(context).padding.top;
-
+  Widget build(BuildContext context) {
     return SignInScaffold(
       appBar: PlatformNavigationBar(
         leading: leadingButton,
@@ -276,6 +274,10 @@ class SignInSubmitButton extends ConsumerWidget {
             onPressed: onPressed,
           ),
         ),
+        Container(
+          height: 20,
+          color: backgroundColor,
+        )
       ],
     );
   }

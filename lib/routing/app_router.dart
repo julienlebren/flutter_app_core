@@ -1,7 +1,5 @@
 library app_router;
 
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_app_core/layout_builder/layout_builder.dart';
 import 'package:flutter_app_core/settings/settings.dart';
@@ -13,6 +11,7 @@ part 'app_router.g.dart';
 
 class NavigatorKeys {
   static final root = GlobalKey<NavigatorState>();
+  static final tabs = GlobalKey<NavigatorState>();
   static final signIn = GlobalKey<NavigatorState>();
 }
 
@@ -43,16 +42,18 @@ GoRoute route(RouteRef ref) => throw Exception(
 // ignore: unsupported_provider_value
 GoRouter goRouter(GoRouterRef ref) {
   final mainRoute = ref.watch(routeProvider);
-  final authSplashState = ref.watch(authSplashProvider);
 
   // All the routes provided by the app
-  final routes = mainRoute.routes.cast<GoRoute>();
+  final routes = mainRoute.routes;
+  print("routes: $routes");
 
   //
   final signInUserInfoRoute = routes.cast<GoRoute?>().firstWhere(
         (r) => r!.name == SignInRoute.info.name,
         orElse: () => null,
       );
+
+  //final otherRoutes = routes.where((r) => r!.name != SignInRoute.info.name);
 
   return GoRouter(
     navigatorKey: NavigatorKeys.root,
@@ -101,12 +102,16 @@ GoRouter goRouter(GoRouterRef ref) {
                 name: SignInRoute.countries.name,
                 pageBuilder: (context, state) {
                   return openCustomDialog(
-                      context, state, const CountriesPage());
+                    context,
+                    state,
+                    const CountriesPage(),
+                  );
                 },
               ),
-              if (signInUserInfoRoute != null) signInUserInfoRoute,
+              //if (signInUserInfoRoute != null) signInUserInfoRoute,
             ],
           ),
+          ...routes,
         ],
 
         /*

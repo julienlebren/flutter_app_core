@@ -45,9 +45,7 @@ class _SignInEmailRegisterPageFormState
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 100), () {
-      emailFocusNode.requestFocus();
-    });
+    emailFocusNode.requestFocus();
   }
 
   @override
@@ -88,6 +86,7 @@ class _SignInEmailRegisterPageFormState
           },
         ),
         if (isCupertino()) const SignInDivider(),
+        const SizedBox(height: 15),
         PasswordRequirements(
           passwordHasDigits: state.passwordHasDigits,
           passwordHasUppercase: state.passwordHasUppercase,
@@ -106,6 +105,7 @@ class _SignInEmailRegisterPageFormState
         ),
         if (signInArea == SignInArea.signIn)
           PlatformTextButton(
+            padding: 1.0,
             title: l10n.signInWithEmailAlreadyAccount,
             onPressed: () {
               //final navigator = SignInNavigatorKeys.modal.currentState!;

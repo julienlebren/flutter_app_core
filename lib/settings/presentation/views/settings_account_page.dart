@@ -96,6 +96,7 @@ class _ButtonsSection extends ConsumerWidget {
         )),
       ],
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           for (final supplier in suppliers) ...[
             FormSection(

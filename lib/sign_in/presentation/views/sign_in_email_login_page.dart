@@ -113,6 +113,7 @@ class _SignInEmailLoginFormState extends ConsumerState<SignInEmailLoginForm> {
               : null,
         ),
         PlatformTextButton(
+          padding: 1.0,
           title: l10n.signInWithEmailCreateAccount,
           onPressed: () {
             //final navigator = SignInNavigatorKeys.modal.currentState!;
