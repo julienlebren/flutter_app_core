@@ -2,7 +2,6 @@
 
 library flutter_app_core;
 
-export 'ad_manager/ad_manager.dart';
 export 'extensions/extensions.dart';
 export 'firebase_auth/firebase_auth_service.dart';
 export 'firebase_storage/firebase_storage_service.dart';
