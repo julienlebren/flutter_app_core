@@ -1,6 +1,6 @@
 name: flutter_app_core
 description: Reusable methods and widgets for building apps 
-version: 1.14.0
+version: 1.16.0
 homepage:
 
 environment:
@@ -30,7 +30,6 @@ dependencies:
   flutter_riverpod: ^2.3.7
   freezed_annotation: ^2.4.1
   google_fonts: ^5.1.0
-  google_mobile_ads: ^3.0.0 
   google_sign_in: ^6.1.4
   go_router: ^10.1.0
   internet_connection_checker: ^1.0.0+1

@@ -4,11 +4,9 @@ library flutter_app_core;
 
 export 'extensions/extensions.dart';
 export 'firebase_auth/firebase_auth_service.dart';
-export 'firebase_storage/firebase_storage_service.dart';
 export 'firestore/firestore_service.dart';
 export 'layout_builder/layout_builder.dart';
 export 'localization/localization.dart';
-export 'notifications/notifications.dart';
 export 'routing/app_router.dart';
 export 'settings/settings.dart';
 export 'sign_in/sign_in.dart';
